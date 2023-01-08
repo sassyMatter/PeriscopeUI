@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 
 @Component({
@@ -26,9 +27,9 @@ export class HelloWorldComponent implements OnInit {
 
   showServerData(){
     this.helloworldService.getServerResponse()
-    .subscribe((data: string) => {
-      console.log(data);
-      this.response = data
+    .subscribe((data: Message) => {
+      console.log(data.response);
+      this.response = data.response;
     });
     
   
