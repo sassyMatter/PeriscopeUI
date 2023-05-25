@@ -7,6 +7,7 @@ import { CanvasService } from '../services/canvas-service';
 import { fabric } from 'fabric';
 import { ComponentProvider } from '../services/componentProvider';
 import { Database } from '../models/components/database';
+import { Point } from 'fabric/fabric-impl';
 
 @Component({
   selector: 'app-hello-world',
@@ -199,6 +200,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     console.log("id for image is", img.getAttribute("id"));
     const componentType : string  = img.getAttribute("id") as string;
     // const newImage = createFabricObject(componentType);
+    // const image = createFabricObject2(componentType, e);
 
     
 
@@ -206,13 +208,20 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
      const newImage: fabric.Image = new fabric.Image(img, {
       width: img.clientWidth + 50,
       height: img.clientHeight + 50,
-      // top: e.clientX,
-      // left: e.clientY,
-      left: e.offsetX,
-      top: e.offsetY,
-      centeredScaling: true
-      // visible: true
+    
+      left: e.offsetX-25,
+      top: e.offsetY-25,
+      centeredScaling: true,
+      originX: 'center', 
+      originY: 'center',
+    
     });
+   
+    
+
+  
+
+
 
     // const component = 
 
