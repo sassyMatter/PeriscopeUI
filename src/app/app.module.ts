@@ -7,6 +7,7 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
 import {HttpClientModule } from '@angular/common/http';
 import { ConverterComponent } from './converter/converter.component'
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { ConverterComponent } from './converter/converter.component'
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    
 
   ],
   providers: [],

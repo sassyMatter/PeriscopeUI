@@ -1,0 +1,92 @@
+.flex-container {
+    display: flex;
+}
+  
+
+#canvas{
+    /* border: 2px solid burlywood; */
+    background: scroll;
+    width: 1000px;
+    height: 500px;
+    box-shadow: 1px;
+    /* background-color: gray; */
+}
+
+
+#canvas-container{
+    background-color: white;
+    width: 1000px;
+    height: 600px;
+    /* overflow: auto; */
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    margin-left: 100px;
+}
+
+#tool-box{
+    box-sizing: border-box;
+    border: 2px solid black;
+    background-color:whitesmoke;
+    /* background-image: url("/assets/background.jpeg"); */
+    width: 400px;
+    height: 600px;
+    margin-right: 20px;
+}
+
+.grid-item {
+    /* Define the width and height for the grid item */
+    width: 50px;
+    height: 50px;
+  }
+  
+.grid-image {
+    /* Make the image fill the container while preserving its aspect ratio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Set 4 columns with equal width */
+    gap: 10px; /* Set gap between grid items */
+  }
+
+  .grid-image {
+    position: relative;
+  }
+  
+.grid-image::after {
+    content: attr(alt); /* Display the alt text */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Background color for the tooltip */
+    color: white; /* Text color for the tooltip */
+    padding: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+  
+.grid-image:hover::after {
+    opacity: 1; /* Show the tooltip on hover */
+}
+  
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+    cursor: move;
+}
+
+.grid-item img.img_dragging {
+  opacity: 0.4;
+}
+
+#canvas-container.over {
+  border: 5px dashed cyan;
+}

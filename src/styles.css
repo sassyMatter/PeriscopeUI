@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+h1{
+    color: rgb(62, 126, 230);
+}
+
+body{
+    background-color:antiquewhite;
+    background-position: center;
+   background-image: url("assets/background.jpeg")
+    
+}
