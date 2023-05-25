@@ -204,8 +204,8 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
 
     console.log(img.width, img.height);
      const newImage: fabric.Image = new fabric.Image(img, {
-      width: img.clientWidth ,
-      height: img.clientHeight,
+      width: img.clientWidth + 50,
+      height: img.clientHeight + 50,
       // top: e.clientX,
       // left: e.clientY,
       left: e.offsetX,
