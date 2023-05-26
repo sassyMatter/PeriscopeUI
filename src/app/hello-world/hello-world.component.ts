@@ -206,8 +206,8 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
 
     console.log(img.width, img.height);
      const newImage: fabric.Image = new fabric.Image(img, {
-      width: img.clientWidth + 50,
-      height: img.clientHeight + 50,
+      width: img.clientWidth + 14,
+      height: img.clientHeight + 14,
     
       left: e.offsetX-25,
       top: e.offsetY-25,
@@ -217,6 +217,8 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     
     });
    
+  
+  
     
 
   
@@ -238,9 +240,18 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
-
     canvas.add(newImage);
-    console.log(canvas.getObjects());
+
+    newImage.set({
+      originX: 'center',
+      originY: 'center'
+    });
+    
+    // Call `setCoords` to update the coordinates of the fabric object
+    newImage.setCoords();
+    
+    // Render the canvas
+    canvas.renderAll();
     this.classList.remove('over');
   }
 
