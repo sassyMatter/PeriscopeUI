@@ -1,18 +1,8 @@
+
 import { fabric } from 'fabric';
 import { Component } from './component';
 
-export class Func extends Component {
-
-    
-  // override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
-  //   const fabricObject = super.createFabricObject(width, height, image, position);
-  //   // Add additional customization specific to Function class
-  //   return fabricObject;
-  // }
-
-  // override createObject(componentType: string, event: DragEvent){
-    
-  // }
+export class CustomGroup extends Component {
   override connections: any[];
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
@@ -20,8 +10,9 @@ export class Func extends Component {
 
   constructor(event: DragEvent, width: number, height: number) {
     super();
+   
     this.connections = [];
-    this.imgUrl = "assets/LamdaResize.png";
+    this.imgUrl = "assets/databaseResized.png";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,
@@ -52,4 +43,30 @@ export class Func extends Component {
 
     
   }
+
+
+//   static createWithImageAndConnections(
+//     imgUrl: string,
+//     imageOptions: fabric.IImageOptions,
+//     connections: any[]
+//   ): CustomGroup {
+//     console.log("setting image ")
+//     const customGroup = new CustomGroup();
+
+//     fabric.Image.fromURL(imgUrl, (img) => {
+//       img.set(imageOptions);
+
+//       console.log("image is : " , img);
+//       // Add the image to the custom group
+//       customGroup.addWithUpdate(img);
+
+//       // Set the connections property
+//       customGroup.connections = connections;
+
+//       // Render the custom group
+//       customGroup.canvas?.renderAll();
+//     });
+
+//     return customGroup;
+//   }
 }

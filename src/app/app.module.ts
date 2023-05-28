@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import {HttpClientModule } from '@angular/common/http';
 import { ConverterComponent } from './converter/converter.component'
+import { ComponentProvider } from './services/componentProvider';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { ConverterComponent } from './converter/converter.component'
     
 
   ],
-  providers: [],
+  providers: [ComponentProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

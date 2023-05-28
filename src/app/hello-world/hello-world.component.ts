@@ -1,13 +1,17 @@
-import { ChangeDetectorRef, Component, ComponentFactory, OnInit, createComponent } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, createComponent } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 
 import { CanvasService } from '../services/canvas-service';
 
 import { fabric } from 'fabric';
-import { ComponentProvider } from '../services/componentProvider';
+
 import { Database } from '../models/components/database';
 import { Point } from 'fabric/fabric-impl';
+import { CustomGroup } from '../models/components/customGroup';
+import { ComponentProvider } from '../services/componentProvider';
+
+
 
 @Component({
   selector: 'app-hello-world',
@@ -33,6 +37,7 @@ export class HelloWorldComponent implements OnInit {
   ngOnInit(): void {
     this.showServerData();
     let createFabricObject = this.createFabricObject;
+    let componentFactory = this.componentFactory;
     
     // this.changeDetectorRef.detectChanges();
 
@@ -201,24 +206,62 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const componentType : string  = img.getAttribute("id") as string;
     // const newImage = createFabricObject(componentType);
     // const image = createFabricObject2(componentType, e);
-
+   
     
 
     console.log(img.width, img.height);
-     const newImage: fabric.Image = new fabric.Image(img, {
-      width: img.clientWidth + 14,
-      height: img.clientHeight + 14,
+    const width = img.clientWidth;
+    const height = img.clientHeight;
+
+    const newImage = createFabricObject(componentType, e, width, height);
+
+
+    //  const newImage: fabric.Image = new fabric.Image(img, {
+      
+    //   width: img.clientWidth + 14,
+    //   height: img.clientHeight + 14,
     
-      left: e.offsetX-25,
-      top: e.offsetY-25,
-      centeredScaling: true,
-      originX: 'center', 
-      originY: 'center',
+    //   left: e.offsetX-25,
+    //   top: e.offsetY-25,
+    //   centeredScaling: true,
+    //   originX: 'center', 
+    //   originY: 'center',
     
-    });
+    // });
    
   
   
+
+    // test
+
+
+//     const imgUrl = 'assets/databaseResized.png';
+// const imageOptions = {
+//   width: img.clientWidth + 14,
+//   height: img.clientHeight + 14,
+
+//   left: e.offsetX-25,
+//   top: e.offsetY-25,
+//   centeredScaling: true,
+//   originX: 'center', 
+//   originY: 'center',
+// };
+
+// const connections: never[] = [
+//   // Array of connection objects
+//   // Customize the connections based on your requirements
+// ];
+
+// const customGroup = CustomGroup.createWithImageAndConnections(
+//   imgUrl,
+//   imageOptions,
+//   connections
+// );
+
+// canvas.add(customGroup);
+// canvas.renderAll();
+
+    // test
     
 
   
@@ -345,10 +388,13 @@ if (canvasContainer) {
    
   }
 
-  createFabricObject(componentType : string): fabric.Object{
-    // return this.componentFactory.createComponent();
-    return new fabric.Object;
+  createFabricObject(componentType : string, event: DragEvent, width:number, height: number): fabric.Group{
+    console.log("calling factory");
+
+    const componentProvider = new ComponentProvider();
     
+    return componentProvider.createComponent(componentType, event, width, height);
+   
   }
 
   showServerData(){
@@ -361,38 +407,38 @@ if (canvasContainer) {
 
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
     // Grid options
-    const options = {
-      distance: 10,
-      param: {
-        stroke: '#ebebeb',
-        strokeWidth: 1,
-        selectable: false
-      }
-    };
+    // const options = {
+    //   distance: 10,
+    //   param: {
+    //     stroke: '#ebebeb',
+    //     strokeWidth: 1,
+    //     selectable: false
+    //   }
+    // };
   
-    const gridLen = Math.max(width, height) / options.distance;
+    // const gridLen = Math.max(width, height) / options.distance;
   
-    for (let i = 0; i < gridLen; i++) {
-      const distance = i * options.distance;
+    // for (let i = 0; i < gridLen; i++) {
+    //   const distance = i * options.distance;
   
-      const horizontal = new fabric.Line(
-        [distance, 0, distance, height],
-        options.param
-      );
+    //   const horizontal = new fabric.Line(
+    //     [distance, 0, distance, height],
+    //     options.param
+    //   );
   
-      const vertical = new fabric.Line(
-        [0, distance, width, distance],
-        options.param
-      );
+    //   const vertical = new fabric.Line(
+    //     [0, distance, width, distance],
+    //     options.param
+    //   );
   
-      canvas.add(horizontal);
-      canvas.add(vertical);
+    //   canvas.add(horizontal);
+    //   canvas.add(vertical);
   
-      if (i % 5 === 0) {
-        horizontal.set({ stroke: '#cccccc' });
-        vertical.set({ stroke: '#cccccc' });
-      }
-    }
+    //   if (i % 5 === 0) {
+    //     horizontal.set({ stroke: '#cccccc' });
+    //     vertical.set({ stroke: '#cccccc' });
+    //   }
+    // }
   }
   
     
