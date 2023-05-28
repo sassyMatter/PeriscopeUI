@@ -10,6 +10,7 @@ import { Database } from '../models/components/database';
 import { Point } from 'fabric/fabric-impl';
 import { CustomGroup } from '../models/components/customGroup';
 import { ComponentProvider } from '../services/componentProvider';
+import { catchError, of, tap } from 'rxjs';
 
 
 
@@ -23,7 +24,7 @@ export class HelloWorldComponent implements OnInit {
   public response = 'Could not connect to server!!';
 
   
-  canvas : fabric.Canvas | undefined;
+  canvas : fabric.Canvas | null = null;
 
   constructor(
     private helloworldService : HelloWorldService,
@@ -65,7 +66,7 @@ const canvas = new fabric.Canvas(canvasElement, {
   width: canvasWidth ?? 0,
   height: canvasHeight ?? 0
 });
-
+this.canvas = canvas;
 this.createGridLines(canvas, canvasWidth, canvasHeight);
 
 
@@ -152,15 +153,24 @@ canvas.on('mouse:wheel', function (options) {
 });
 
 // delete object on the click on delete button on the selected object
+// not working
 canvas.on('object:selected', (event : fabric.IEvent) =>{
-   const target : fabric.Object = event.target as fabric.Object;
-  //  if(target !== canvas){
 
-    target.on('delete:click', () =>{
+  console.log("double click event triggered")
+  const target: fabric.Object = event.target as fabric.Object;
+
+  target.on('mousedown', (e: fabric.IEvent) => {
+    if (e.e instanceof MouseEvent && e.e.detail === 2) {
       canvas.remove(target);
-    // })
-   });
+    }
+  });
+  
 });
+
+
+
+
+
 
 
   
@@ -405,40 +415,90 @@ if (canvasContainer) {
     });
   }
 
+  
+ 
+  // sendCanvasDataToBackend(){
+  //   const serializedCanvas = this.canvas?.toJSON();
+  //   this.helloworldService.sendCanvasData(JSON.stringify(serializedCanvas))
+  //   .subscribe(
+  //     response => {
+  //       // Handle the response from the backend
+  //       console.log('Post request successful', response);
+  //     },
+  //     error => {
+  //       // Handle any errors that occur during the request
+  //       console.error('Error occurred during post request', error);
+  //     }
+  //   );
+  // }
+
+  sendCanvasDataToBackend(): void {
+
+    var objects =  this.canvas?.getObjects();
+    
+    
+    const serializedCanvas = this.canvas?.toJSON(["id"]);
+    if (serializedCanvas) {
+      const filteredCanvasObjects = serializedCanvas.objects.filter(
+        (obj: any) => obj.id !== 'grid-lines'
+      );
+
+      const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
+      const serializedData = JSON.stringify(filteredCanvasData);
+
+      // const serializedData = JSON.stringify(serializedCanvas);
+      console.log("serialized Data :: " , serializedData);
+      this.helloworldService.sendCanvasData(serializedData).pipe(
+        tap((response: any) => {
+          // Handle the response from the backend
+          console.log('Post request successful', response);
+        }),
+        catchError((error) => {
+          // Handle any errors that occur during the request
+          console.error('Error occurred during post request', error);
+          return of(null); // Returning a non-error observable to prevent unhandled error
+        })
+      ).subscribe();
+    }
+  }
+
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
     // Grid options
-    // const options = {
-    //   distance: 10,
-    //   param: {
-    //     stroke: '#ebebeb',
-    //     strokeWidth: 1,
-    //     selectable: false
-    //   }
-    // };
+    const options = {
+      distance: 10,
+      param: {
+        stroke: '#ebebeb',
+        strokeWidth: 1,
+        selectable: false,
+        id: "grid-lines"
+      }
+    };
   
-    // const gridLen = Math.max(width, height) / options.distance;
+    const gridLen = Math.max(width, height) / options.distance;
   
-    // for (let i = 0; i < gridLen; i++) {
-    //   const distance = i * options.distance;
+    for (let i = 0; i < gridLen; i++) {
+      const distance = i * options.distance;
   
-    //   const horizontal = new fabric.Line(
-    //     [distance, 0, distance, height],
-    //     options.param
-    //   );
+      const horizontal = new fabric.Line(
+        [distance, 0, distance, height],
+        options.param,
+      );
   
-    //   const vertical = new fabric.Line(
-    //     [0, distance, width, distance],
-    //     options.param
-    //   );
+      const vertical = new fabric.Line(
+        [0, distance, width, distance],
+        options.param
+      );
+     
+     
+      
+      canvas.add(horizontal);
+      canvas.add(vertical);
   
-    //   canvas.add(horizontal);
-    //   canvas.add(vertical);
-  
-    //   if (i % 5 === 0) {
-    //     horizontal.set({ stroke: '#cccccc' });
-    //     vertical.set({ stroke: '#cccccc' });
-    //   }
-    // }
+      if (i % 5 === 0) {
+        horizontal.set({ stroke: '#cccccc' });
+        vertical.set({ stroke: '#cccccc' });
+      }
+    }
   }
   
     
