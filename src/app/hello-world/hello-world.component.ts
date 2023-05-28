@@ -168,6 +168,64 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
 });
 
 
+canvas.on('mouse:down', (event: fabric.IEvent) => {
+  console.log("drag for line")
+  const target = event.target as CustomGroup;
+  const mouseEvent = event.e as MouseEvent;
+  const isCommandPressed = mouseEvent.ctrlKey || mouseEvent.metaKey;
+   
+
+  // Check if the target object has an ID
+  if (isCommandPressed && target.id && target.left && target.width && target.top && target.height) {
+    target.selectable = false;
+    target.lockMovementX = true;
+    target.lockMovementY = true;
+    // Start drawing a line from the center of the target object
+    const startingPoint = new fabric.Point(target.left + target.width / 2, target.top + target.height / 2);
+
+    // Create a line and add it to the canvas
+    const line = new fabric.Line([startingPoint.x, startingPoint.y, startingPoint.x, startingPoint.y], {
+      stroke: 'black',
+      strokeWidth: 2,
+      selectable: false,
+      evented: false,
+    });
+    canvas.add(line);
+
+    // Attach an event listener to the `mouse:move` event on the canvas
+    canvas.on('mouse:move', (event: fabric.IEvent) => {
+      const pointer = canvas.getPointer(event.e);
+      line.set({ x2: pointer.x, y2: pointer.y });
+      canvas.renderAll();
+    });
+
+    // Attach an event listener to the `mouse:up` event on the canvas
+    canvas.on('mouse:up', () => {
+      // Check if the line intersects with any other objects
+      canvas.forEachObject((obj) => {
+        if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
+          // Perform the desired action when the line intersects with another object
+          
+
+          console.log('Line intersects with:', obj.name);
+        }
+        target.selectable = true;
+        target.lockMovementX = false;
+        target.lockMovementY = false;
+      });
+
+      // Remove the line from the canvas
+      canvas.remove(line);
+
+      // Remove the event listeners
+      canvas.off('mouse:move');
+      canvas.off('mouse:up');
+    });
+  }
+});
+
+
+
 
 
 

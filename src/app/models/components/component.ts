@@ -1,13 +1,14 @@
 import { fabric } from 'fabric';
 import { Connector } from './connector';
-
-
+import { v4 as uuid } from 'uuid';
 
 export class Component extends fabric.Group  {
   connections: Connector[] = [];
+  id:string |undefined;
 
   constructor() {
     super();
+    this.id = uuid();
     // Set any default fabric.js object properties here
   }
 
