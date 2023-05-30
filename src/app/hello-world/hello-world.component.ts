@@ -117,7 +117,7 @@ let lastPosY = 0;
 
 canvas.on('mouse:down', function (options) {
   const evt = options.e;
-  if (evt.altKey === true) {
+  if (evt.ctrlKey === true && evt.shiftKey) {
     isDragging = true;
     canvas.defaultCursor = 'grabbing';
     lastPosX = evt.clientX;
@@ -172,7 +172,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
   console.log("drag for line")
   const target = event.target as CustomGroup;
   const mouseEvent = event.e as MouseEvent;
-  const isCommandPressed = mouseEvent.ctrlKey || mouseEvent.metaKey;
+  const isCommandPressed = mouseEvent.metaKey;
    
 
   // Check if the target object has an ID
@@ -186,7 +186,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
     // Create a line and add it to the canvas
     const line = new fabric.Line([startingPoint.x, startingPoint.y, startingPoint.x, startingPoint.y], {
       stroke: 'black',
-      strokeWidth: 2,
+      strokeWidth: 1,
       selectable: false,
       evented: false,
     });
@@ -202,13 +202,25 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
     // Attach an event listener to the `mouse:up` event on the canvas
     canvas.on('mouse:up', () => {
       // Check if the line intersects with any other objects
+      console.log("Event for mouse up")
       canvas.forEachObject((obj) => {
-        if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
+
+        if(line.intersectsWithObject(obj)){
+          console.log("line intersects with :: " , obj as fabric.Group);
+          console.log("target:: ", target);
+          console.log("obj:: ", obj);
+        }
+        // if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
           // Perform the desired action when the line intersects with another object
           
+          if(obj instanceof fabric.Group){
+                const line = this.createConnectLine(target, obj);
+                canvas.add(line);
+                canvas.renderAll();
+          }
 
           console.log('Line intersects with:', obj.name);
-        }
+        // }
         target.selectable = true;
         target.lockMovementX = false;
         target.lockMovementY = false;
@@ -558,6 +570,46 @@ if (canvasContainer) {
       }
     }
   }
+
+
+  // creating connection lines 
+  updateLine(line: fabric.Line, obj1: fabric.Group, point:string) {
+    const centerPoint = obj1.getCenterPoint();
+    line.set({
+      [`x${point}`]: centerPoint.x,
+      [`y${point}`]: centerPoint.y
+    });
+  }
+  
+ createConnectLine(obj1: fabric.Group, obj2: fabric.Group) {
+   console.log("Create line called for ", obj1, obj2);
+    
+    const centerPointSource = obj1.getCenterPoint();
+    const centerPointTarget = obj2.getCenterPoint();
+
+    const connectLine = new fabric.Line(
+      [
+        centerPointSource.x,
+        centerPointSource.y,
+        centerPointTarget.x,
+        centerPointTarget.y
+      ],
+      {
+        stroke: "black",
+        hoverCursor: "default",
+        selectable: false
+      }
+    );
+  
+    obj1.on("moving", () => this.updateLine(connectLine, obj1, "1"));
+    obj1.on("scaling", () => this.updateLine(connectLine, obj1, "1"));
+    obj2.on("moving", () => this.updateLine(connectLine, obj2, "2"));
+    obj2.on("scaling", () => this.updateLine(connectLine, obj2, "2"));
+  
+    return connectLine;
+  }
+  
+  
   
     
 }

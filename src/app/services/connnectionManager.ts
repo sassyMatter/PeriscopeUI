@@ -1,7 +1,13 @@
+import { Injectable } from "@angular/core";
 import { Component } from "../models/components/component";
 import { Connector } from "../models/components/connector";
 
-class ConnectionManager {
+
+
+@Injectable({
+    providedIn: 'root'
+  })
+export class ConnectionManager {
 
 
     establishBiDirectionalConnection(component1: Component, component2: Component) {
