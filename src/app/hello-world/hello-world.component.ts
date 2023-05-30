@@ -117,7 +117,7 @@ let lastPosY = 0;
 
 canvas.on('mouse:down', function (options) {
   const evt = options.e;
-  if (evt.ctrlKey === true && evt.shiftKey) {
+  if (evt.ctrlKey === true && evt.shiftKey == true) {
     isDragging = true;
     canvas.defaultCursor = 'grabbing';
     lastPosX = evt.clientX;
