@@ -5,6 +5,7 @@ import { Func } from "../models/components/func";
 import { RestInterface } from "../models/components/restInterface";
 import { Topic } from "../models/components/topic";
 import { CustomGroup } from "../models/components/customGroup";
+import { Input } from "../models/components/input";
 
 
 @Injectable({
@@ -26,6 +27,8 @@ export class ComponentProvider {
           return new Topic(event, width, height);
         case 'customGroup':
           return new CustomGroup(event, width, height);
+        case 'input':
+          return new Input(event, width, height);
         default:
           throw new Error('Invalid component type.');
       }
