@@ -200,36 +200,71 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
     });
 
     // Attach an event listener to the `mouse:up` event on the canvas
+    
     canvas.on('mouse:up', () => {
       // Check if the line intersects with any other objects
-      console.log("Event for mouse up")
-      canvas.forEachObject((obj) => {
+     // getting the point 
+     const pointer = canvas.getPointer(event.e);
+     const point = new fabric.Point(pointer.x , pointer.y);
 
-        if(line.intersectsWithObject(obj)){
+     
+
+      var isConnected = false
+      const allObjects = canvas.getObjects().filter(obj=>{
+        const fabricObj = obj as fabric.Object & { id?: string };
+        if(fabricObj.hasOwnProperty('id')) {
+          return fabricObj.id !== 'grid-lines';
+        }
+        return false;
+      });
+      console.log("all objects ", allObjects);
+      
+      
+
+      for(let index = 0; index < allObjects.length; index++){
+        const obj = allObjects.at(index) as fabric.Object;
+        console.log("interating for " , obj);
+        
+        if(obj.containsPoint(point)){
+          console.log("Intersecting");
+        }
+
+        console.log("obj:: ", obj, " target:: ", target);
+       
+        if(obj.containsPoint(point) && obj !== target){
           console.log("line intersects with :: " , obj as fabric.Group);
           console.log("target:: ", target);
           console.log("obj:: ", obj);
-        }
+        
         // if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
           // Perform the desired action when the line intersects with another object
-          
-          if(obj instanceof fabric.Group){
+          console.log("is connected ", isConnected)
+          if(obj instanceof fabric.Group && target !== obj && isConnected !== true){
+            console.log("drawing line");
+                isConnected = true;
                 const line = this.createConnectLine(target, obj);
                 canvas.add(line);
                 canvas.renderAll();
+                
           }
-
-          console.log('Line intersects with:', obj.name);
+        }
+          
         // }
         target.selectable = true;
         target.lockMovementX = false;
         target.lockMovementY = false;
-      });
+      }
+      console.log("Event for mouse up")
+
+ 
 
       // Remove the line from the canvas
       canvas.remove(line);
 
+
+      console.log("setting isConnected to false");
       // Remove the event listeners
+      isConnected = false;
       canvas.off('mouse:move');
       canvas.off('mouse:up');
     });
@@ -346,19 +381,6 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
 
   
 
-
-
-    // const component = 
-
-    // img.onload = () => {
-    //   const newImage = new fabric.Image(img, {
-    //     width: img.width,
-    //     height: img.height,
-    //     left: e.offsetX,
-    //     top: e.offsetY
-    //   });
-    //   canvas.add(newImage);
-    // };
 
     
     console.log("adding image to canvas " , img);
