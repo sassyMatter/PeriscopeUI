@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HelloWorldComponent } from './hello-world/hello-world.component';
+import { CanvasCoreComponent } from './canvas-core/canvas-core.component';
 import { ConverterComponent  } from './converter/converter.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
-  {path: 'hello-world', component : HelloWorldComponent},
+  {path: 'hello-world', component : CanvasCoreComponent},
   {path: 'converter', component: ConverterComponent}
 ];
 

@@ -15,11 +15,11 @@ import { catchError, of, tap } from 'rxjs';
 
 
 @Component({
-  selector: 'app-hello-world',
-  templateUrl: './hello-world.component.html',
-  styleUrls: ['./hello-world.component.css']
+  selector: 'canvas-core',
+  templateUrl: './canvas-core.component.html',
+  styleUrls: ['./canvas-core.component.css']
 })
-export class HelloWorldComponent implements OnInit {
+export class CanvasCoreComponent implements OnInit {
 
   public response = 'Could not connect to server!!';
 

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HelloWorldComponent } from './hello-world/hello-world.component';
+import { CanvasCoreComponent } from './canvas-core/canvas-core.component';
 import {HttpClientModule } from '@angular/common/http';
 import { ConverterComponent } from './converter/converter.component'
 import { ComponentProvider } from './services/componentProvider';
@@ -12,7 +12,7 @@ import { ComponentProvider } from './services/componentProvider';
 @NgModule({
   declarations: [
     AppComponent,
-    HelloWorldComponent,
+    CanvasCoreComponent,
     ConverterComponent
   ],
   imports: [
