@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, createComponent } from '@angular/core';
+import { ChangeDetectorRef,  Component,  OnInit, createComponent } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 
@@ -11,6 +11,8 @@ import { Point } from 'fabric/fabric-impl';
 import { CustomGroup } from '../models/components/customGroup';
 import { ComponentProvider } from '../services/componentProvider';
 import { catchError, of, tap } from 'rxjs';
+import { ConnectionManager } from '../services/connnectionManager';
+import { Item } from '../models/components/component';
 
 
 
@@ -29,6 +31,7 @@ export class CanvasCoreComponent implements OnInit {
   constructor(
     private helloworldService : HelloWorldService,
     private componentFactory : ComponentProvider,
+    private connectionManager: ConnectionManager
     // private canvasService : CanvasService,
    ){
 
@@ -622,12 +625,18 @@ if (canvasContainer) {
         selectable: false
       }
     );
+
+    const ob =    obj1 as Item;
+    const oc = obj2 as Item;
   
     obj1.on("moving", () => this.updateLine(connectLine, obj1, "1"));
     obj1.on("scaling", () => this.updateLine(connectLine, obj1, "1"));
     obj2.on("moving", () => this.updateLine(connectLine, obj2, "2"));
     obj2.on("scaling", () => this.updateLine(connectLine, obj2, "2"));
-  
+
+    // updating the connections in the objects
+    this.connectionManager.establishBiDirectionalConnection(ob, oc);
+
     return connectLine;
   }
   

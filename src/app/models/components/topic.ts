@@ -1,7 +1,7 @@
 import { fabric } from 'fabric';
-import { Component } from './component';
+import { Item } from './component';
 
-export class Topic extends Component {
+export class Topic extends Item {
     
  
 

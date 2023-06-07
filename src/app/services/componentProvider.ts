@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Component } from "../models/components/component";
+import { Item } from "../models/components/component";
 import { Database } from "../models/components/database";
 import { Func } from "../models/components/func";
 import { RestInterface } from "../models/components/restInterface";
@@ -14,7 +14,7 @@ import { Input } from "../models/components/input";
 )
 export class ComponentProvider {
 
-    createComponent(type: string, event: DragEvent, width: number, height : number): Component {
+    createComponent(type: string, event: DragEvent, width: number, height : number): Item {
       console.log("calling create component");
       switch (type) {
         case 'database':

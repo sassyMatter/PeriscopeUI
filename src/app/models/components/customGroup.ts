@@ -1,8 +1,8 @@
 
 import { fabric } from 'fabric';
-import { Component } from './component';
+import { Item } from './component';
 
-export class CustomGroup extends Component {
+export class CustomGroup extends Item {
   override connections: any[];
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Component } from "../models/components/component";
+import { Item } from "../models/components/component";
 import { Connector } from "../models/components/connector";
 
 
@@ -10,7 +10,7 @@ import { Connector } from "../models/components/connector";
 export class ConnectionManager {
 
 
-    establishBiDirectionalConnection(component1: Component, component2: Component) {
+    establishBiDirectionalConnection(component1: Item, component2: Item) {
       const connector = new Connector();
       component1.connections.push(connector);
       component2.connections.push(connector);
@@ -19,7 +19,7 @@ export class ConnectionManager {
     // Add other methods for managing connetions
     // true : from comp1 to comp2
     // false : from comp2 to comp1
-    establishDirectionalConnection(component1: Component, component2: Component, direction: boolean){
+    establishDirectionalConnection(component1: Item, component2: Item, direction: boolean){
         const connector = new Connector();
         if(direction){
             component1.connections.push(connector);

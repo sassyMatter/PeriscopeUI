@@ -1,7 +1,7 @@
 import { fabric } from 'fabric';
-import { Component } from './component';
+import { Item } from './component';
 
-export class RestInterface extends Component {
+export class RestInterface extends Item {
 
     
 //   override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
