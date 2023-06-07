@@ -12,13 +12,11 @@ export class Item extends fabric.Group  {
     // Set any default fabric.js object properties here
   }
 
-  // createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
-  //   const fabricObject = new fabric.Object();
 
-  //   return fabricObject;
-  // }
-
-  // createObject(componentType: string, event: DragEvent){
-    
-  // }
+  override toObject(propertiesToInclude?: string[]): any {
+    return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      connections: this.connections,
+      id: this.id
+    });
+  }
 }
