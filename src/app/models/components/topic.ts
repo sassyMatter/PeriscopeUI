@@ -26,6 +26,7 @@ export class Topic extends Item {
     super();
     this.connections = [];
     this.imgUrl = "assets/QueueResized.png";
+    this.type = "queue";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,

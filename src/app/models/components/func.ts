@@ -22,6 +22,7 @@ export class Func extends Item {
     super();
     this.connections = [];
     this.imgUrl = "assets/LamdaResize.png";
+    this.type = "func";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,

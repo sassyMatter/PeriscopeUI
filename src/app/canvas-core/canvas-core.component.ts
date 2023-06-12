@@ -535,7 +535,7 @@ if (canvasContainer) {
     const serializedCanvas = this.canvas?.toJSON(["id"]);
     if (serializedCanvas) {
       const filteredCanvasObjects = serializedCanvas.objects.filter(
-        (obj: any) => obj.id !== 'grid-lines'
+        (obj: any) => (obj.id !== 'grid-lines' && obj.type !== 'line')
       );
 
       const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };

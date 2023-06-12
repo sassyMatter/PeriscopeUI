@@ -40,6 +40,7 @@ export class Database extends Item {
     super();
     this.connections = [];
     this.imgUrl = "assets/databaseResized.png";
+    this.type = "database";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,

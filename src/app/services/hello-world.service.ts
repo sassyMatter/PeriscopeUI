@@ -12,7 +12,7 @@ export class HelloWorldService {
 
   sendCanvasData(canvasData : string | undefined): Observable<any>{
   
-    const url = 'http://localhost:8080/canvas/post-canvas-data'; // Replace with your actual backend URL
+    const url = 'http://localhost:8080/canvas/post-canvas-data'; 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     return this.http.post(url, canvasData, options);

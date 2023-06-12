@@ -13,8 +13,8 @@ export class ConnectionManager {
     establishBiDirectionalConnection(component1: Item, component2: Item) {
       const connector1 = new Connector(component1.id);
       const connector2 = new Connector(component2.id);
-      component1.connections.push(connector1);
-      component2.connections.push(connector2);
+      component1.connections.push(connector2);
+      component2.connections.push(connector1);
     }
   
     // Add other methods for managing connetions

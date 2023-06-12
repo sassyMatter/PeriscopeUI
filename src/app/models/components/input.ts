@@ -13,6 +13,7 @@ export class Input extends Item {
    
     this.connections = [];
     this.imgUrl = "assets/big-data.png";
+    this.type = "input";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,

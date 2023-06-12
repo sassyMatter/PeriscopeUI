@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 export class Item extends fabric.Group  {
   connections: Connector[] = [];
   id:string;
+  
 
   constructor() {
     super();
@@ -16,7 +17,8 @@ export class Item extends fabric.Group  {
   override toObject(propertiesToInclude?: string[]): any {
     return fabric.util.object.extend(super.toObject(propertiesToInclude), {
       connections: this.connections,
-      id: this.id
+      id: this.id,
+
     });
   }
 }

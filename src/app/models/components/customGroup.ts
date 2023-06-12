@@ -13,6 +13,7 @@ export class CustomGroup extends Item {
    
     this.connections = [];
     this.imgUrl = "assets/databaseResized.png";
+    this.type = "CustomGroup";
     this.imageOptions = { 
         width: width + 14,
         height: height + 14,

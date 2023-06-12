@@ -21,6 +21,7 @@ constructor(event: DragEvent, width: number, height: number) {
   super();
   this.connections = [];
   this.imgUrl = "assets/restCall.png";
+  this.type = "rest";
   this.imageOptions = { 
       width: width + 14,
       height: height + 14,
