@@ -332,59 +332,6 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const height = img.clientHeight;
 
     const newImage = createFabricObject(componentType, e, width, height);
-
-
-    //  const newImage: fabric.Image = new fabric.Image(img, {
-      
-    //   width: img.clientWidth + 14,
-    //   height: img.clientHeight + 14,
-    
-    //   left: e.offsetX-25,
-    //   top: e.offsetY-25,
-    //   centeredScaling: true,
-    //   originX: 'center', 
-    //   originY: 'center',
-    
-    // });
-   
-  
-  
-
-    // test
-
-
-//     const imgUrl = 'assets/databaseResized.png';
-// const imageOptions = {
-//   width: img.clientWidth + 14,
-//   height: img.clientHeight + 14,
-
-//   left: e.offsetX-25,
-//   top: e.offsetY-25,
-//   centeredScaling: true,
-//   originX: 'center', 
-//   originY: 'center',
-// };
-
-// const connections: never[] = [
-//   // Array of connection objects
-//   // Customize the connections based on your requirements
-// ];
-
-// const customGroup = CustomGroup.createWithImageAndConnections(
-//   imgUrl,
-//   imageOptions,
-//   connections
-// );
-
-// canvas.add(customGroup);
-// canvas.renderAll();
-
-    // test
-    
-
-  
-
-
     
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
@@ -555,6 +502,10 @@ if (canvasContainer) {
         })
       ).subscribe();
     }
+  }
+
+  runSimulation(){
+
   }
 
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
