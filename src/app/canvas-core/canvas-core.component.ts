@@ -586,7 +586,7 @@ if (canvasContainer) {
     obj2.on("scaling", () => this.updateLine(connectLine, obj2, "2"));
 
     // updating the connections in the objects
-    this.connectionManager.establishBiDirectionalConnection(ob, oc);
+    this.connectionManager.establishDirectionalConnection(ob, oc, true);
 
     return connectLine;
   }
