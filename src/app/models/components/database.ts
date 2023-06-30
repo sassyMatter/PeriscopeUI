@@ -36,6 +36,11 @@ export class Database extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
+  // properties for form and extendible
+  tableDefinitions!: string;
+  // properties for form config, array for same
+  
+
   constructor(event: DragEvent, width: number, height: number) {
     super();
     this.connections = [];
