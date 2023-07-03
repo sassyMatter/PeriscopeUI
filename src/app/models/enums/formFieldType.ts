@@ -3,4 +3,6 @@ enum formFieldType{
     LONG_STRING,
     // for variable names
     SHORT_STRING,
+
+    CODE_EDITOR,
 }

@@ -1,10 +1,13 @@
 <div *ngIf="isOpen" class="dialog-container">
     <h2>Configuration</h2>
+    <div class="references">
+        <p>References would be stored here</p>
+    </div>
     <p>Target: {{ target }}</p>
     <!-- Dialog content goes here -->
     <p>dialog works configuration!</p>
-    <div id="editor"></div>
-
+    <!-- <div id="editor"></div> -->
+    <h3>Editor</h3>
     <ngx-codemirror
        [options]="codeMirrorOptions"
     ></ngx-codemirror>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { java, javaLanguage } from '@codemirror/lang-java';
+import { Item } from '../models/components/component';
 
 
 
@@ -13,7 +14,7 @@ import { java, javaLanguage } from '@codemirror/lang-java';
 export class DialogComponent implements OnInit {
 
 
-  @Input() target: any;
+  @Input() target: Item | undefined;
   
   @Input() isOpen: boolean | undefined;
 
@@ -21,12 +22,15 @@ export class DialogComponent implements OnInit {
 
   openDialog() {
     this.isOpen = true;
+  
   }
 
   closeDialog() {
     this.isOpen = false;
     console.log("emitting close event");
     this.onClose.emit();
+    console.log("target :: {} ", this.target?.type)
+    
   }
 
   codeMirrorOptions: any = {
@@ -50,7 +54,6 @@ export class DialogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
  
   }
 

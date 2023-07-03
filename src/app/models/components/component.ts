@@ -5,6 +5,8 @@ import { v4 as uuid } from 'uuid';
 export class Item extends fabric.Group  {
   connections: Connector[] = [];
   id:string;
+  references: String[] = [];
+  
   
 
   constructor() {

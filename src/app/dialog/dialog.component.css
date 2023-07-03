@@ -1,12 +1,12 @@
 .dialog-container {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
-    width: 400px; /* Adjust the width as per your requirement */
+    width: 800px; /* Adjust the width as per your requirement */
     max-width: 90%; /* Limit the width to 90% of the viewport */
 
   }
@@ -16,4 +16,11 @@
 .close-button{
     margin-top : 20px;
 
+}
+
+.references{
+  box-sizing: border-box;
+  border-radius: 2px;
+  border-color: rgb(166, 28, 28);
+  border: #ccc;
 }

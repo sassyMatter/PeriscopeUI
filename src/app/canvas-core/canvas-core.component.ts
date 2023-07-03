@@ -196,7 +196,8 @@ canvas.on('mouse:dblclick', (options) => {
     // Object is double-clicked
     console.log('Object double-clicked:', target);
     this.openDialog();
-    this.targetObjectForDialog = target;
+    this.targetObjectForDialog = target as Item;
+    
      // Perform any desired actions
 
   }
