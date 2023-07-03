@@ -1,1 +1,13 @@
-<p>dialog works!</p>
+<div *ngIf="isOpen" class="dialog-container">
+    <h2>Configuration</h2>
+    <p>Target: {{ target }}</p>
+    <!-- Dialog content goes here -->
+    <p>dialog works configuration!</p>
+    <div id="editor"></div>
+
+    <ngx-codemirror
+       [options]="codeMirrorOptions"
+    ></ngx-codemirror>
+
+    <button class="close-button" (click)="closeDialog()">Close</button>
+</div>

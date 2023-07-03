@@ -23,7 +23,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    // CodemirrorModule,
+    CodemirrorModule,
 
     
 
