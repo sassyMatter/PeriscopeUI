@@ -1,7 +1,12 @@
-<div *ngIf="isOpen" class="dialog-container">
-    <h2>Configuration</h2>
+<div *ngIf="isOpen" class="dialog-container" cdkDrag >
+    <h2 class="configure">Configuration</h2>
+    <p>References</p>
     <div class="references">
-        <p>References would be stored here</p>
+        <mat-chip-listbox>
+            <mat-chip class="chip" *ngFor="let item of references" >
+              {{ item }}
+            </mat-chip>
+        </mat-chip-listbox>
     </div>
     <p>Target: {{ target }}</p>
     <!-- Dialog content goes here -->

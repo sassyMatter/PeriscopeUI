@@ -2,6 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { java, javaLanguage } from '@codemirror/lang-java';
 import { Item } from '../models/components/component';
+import {MatChipsModule} from '@angular/material/chips';
+import {NgFor} from '@angular/common';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+
 
 
 
@@ -24,6 +28,12 @@ export class DialogComponent implements OnInit {
     this.isOpen = true;
   
   }
+
+  references: string[] = [
+    "ref1", "ref2", "ref3", "ref4", "ref1", "ref2", "ref3"
+  ]
+
+  
 
   closeDialog() {
     this.isOpen = false;
@@ -49,11 +59,27 @@ export class DialogComponent implements OnInit {
 
   query: string | undefined;
 
+
+  onDragEnded(event: CdkDragEnd<any>): void {
+    const element = event.source.element.nativeElement as HTMLElement;
+    const transform = element.style.transform;
+    const translateValues = transform.match(/-?\d+/g);
+
+    if (translateValues && translateValues.length >= 2) {
+      const left = parseInt(translateValues[0], 10);
+      const top = parseInt(translateValues[1], 10);
+
+      // Update the dialog container position or perform any desired action
+      console.log('New position:', left, top);
+    }
+  }
   
 
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log("NgInit hit")
  
   }
 

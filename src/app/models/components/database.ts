@@ -32,6 +32,7 @@ export class Database extends Item {
 
   
   override connections: any[];
+  override references = ["ref1", "ref2", "ref3", "ref3"];
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];

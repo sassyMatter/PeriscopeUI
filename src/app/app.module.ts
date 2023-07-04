@@ -9,6 +9,9 @@ import { ConverterComponent } from './converter/converter.component'
 import { ComponentProvider } from './services/componentProvider';
 import { DialogComponent } from './dialog/dialog.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipsModule } from '@angular/material/chips';
+import { NgFor } from '@angular/common';
 
 
 
@@ -24,6 +27,10 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     HttpClientModule,
     AppRoutingModule,
     CodemirrorModule,
+    BrowserAnimationsModule,
+    MatChipsModule,
+    NgFor,
+    
 
     
 
