@@ -1,11 +1,15 @@
 import { fabric } from 'fabric';
 import { Connector } from './connector';
 import { v4 as uuid } from 'uuid';
+import { Field } from '../formField';
+
+
 
 export class Item extends fabric.Group  {
   connections: Connector[] = [];
   id:string;
-  references: String[] = [];
+  formFields: Field[] = [];
+  references: string[] = [];
   
   
 

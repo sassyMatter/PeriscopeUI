@@ -1,5 +1,7 @@
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { formFieldType } from '../enums/formFieldType';
+import { Field } from '../formField';
 
 export class Func extends Item {
 
@@ -17,6 +19,37 @@ export class Func extends Item {
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
+
+
+  override formFields: Field[] = [
+    {
+      "name": "functionType",
+      "type": formFieldType.SHORT_STRING
+    },
+    {
+      "name" : "functionName",
+      "type" : formFieldType.SHORT_STRING,
+    },
+    {
+      "name" : "functionBody",
+      "type" : formFieldType.CODE_EDITOR
+    },
+    {
+      "name" : "parameters",
+      "type" : formFieldType.EXTENDIBLE_MAP
+    },
+    {
+      "name" : "returnType",
+      "type" : formFieldType.SHORT_STRING
+    },
+    {
+      "name" : "topic",
+      "type" : formFieldType.SHORT_STRING
+    }
+  ];
+
+  override references: string[] = ["jdbcTemplate", "kafkaProducer"];
+
 
   constructor(event: DragEvent, width: number, height: number) {
     super();

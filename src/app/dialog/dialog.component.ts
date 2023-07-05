@@ -40,6 +40,7 @@ export class DialogComponent implements OnInit {
     console.log("emitting close event");
     this.onClose.emit();
     console.log("target :: {} ", this.target?.type)
+   
     
   }
 
@@ -72,6 +73,17 @@ export class DialogComponent implements OnInit {
       // Update the dialog container position or perform any desired action
       console.log('New position:', left, top);
     }
+  }
+
+
+
+
+  ngOnChanges(): void{
+    console.log("target manipulation ", this.target);
+    if(this.target?.references){
+      this.references = this.target?.references;
+    }
+    
   }
   
 

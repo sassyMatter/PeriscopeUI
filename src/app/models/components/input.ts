@@ -1,12 +1,23 @@
 
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { Field } from '../formField';
+import { formFieldType } from '../enums/formFieldType';
 
 export class Input extends Item {
   override connections: any[];
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
+
+  override formFields: Field[] = [
+    {
+      "name" : "inputSource",
+      "type" : formFieldType.SHORT_STRING,
+    },    
+  ];
+  
+  override references: string[] = ["apiReference1"];
 
   constructor(event: DragEvent, width: number, height: number) {
     super();

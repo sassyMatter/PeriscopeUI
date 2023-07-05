@@ -1,5 +1,7 @@
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { formFieldType } from '../enums/formFieldType';
+import { Field } from '../formField';
 
 export class RestInterface extends Item {
 
@@ -16,6 +18,49 @@ override connections: any[];
 imgUrl!: string;
 imageOptions!: fabric.IImageOptions;
 objects?: fabric.Object[];
+
+
+override formFields: Field[] = [
+  {
+    "name" : "url",
+    "type" : formFieldType.SHORT_STRING,
+  },
+  {
+    "name" : "tyep",
+    "type" : formFieldType.DROP_DOWN,
+  },
+  {
+    "name" : "headers",
+    "type" : formFieldType.EXTENDIBLE_MAP,
+  },
+  {
+    "name" : "requestBody",
+    "type" : formFieldType.EXTENDIBLE_MAP,
+  }
+  ,
+  {
+    "name" : "requestUrl",
+    "type" : formFieldType.SHORT_STRING,
+  }
+  ,
+  {
+    "name" : "apiType",
+    "type" : formFieldType.DROP_DOWN,
+  }
+  ,
+  {
+    "name" : "httpMethod",
+    "type" : formFieldType.DROP_DOWN,
+  }
+  ,
+  {
+    "name" : "methodName",
+    "type" : formFieldType.SHORT_STRING,
+  }
+  
+];
+
+override references: string[] = ["methodReference1", "methodRefence2"];
 
 constructor(event: DragEvent, width: number, height: number) {
   super();
