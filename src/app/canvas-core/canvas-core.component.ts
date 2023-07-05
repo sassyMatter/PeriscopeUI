@@ -28,6 +28,22 @@ export class CanvasCoreComponent implements OnInit {
   
   canvas : fabric.Canvas | null = null;
 
+  isDialogOpen = false;
+  targetObjectForDialog : any;
+  
+  openDialog() {
+      console.log("setting isDialogOpen to true")
+      this.isDialogOpen = true;
+  }
+
+  closeDialog() {
+    console.log("setting isDialogOpen to false")
+    this.isDialogOpen = false;
+  }
+  
+  
+
+
   constructor(
     private helloworldService : HelloWorldService,
     private componentFactory : ComponentProvider,
@@ -38,6 +54,7 @@ export class CanvasCoreComponent implements OnInit {
     this.canvas = new fabric.Canvas('canvas');
    }
 
+  
   ngOnInit(): void {
     this.showServerData();
     let createFabricObject = this.createFabricObject;
@@ -169,6 +186,24 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
   });
   
 });
+
+
+
+canvas.on('mouse:dblclick', (options) => {
+  var event = options.e;
+  var target = canvas.findTarget(event, false);
+  if (target) {
+    // Object is double-clicked
+    console.log('Object double-clicked:', target);
+    this.openDialog();
+    this.targetObjectForDialog = target as Item;
+    
+     // Perform any desired actions
+
+  }
+});
+
+
 
 
 canvas.on('mouse:down', (event: fabric.IEvent) => {

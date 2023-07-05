@@ -1,5 +1,7 @@
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { Field } from '../formField';
+import { formFieldType } from '../enums/formFieldType';
 
 export class Topic extends Item {
     
@@ -21,6 +23,16 @@ export class Topic extends Item {
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
+
+
+  override formFields: Field[] = [
+    {
+      "name" : "topic",
+      "type" : formFieldType.SHORT_STRING,
+    },
+  ];
+
+  override references: string[] = ["topicName"];
 
   constructor(event: DragEvent, width: number, height: number) {
     super();

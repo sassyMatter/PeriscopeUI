@@ -34,6 +34,16 @@
 
 <div id="canvas-container">
    <canvas id="canvas"></canvas>
+   <app-dialog 
+   [target]="targetObjectForDialog" 
+   [isOpen]="isDialogOpen"
+   (onClose)="closeDialog()"> 
+  
+  </app-dialog>
 </div>
 </div>
+
+
+
+
 

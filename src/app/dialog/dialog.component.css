@@ -1,0 +1,42 @@
+.dialog-container {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(244, 238, 238);
+    padding: 20px;
+    border: 1px solid #181717;
+    width: 800px; /* Adjust the width as per your requirement */
+    max-width: 90%; /* Limit the width to 90% of the viewport */
+    border-radius: 10px;
+    /* position: relative; */
+
+  }
+
+
+
+.close-button{
+    margin-top : 20px;
+
+}
+
+.references{
+    border: 1px solid #181717;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chip{
+    display: inline-flex;
+    align-items: center;
+    background-color: #f4f1f1;
+    padding: 2px 4px;
+    border-radius: 10px;
+    margin-right: 2px;
+}
+
+.configure{
+  text-align: center;
+}

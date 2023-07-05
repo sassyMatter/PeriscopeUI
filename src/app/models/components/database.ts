@@ -1,5 +1,7 @@
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { Field } from '../formField';
+import { formFieldType } from '../enums/formFieldType';
 
 export class Database extends Item {
 
@@ -32,9 +34,30 @@ export class Database extends Item {
 
   
   override connections: any[];
+
+  override formFields: Field[] = [
+    {
+      "name" : "Table Name",
+      "type" : formFieldType.SHORT_STRING,
+    },
+    {
+      "name" : "Editor",
+      "type" : formFieldType.CODE_EDITOR
+    }
+  ];
+
+  override references: string[] = ["jdbcTemplate"];
+
+
+
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
+
+  // properties for form and extendible
+  tableDefinitions!: string;
+  // properties for form config, array for same
+  
 
   constructor(event: DragEvent, width: number, height: number) {
     super();

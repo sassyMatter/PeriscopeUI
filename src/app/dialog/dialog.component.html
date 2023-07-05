@@ -1,0 +1,21 @@
+<div *ngIf="isOpen" class="dialog-container" cdkDrag >
+    <h2 class="configure">Configuration</h2>
+    <p>References</p>
+    <div class="references">
+        <mat-chip-listbox>
+            <mat-chip class="chip" *ngFor="let item of references" >
+              {{ item }}
+            </mat-chip>
+        </mat-chip-listbox>
+    </div>
+    <p>Target: {{ target }}</p>
+    <!-- Dialog content goes here -->
+    <p>dialog works configuration!</p>
+    <!-- <div id="editor"></div> -->
+    <h3>Editor</h3>
+    <ngx-codemirror
+       [options]="codeMirrorOptions"
+    ></ngx-codemirror>
+
+    <button class="close-button" (click)="closeDialog()">Close</button>
+</div>
