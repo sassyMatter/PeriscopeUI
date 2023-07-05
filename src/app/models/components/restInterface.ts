@@ -26,7 +26,7 @@ override formFields: Field[] = [
     "type" : formFieldType.SHORT_STRING,
   },
   {
-    "name" : "tyep",
+    "name" : "type",
     "type" : formFieldType.DROP_DOWN,
   },
   {
