@@ -1,5 +1,5 @@
 <div *ngIf="isOpen" class="dialog-container" cdkDrag >
-    <h2 class="configure">Configuration</h2>
+    <h2 class="configure">Configuration  {{target?.type}}</h2>
     <p>References</p>
     <div class="references">
         <mat-chip-listbox>
@@ -8,14 +8,56 @@
             </mat-chip>
         </mat-chip-listbox>
     </div>
-    <p>Target: {{ target }}</p>
-    <!-- Dialog content goes here -->
-    <p>dialog works configuration!</p>
-    <!-- <div id="editor"></div> -->
-    <h3>Editor</h3>
-    <ngx-codemirror
-       [options]="codeMirrorOptions"
-    ></ngx-codemirror>
+   
+    <div *ngFor="let field of formFields">
+        <label>{{ field.name }}</label>
+        <ng-container [ngSwitch]="field.type">
+          <!-- For SHORT_STRING type -->
+          <input *ngSwitchCase="formFieldType.SHORT_STRING" type="text" [(ngModel)]="field.value" />
+      
+          <!-- For DROP_DOWN type -->
+          <select *ngSwitchCase="formFieldType.DROP_DOWN" [(ngModel)]="field.value">
+            <option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+          </select>
+      
+          <!-- For EXTENDIBLE_MAP type -->
+          <div *ngSwitchCase="formFieldType.EXTENDIBLE_MAP">
+            <!-- <div *ngFor="let entry of field.value; let i = index">
+              <input type="text" [(ngModel)]="entry.key" placeholder="Key" />
+              <input type="text" [(ngModel)]="entry.value" placeholder="Value" />
+              <button (click)="removeEntry(field.value, i)">Remove</button>
+            </div>
+            <button (click)="addEntry(field.value)">Add Entry</button> -->
+            <label>{{field.name}}</label>
+            <ng-container *ngFor="let entry of field.value; let i = index">
+                <div class="entry-row">
+                  
+                  <input type="text" [(ngModel)]="entry.key" placeholder="Key" />
+                  <input type="text" [(ngModel)]="entry.value" placeholder="Value" />
+                  <button (click)="removeEntry(field.value, i)">Remove</button>
+                </div>
+              </ng-container>
+              <button (click)="addEntry(field.value)">Add Entry</button>
+
+
+
+          </div>
+      
+          <!-- Add more cases for other field types as needed -->
+          <div *ngSwitchCase="formFieldType.CODE_EDITOR">
+            <ngx-codemirror
+               [options]="codeMirrorOptions"
+            ></ngx-codemirror>
+          </div>
+      
+          <!-- For unknown field types -->
+          <div *ngSwitchDefault>
+            <p>Field type not supported</p>
+          </div>
+        </ng-container>
+      </div>
+      
+
 
     <button class="close-button" (click)="closeDialog()">Close</button>
 </div>

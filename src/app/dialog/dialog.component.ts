@@ -5,6 +5,8 @@ import { Item } from '../models/components/component';
 import {MatChipsModule} from '@angular/material/chips';
 import {NgFor} from '@angular/common';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Field } from '../models/formField';
+import { formFieldType } from '../models/enums/formFieldType';
 
 
 
@@ -33,6 +35,7 @@ export class DialogComponent implements OnInit {
     "ref1", "ref2", "ref3", "ref4", "ref1", "ref2", "ref3"
   ]
 
+  formFields: Field[] = [];
   
 
   closeDialog() {
@@ -75,6 +78,7 @@ export class DialogComponent implements OnInit {
     }
   }
 
+  formFieldType = formFieldType;
 
 
 
@@ -83,7 +87,20 @@ export class DialogComponent implements OnInit {
     if(this.target?.references){
       this.references = this.target?.references;
     }
+    if(this.target?.formFields){
+      this.formFields = this.target?.formFields;
+    }
     
+  }
+
+
+  removeEntry(arg0: any,_t37: number) {
+     console.log("Removing Entry");
+  }
+
+  addEntry(arg0: any) {
+     
+     console.log("Adding Entry");
   }
   
 
