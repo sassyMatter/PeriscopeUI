@@ -32,6 +32,7 @@ override formFields: Field[] = [
   {
     "name" : "headers",
     "type" : formFieldType.EXTENDIBLE_MAP,
+    "value" : [{"key1": "value1"}, {"key2": "value2"}]
   },
   {
     "name" : "requestBody",
@@ -46,6 +47,7 @@ override formFields: Field[] = [
   {
     "name" : "apiType",
     "type" : formFieldType.DROP_DOWN,
+    "options": ["POST", "GET"]
   }
   ,
   {

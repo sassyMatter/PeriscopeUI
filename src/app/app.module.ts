@@ -12,6 +12,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -30,6 +31,7 @@ import { NgFor } from '@angular/common';
     BrowserAnimationsModule,
     MatChipsModule,
     NgFor,
+    FormsModule,
     
 
     
