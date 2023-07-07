@@ -94,14 +94,26 @@ export class DialogComponent implements OnInit {
   }
 
 
-  removeEntry(arg0: any,_t37: number) {
+  removeEntry(arg0: any, arg1: string) {
      console.log("Removing Entry");
   }
 
   addEntry(arg0: any) {
-     
      console.log("Adding Entry");
+     console.log(arg0);
+    const fieldToUpdate = this.formFields.find(field => field.name === "parameters")
+    if(fieldToUpdate){
+      fieldToUpdate.value?.set("x", "y");
+       
+    }
+     
   }
+
+  
+getEntries(map: Map<string, string> | undefined): [string, string][] {
+    return map ? Array.from(map.entries()) : [];
+}
+  
   
 
   constructor() { }

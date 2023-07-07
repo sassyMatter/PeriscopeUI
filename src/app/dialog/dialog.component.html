@@ -28,20 +28,18 @@
               <button (click)="removeEntry(field.value, i)">Remove</button>
             </div>
             <button (click)="addEntry(field.value)">Add Entry</button> -->
-            <label>{{field.name}}</label>
-            <ng-container *ngFor="let entry of field.value; let i = index">
-                <div class="entry-row">
-                  
-                  <input type="text" [(ngModel)]="entry.key" placeholder="Key" />
-                  <input type="text" [(ngModel)]="entry.value" placeholder="Value" />
-                  <button (click)="removeEntry(field.value, i)">Remove</button>
-                </div>
-              </ng-container>
-              <button (click)="addEntry(field.value)">Add Entry</button>
-
-
+          <label>{{field.name}}</label>
+          <ng-container *ngFor="let entry of getEntries(field.value)">
+            <div class="entry-row">
+              <input type="text" [(ngModel)]="entry[0]" placeholder="Key" />
+              <input type="text" [(ngModel)]="entry[1]" placeholder="Value" />
+              <button (click)="removeEntry(field.value, entry[0])">Remove</button>
+            </div>
+          </ng-container>
+          <button (click)="addEntry(field.value)">Add Entry</button>
 
           </div>
+
       
           <!-- Add more cases for other field types as needed -->
           <div *ngSwitchCase="formFieldType.CODE_EDITOR">

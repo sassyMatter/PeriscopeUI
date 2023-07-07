@@ -55,7 +55,7 @@ export class Database extends Item {
   objects?: fabric.Object[];
 
   // properties for form and extendible
-  tableDefinitions!: string;
+  tableDefinitions!: string[];
   // properties for form config, array for same
   
 
@@ -91,6 +91,7 @@ export class Database extends Item {
         // this.canvas?.renderAll();
       });
 
+     this.tableDefinitions = [];
 
     
   }

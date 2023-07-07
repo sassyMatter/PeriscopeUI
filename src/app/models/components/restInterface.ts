@@ -19,6 +19,16 @@ imgUrl!: string;
 imageOptions!: fabric.IImageOptions;
 objects?: fabric.Object[];
 
+// custom Properties
+url: string;
+// type: string;
+headers: Map<string, string>;
+requestBody: Map<string, string>;
+requestUrl: string;
+apiType: string;
+httpMethod: string;
+methodName: string;
+
 
 override formFields: Field[] = [
   {
@@ -32,7 +42,10 @@ override formFields: Field[] = [
   {
     "name" : "headers",
     "type" : formFieldType.EXTENDIBLE_MAP,
-    "value" : [{"key1": "value1"}, {"key2": "value2"}]
+    "value" : new Map<string, string>([
+      ["key1", "value1"],
+      ["key2", "value2"]
+    ])
   },
   {
     "name" : "requestBody",
@@ -97,6 +110,18 @@ constructor(event: DragEvent, width: number, height: number) {
     });
 
 
+    // initialzing custom properties
+    
+      this.url = '',
+      // type is already in parent class;
+      // this.type = '',
+      this.headers = new Map<string, string>(),
+      this.requestBody = new Map<string, string>(),
+      this.requestUrl = '',
+      this.apiType= '',
+      this.httpMethod = '',
+      this.methodName = ''
+
   
-}
+  }
 }

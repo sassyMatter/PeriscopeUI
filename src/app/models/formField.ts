@@ -4,5 +4,5 @@ export interface Field {
   name: string;
   type: formFieldType;
   options?: string[];
-  value?:any[];
+  value?: Map<string, string>;
 }

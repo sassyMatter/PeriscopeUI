@@ -20,6 +20,15 @@ export class Func extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
+  // custom properties
+  parameters: Map<string, string>;
+  returnType: string;
+  functionBody: string;
+  functionName: string;
+  topic: string;
+  deserializationClass: string;
+  functionType: string;
+
 
   override formFields: Field[] = [
     {
@@ -82,6 +91,16 @@ export class Func extends Item {
         // Render the custom group
         // this.canvas?.renderAll();
       });
+
+
+      // initializing custom properties
+      this.parameters = new Map<string, string>();
+      this.returnType = '';
+      this.functionBody = '';
+      this.functionName = '';
+      this.topic = '';
+      this.deserializationClass = '';
+      this.functionType = '';
 
 
     
