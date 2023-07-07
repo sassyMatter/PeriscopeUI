@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 
 
@@ -32,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     MatChipsModule,
     NgFor,
     FormsModule,
-    
+    CdkDrag,
 
     
 
