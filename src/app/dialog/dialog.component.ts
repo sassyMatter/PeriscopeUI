@@ -59,6 +59,8 @@ export class DialogComponent implements OnInit {
     matchBrackets: true,
     lint: true,
     theme: 'material',
+    
+     
   };
 
   query: string | undefined;
@@ -101,7 +103,7 @@ export class DialogComponent implements OnInit {
   addEntry(arg0: any) {
      console.log("Adding Entry");
      console.log(arg0);
-    const fieldToUpdate = this.formFields.find(field => field.name === "parameters")
+    const fieldToUpdate = this.formFields.find(field => field.name === "headers")
     if(fieldToUpdate){
       fieldToUpdate.value?.set("x", "y");
        
