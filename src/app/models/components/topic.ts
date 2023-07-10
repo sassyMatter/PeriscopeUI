@@ -31,7 +31,9 @@ export class Topic extends Item {
   override formFields: Field[] = [
     {
       "name" : "topic",
+      "fieldlabel" : "Topic",
       "type" : formFieldType.SHORT_STRING,
+      "value" : ""
     },
   ];
 

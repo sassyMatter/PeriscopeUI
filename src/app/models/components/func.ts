@@ -33,27 +33,39 @@ export class Func extends Item {
   override formFields: Field[] = [
     {
       "name": "functionType",
-      "type": formFieldType.SHORT_STRING
+      "fieldlabel": "Function Type",
+      "type": formFieldType.SHORT_STRING,
+      "value": "",
     },
     {
       "name" : "functionName",
+      "fieldlabel": "Function Name",
       "type" : formFieldType.SHORT_STRING,
+      "value" : "",
     },
     {
       "name" : "functionBody",
-      "type" : formFieldType.CODE_EDITOR
+      "fieldlabel": "Function Body",
+      "type" : formFieldType.CODE_EDITOR,
+      "value" : "",
     },
     {
       "name" : "parameters",
-      "type" : formFieldType.EXTENDIBLE_MAP
+      "fieldlabel": "Parameters",
+      "type" : formFieldType.EXTENDIBLE_MAP,
+      "value" : new Map<String, String>(),
     },
     {
       "name" : "returnType",
-      "type" : formFieldType.SHORT_STRING
+      "fieldlabel": "Return Type",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : ""
     },
     {
       "name" : "topic",
-      "type" : formFieldType.SHORT_STRING
+      "fieldlabel" : "Topic",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : ""
     }
   ];
 

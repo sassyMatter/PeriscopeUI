@@ -27,4 +27,6 @@ export class Item extends fabric.Group  {
 
     });
   }
+
+  
 }

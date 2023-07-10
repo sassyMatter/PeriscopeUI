@@ -10,10 +10,10 @@
     </div>
    
     <div class="input-container" *ngFor="let field of formFields">
-        <label>{{ field.name }}</label>
+        <label>{{ field.fieldlabel }}</label>
         <ng-container class="input-container" [ngSwitch]="field.type">
           <!-- For SHORT_STRING type -->
-          <input *ngSwitchCase="formFieldType.SHORT_STRING" type="text" [(ngModel)]="field.value" />
+          <input *ngSwitchCase="formFieldType.SHORT_STRING" type="text" [(ngModel)]="field.name" />
       
           <!-- For DROP_DOWN type -->
           <select *ngSwitchCase="formFieldType.DROP_DOWN" [(ngModel)]="field.value">
@@ -22,13 +22,7 @@
       
           <!-- For EXTENDIBLE_MAP type -->
           <div class="input-container" *ngSwitchCase="formFieldType.EXTENDIBLE_MAP">
-            <!-- <div *ngFor="let entry of field.value; let i = index">
-              <input type="text" [(ngModel)]="entry.key" placeholder="Key" />
-              <input type="text" [(ngModel)]="entry.value" placeholder="Value" />
-              <button (click)="removeEntry(field.value, i)">Remove</button>
-            </div>
-            <button (click)="addEntry(field.value)">Add Entry</button> -->
-          <label>{{field.name}}</label>
+          <label>{{field.fieldlabel}}</label>
           <ng-container class="input-container" *ngFor="let entry of getEntries(field.value)">
             <div class="entry-row">
               <input type="text" [(ngModel)]="entry[0]" placeholder="Key" />

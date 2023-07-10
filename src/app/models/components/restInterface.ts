@@ -33,14 +33,20 @@ methodName: string;
 override formFields: Field[] = [
   {
     "name" : "url",
+    "fieldlabel": "URL",
     "type" : formFieldType.SHORT_STRING,
+    "value" : "",
   },
   {
     "name" : "type",
+    "fieldlabel": "Type",
     "type" : formFieldType.DROP_DOWN,
+    "options" : [],
+    "value" : ""
   },
   {
     "name" : "headers",
+    "fieldlabel": "Headers",
     "type" : formFieldType.EXTENDIBLE_MAP,
     "value" : new Map<string, string>([
       ["key1", "value1"],
@@ -49,28 +55,39 @@ override formFields: Field[] = [
   },
   {
     "name" : "requestBody",
+    "fieldlabel": "Request Body",
     "type" : formFieldType.EXTENDIBLE_MAP,
+    "value" : new Map<string, string>()
   }
   ,
   {
     "name" : "requestUrl",
+    "fieldlabel": "Request URL",
     "type" : formFieldType.SHORT_STRING,
+    "value" : "",
   }
   ,
   {
     "name" : "apiType",
+    "fieldlabel": "API Type",
     "type" : formFieldType.DROP_DOWN,
-    "options": ["POST", "GET"]
+    "options": ["POST", "GET"],
+    "value" : "",
   }
   ,
   {
     "name" : "httpMethod",
+    "fieldlabel" : "Http Method",
     "type" : formFieldType.DROP_DOWN,
+    "options": [],
+    "value": "",
   }
   ,
   {
     "name" : "methodName",
+    "fieldlabel" : "Method Name",
     "type" : formFieldType.SHORT_STRING,
+    "value" : ""
   }
   
 ];

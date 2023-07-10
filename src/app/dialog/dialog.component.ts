@@ -39,6 +39,7 @@ export class DialogComponent implements OnInit {
   
 
   closeDialog() {
+    // need to save data into attributes
     this.isOpen = false;
     console.log("emitting close event");
     this.onClose.emit();
@@ -82,6 +83,9 @@ export class DialogComponent implements OnInit {
 
   formFieldType = formFieldType;
 
+  
+
+
 
 
   ngOnChanges(): void{
@@ -92,7 +96,7 @@ export class DialogComponent implements OnInit {
     if(this.target?.formFields){
       this.formFields = this.target?.formFields;
     }
-    
+  
   }
 
 

@@ -13,7 +13,9 @@ export class Input extends Item {
   override formFields: Field[] = [
     {
       "name" : "inputSource",
+      "fieldlabel": "Input Source",
       "type" : formFieldType.SHORT_STRING,
+      "value": "",
     },    
   ];
   

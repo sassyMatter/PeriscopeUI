@@ -37,12 +37,16 @@ export class Database extends Item {
 
   override formFields: Field[] = [
     {
-      "name" : "Table Name",
+      "name" : "tableNames",
+      "fieldlabel": "Table Names(comma separated)",
       "type" : formFieldType.SHORT_STRING,
+      "value": "",
     },
     {
-      "name" : "Editor",
-      "type" : formFieldType.CODE_EDITOR
+      "name" : "tableDefinitions",
+      "fieldlabel": "Editor",
+      "type" : formFieldType.CODE_EDITOR,
+      "value": ""
     }
   ];
 
@@ -55,6 +59,9 @@ export class Database extends Item {
   objects?: fabric.Object[];
 
   // properties for form and extendible
+
+  // tables names field type should be a list, would add support for it later
+  tableNames!: string[];
   tableDefinitions!: string[];
   // properties for form config, array for same
   
@@ -92,6 +99,7 @@ export class Database extends Item {
       });
 
      this.tableDefinitions = [];
+     this.tableNames = [];
 
     
   }
