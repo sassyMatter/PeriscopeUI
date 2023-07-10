@@ -53,15 +53,18 @@
 }
 
 .entry-row {
-    display: flex;
     align-items: center;
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
   
 .entry-row input {
     margin-right: 10px;
     border-radius: 10px;
     margin-left: 20px;
+    
+    
 }
 
 
