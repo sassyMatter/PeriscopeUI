@@ -46,7 +46,7 @@ export class Database extends Item {
       "name" : "tableDefinitions",
       "fieldlabel": "Editor",
       "type" : formFieldType.CODE_EDITOR,
-      "value": ""
+      "value": ``
     }
   ];
 

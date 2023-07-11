@@ -47,7 +47,7 @@ export class Func extends Item {
       "name" : "functionBody",
       "fieldlabel": "Function Body",
       "type" : formFieldType.CODE_EDITOR,
-      "value" : "",
+      "value" : ``,
     },
     {
       "name" : "parameters",
