@@ -19,45 +19,75 @@ imgUrl!: string;
 imageOptions!: fabric.IImageOptions;
 objects?: fabric.Object[];
 
+// custom Properties
+url: string;
+// type: string;
+headers: Map<string, string>;
+requestBody: Map<string, string>;
+requestUrl: string;
+apiType: string;
+httpMethod: string;
+methodName: string;
+
 
 override formFields: Field[] = [
   {
     "name" : "url",
+    "fieldlabel": "URL",
     "type" : formFieldType.SHORT_STRING,
+    "value" : "",
   },
   {
     "name" : "type",
+    "fieldlabel": "Type",
     "type" : formFieldType.DROP_DOWN,
+    "options" : [],
+    "value" : ""
   },
   {
     "name" : "headers",
+    "fieldlabel": "Headers",
     "type" : formFieldType.EXTENDIBLE_MAP,
-    "value" : [{"key1": "value1"}, {"key2": "value2"}]
+    "value" : new Map<string, string>([
+      ["key1", "value1"],
+      ["key2", "value2"]
+    ])
   },
   {
     "name" : "requestBody",
+    "fieldlabel": "Request Body",
     "type" : formFieldType.EXTENDIBLE_MAP,
+    "value" : new Map<string, string>()
   }
   ,
   {
     "name" : "requestUrl",
+    "fieldlabel": "Request URL",
     "type" : formFieldType.SHORT_STRING,
+    "value" : "",
   }
   ,
   {
     "name" : "apiType",
+    "fieldlabel": "API Type",
     "type" : formFieldType.DROP_DOWN,
-    "options": ["POST", "GET"]
+    "options": ["POST", "GET"],
+    "value" : "",
   }
   ,
   {
     "name" : "httpMethod",
+    "fieldlabel" : "Http Method",
     "type" : formFieldType.DROP_DOWN,
+    "options": [],
+    "value": "",
   }
   ,
   {
     "name" : "methodName",
+    "fieldlabel" : "Method Name",
     "type" : formFieldType.SHORT_STRING,
+    "value" : ""
   }
   
 ];
@@ -97,6 +127,18 @@ constructor(event: DragEvent, width: number, height: number) {
     });
 
 
+    // initialzing custom properties
+    
+      this.url = '',
+      // type is already in parent class;
+      // this.type = '',
+      this.headers = new Map<string, string>(),
+      this.requestBody = new Map<string, string>(),
+      this.requestUrl = '',
+      this.apiType= '',
+      this.httpMethod = '',
+      this.methodName = ''
+
   
-}
+  }
 }

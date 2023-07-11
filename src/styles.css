@@ -4,9 +4,9 @@ h1{
 }
 
 body{
-    background-color:antiquewhite;
+    background-color:rgb(244, 238, 238);
     background-position: center;
-   background-image: url("assets/background.jpeg")
+   /* background-image: url("assets/background.jpeg") */
     
 }
 

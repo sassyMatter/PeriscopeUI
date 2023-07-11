@@ -24,11 +24,16 @@ export class Topic extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
+  // custom properties
+  topic: string;
+
 
   override formFields: Field[] = [
     {
       "name" : "topic",
+      "fieldlabel" : "Topic",
       "type" : formFieldType.SHORT_STRING,
+      "value" : ""
     },
   ];
 
@@ -66,6 +71,9 @@ export class Topic extends Item {
         // this.canvas?.renderAll();
       });
 
+
+      // initializing custom topics
+      this.topic = '';
 
     
   }
