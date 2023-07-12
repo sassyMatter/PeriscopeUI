@@ -211,7 +211,9 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
   const target = event.target as CustomGroup;
   const mouseEvent = event.e as MouseEvent;
   const isCommandPressed = mouseEvent.metaKey;
-   
+  
+
+  
 
   // Check if the target object has an ID
   if (isCommandPressed && target.id && target.left && target.width && target.top && target.height) {
@@ -239,11 +241,14 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
 
     // Attach an event listener to the `mouse:up` event on the canvas
     
-    canvas.on('mouse:up', () => {
+    canvas.on('mouse:up', (mouseUpevent: fabric.IEvent) => {
       // Check if the line intersects with any other objects
      // getting the point 
      const pointer = canvas.getPointer(event.e);
      const point = new fabric.Point(pointer.x , pointer.y);
+
+     const e = mouseUpevent.e as MouseEvent;
+     const isShiftKeyPressed = e.shiftKey;
 
      
 
@@ -277,10 +282,11 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
         // if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
           // Perform the desired action when the line intersects with another object
           console.log("is connected ", isConnected)
+          console.log("isShiftKeyPressed", isShiftKeyPressed)
           if(obj instanceof fabric.Group && target !== obj && isConnected !== true){
             console.log("drawing line");
                 isConnected = true;
-                const line = this.createConnectLine(target, obj);
+                const line = this.createConnectLine(target, obj, isShiftKeyPressed);
                 canvas.add(line);
                 canvas.renderAll();
                 
@@ -592,7 +598,7 @@ if (canvasContainer) {
     });
   }
   
- createConnectLine(obj1: fabric.Group, obj2: fabric.Group) {
+ createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
    console.log("Create line called for ", obj1, obj2);
     
     const centerPointSource = obj1.getCenterPoint();
@@ -621,7 +627,7 @@ if (canvasContainer) {
     obj2.on("scaling", () => this.updateLine(connectLine, obj2, "2"));
 
     // updating the connections in the objects
-    this.connectionManager.establishDirectionalConnection(ob, oc, true);
+    this.connectionManager.establishDirectionalConnection(ob, oc, !directional);
 
     return connectLine;
   }

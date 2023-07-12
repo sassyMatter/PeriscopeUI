@@ -27,7 +27,9 @@ export class DialogComponent implements OnInit {
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
   openDialog() {
+    console.log("Open Dialog called:: we can populate the values here");
     this.isOpen = true;
+
   
   }
 
