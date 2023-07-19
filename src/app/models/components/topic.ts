@@ -33,11 +33,11 @@ export class Topic extends Item {
       "name" : "topic",
       "fieldlabel" : "Topic",
       "type" : formFieldType.SHORT_STRING,
-      "value" : ""
+      "value" : "TestQueue"
     },
   ];
 
-  override references: string[] = ["topicName"];
+  override references: string[] = ["testQueue"];
 
   constructor(event: DragEvent, width: number, height: number) {
     super();
@@ -77,4 +77,38 @@ export class Topic extends Item {
 
     
   }
+  override loadDataToFormFields(): void {
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "topic":
+          field.value = this.topic;
+          break;
+       
+        // Add cases for any other form fields you have in the class
+      }
+    }
+  }
+
+  override unloadDataFromFormFields(): void {
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "topic":
+          this.topic = field.value;
+          break;
+       
+        // Add cases for any other form fields you have in the class
+     }
+    }
+  }
+
+  override toObject(propertiesToInclude?: string[] | undefined) {
+    super.toObject();
+    return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      // already called super, do we really need it
+      // connections: this.connections,
+      // id: this.id,
+     topic: this.topic
+   });
+
+ }
 }

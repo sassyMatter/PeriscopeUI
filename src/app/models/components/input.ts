@@ -59,6 +59,15 @@ export class Input extends Item {
   }
 
 
+  override loadDataToFormFields(): void {
+    
+  }
+
+  override unloadDataFromFormFields(): void {
+    
+  }
+
+
 //   static createWithImageAndConnections(
 //     imgUrl: string,
 //     imageOptions: fabric.IImageOptions,

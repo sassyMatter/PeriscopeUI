@@ -141,4 +141,82 @@ constructor(event: DragEvent, width: number, height: number) {
 
   
   }
+
+  override loadDataToFormFields(): void {
+    console.log("loading data from to formFields for ", this.type);
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "url":
+          field.value = this.url;
+          break;
+        case "headers":
+       
+
+          field.value = this.headers;
+          break;
+        case "requestBody":
+          field.value = this.requestBody;
+          break;
+        case "requestUrl":
+          field.value = this.requestUrl;
+          break;
+        case "apiType":
+          field.value = this.apiType;
+          break;
+        case "httpMethod":
+          field.value = this.httpMethod;
+          break;
+        case "methodName":
+          field.value = this.methodName;
+          break;
+        // Add cases for any other form fields you have in the class
+      }
+    }
+  }
+
+  override unloadDataFromFormFields(): void {
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "url":
+          this.url = field.value;
+          break;
+        case "headers":
+          this.headers = new Map<string, string>(Object.entries(field.value));
+          break;
+        case "requestBody":
+          this.requestBody = new Map<string, string>(Object.entries(field.value));
+          break;
+        case "requestUrl":
+          this.requestUrl = field.value;
+          break;
+        case "apiType":
+          this.apiType = field.value;
+          break;
+        case "httpMethod":
+          this.httpMethod = field.value;
+          break;
+        case "methodName":
+          this.methodName = field.value;
+          break;
+        // Add cases for any other form fields you have in the class
+      }
+    }
+  }
+
+  override toObject(propertiesToInclude?: string[] | undefined) {
+    super.toObject();
+    return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      // already called super, do we really need it
+      // connections: this.connections,
+      // id: this.id,
+     url: this.url,
+     headers: this.headers,
+     requestBody: this.requestBody,
+     requestUrl: this.requestUrl,
+     apiType: this.apiType,
+     httpMethod: this.httpMethod,
+     methodName: this.methodName
+   });
+
+ }
 }

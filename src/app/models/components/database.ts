@@ -40,13 +40,19 @@ export class Database extends Item {
       "name" : "tableNames",
       "fieldlabel": "Table Names(comma separated)",
       "type" : formFieldType.SHORT_STRING,
-      "value": "",
+      "value": "Persons",
     },
     {
       "name" : "tableDefinitions",
       "fieldlabel": "Editor",
       "type" : formFieldType.CODE_EDITOR,
-      "value": ""
+      "value": `CREATE TABLE Persons (
+        PersonID int,
+        LastName varchar(255),
+        FirstName varchar(255),
+        Address varchar(255),
+        City varchar(255)
+    );`
     }
   ];
 
@@ -101,11 +107,51 @@ export class Database extends Item {
      this.tableDefinitions = [];
      this.tableNames = [];
 
+
     
   }
 
 
-  // override createObject(componentType: string, event: DragEvent){
-    
-  // }
+ override unloadDataFromFormFields(): void {
+  console.log("loading data from to formFields for ", this.type);
+   for (const field of this.formFields) {
+    switch (field.name) {
+      case "tableNames":
+        this.tableNames = field.value.split(","); // Split the comma-separated values into an array
+        break;
+      case "tableDefinitions":
+        this.tableDefinitions = [field.value]; // Assign the value to the tableDefinitions array
+        break;
+      // Add cases for any other form fields you have in the class
+    }
+  }
+ }
+
+ override loadDataToFormFields(): void {
+  for (const field of this.formFields) {
+    switch (field.name) {
+      case "tableNames":
+        field.value = this.tableNames.join(","); // Join the tableNames array into a comma-separated string
+        break;
+      case "tableDefinitions":
+        field.value = this.tableDefinitions.join(","); // Assign the first value from tableDefinitions to the field value
+        break;
+      // Add cases for any other form fields you have in the class
+    }
+  }
+ }
+
+ override toObject(propertiesToInclude?: string[] | undefined) {
+    super.toObject();
+    return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      // already called super, do we really need it
+      // connections: this.connections,
+      // id: this.id,
+      tableNames : this.tableNames,
+      tableDefinitions: this.tableDefinitions
+
+
+    });
+
+ }
 }
