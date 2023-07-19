@@ -165,7 +165,7 @@ export class Func extends Item {
           this.functionBody = field.value;
           break;
         case "parameters":
-          this.parameters = new Map<string, string>(Object.entries(field.value));
+          this.parameters = new Map<string, string>(field.value);
           break;
         case "returnType":
           this.returnType = field.value;

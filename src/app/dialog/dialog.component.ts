@@ -46,6 +46,7 @@ export class DialogComponent implements OnInit {
     console.log("emitting close event");
     this.onClose.emit();
     console.log("target :: {} ", this.target?.type);
+    console.log(this.formFields);
     if(this.target?.formFields){
       console.log(this.target.formFields + " \n" + this.formFields);
      this.target.formFields = this.formFields;
