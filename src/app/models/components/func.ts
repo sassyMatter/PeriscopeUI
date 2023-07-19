@@ -35,31 +35,40 @@ export class Func extends Item {
       "name": "functionType",
       "fieldlabel": "Function Type",
       "type": formFieldType.SHORT_STRING,
-      "value": "",
+      "value": "Vanilla",
     },
     {
       "name" : "functionName",
       "fieldlabel": "Function Name",
       "type" : formFieldType.SHORT_STRING,
-      "value" : "",
+      "value" : "toCamelCase",
     },
     {
       "name" : "functionBody",
       "fieldlabel": "Function Body",
       "type" : formFieldType.CODE_EDITOR,
-      "value" : ``,
+      "value" : `String[] words = input.split("[^\\w]+");
+      StringBuilder camelCaseBuilder = new StringBuilder(words[0].toLowerCase());
+      for (int i = 1; i < words.length; i++) {
+          camelCaseBuilder.append(words[i].substring(0, 1).toUpperCase()).append(words[i].substring(1).toLowerCase());
+      }
+      return camelCaseBuilder.toString();`,
     },
     {
       "name" : "parameters",
       "fieldlabel": "Parameters",
       "type" : formFieldType.EXTENDIBLE_MAP,
-      "value" : new Map<String, String>(),
+      "value" : new Map<String, String>(
+        [
+          ["String", "input"],
+        ]
+      ),
     },
     {
       "name" : "returnType",
       "fieldlabel": "Return Type",
       "type" : formFieldType.SHORT_STRING,
-      "value" : ""
+      "value" : "String"
     },
     {
       "name" : "topic",
@@ -69,7 +78,7 @@ export class Func extends Item {
     }
   ];
 
-  override references: string[] = ["jdbcTemplate", "kafkaProducer"];
+  override references: string[] = [];
 
 
   constructor(event: DragEvent, width: number, height: number) {
@@ -115,6 +124,77 @@ export class Func extends Item {
       this.functionType = '';
 
 
-    
   }
+
+  override loadDataToFormFields(): void {
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "functionType":
+          field.value = this.functionType;
+          break;
+        case "functionName":
+          field.value = this.functionName;
+          break;
+        case "functionBody":
+          field.value = this.functionBody;
+          break;
+        case "parameters":
+          field.value = this.parameters;
+          break;
+        case "returnType":
+          field.value = this.returnType;
+          break;
+        case "topic":
+          field.value = this.topic;
+          break;
+        // Add cases for any other form fields you have in the class
+      }
+    }
+  }
+
+  override unloadDataFromFormFields(): void {
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "functionType":
+          this.functionType = field.value;
+          break;
+        case "functionName":
+          this.functionName = field.value;
+          break;
+        case "functionBody":
+          this.functionBody = field.value;
+          break;
+        case "parameters":
+          this.parameters = new Map<string, string>(Object.entries(field.value));
+          break;
+        case "returnType":
+          this.returnType = field.value;
+          break;
+        case "topic":
+          this.topic = field.value;
+          break;
+        // Add cases for any other form fields you have in the class
+      }
+    }
+  }
+
+  override toObject(propertiesToInclude?: string[] | undefined) {
+     super.toObject();
+     return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      // already called super, do we really need it
+      // connections: this.connections,
+      // id: this.id,
+      functionBody: this.functionBody,
+      functionName: this.functionName,
+      functionType: this.functionType,
+      parameters: this.parameters,
+      returnType: this.returnType,
+      topic: this.topic
+    
+    });
+  }
+
+
 }
+
+

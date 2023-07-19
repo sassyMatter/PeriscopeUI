@@ -50,6 +50,8 @@ export class DialogComponent implements OnInit {
       console.log(this.target.formFields + " \n" + this.formFields);
      this.target.formFields = this.formFields;
     }
+
+    this.target?.unloadDataFromFormFields();
    
     
   }
@@ -100,8 +102,15 @@ export class DialogComponent implements OnInit {
       this.references = this.target?.references;
     }
     if(this.target?.formFields){
+      // this.target.loadDataToFormFields();
       this.formFields = this.target?.formFields;
+
     }
+    if(this.isOpen){
+      this.target?.loadDataToFormFields();
+    }
+
+
 
   
   }
@@ -198,6 +207,8 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
 
     console.log("NgInit hit")
+    console.log("Loading data from component to formFields");
+    this.target?.loadDataToFormFields();
  
   }
 

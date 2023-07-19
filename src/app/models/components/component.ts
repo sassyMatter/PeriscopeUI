@@ -28,5 +28,13 @@ export class Item extends fabric.Group  {
     });
   }
 
+  unloadDataFromFormFields(){
+     console.log("unloading data from form fields");
+  }
+
+  loadDataToFormFields(){
+      console.log("loading data to form fields");
+  }
+
   
 }

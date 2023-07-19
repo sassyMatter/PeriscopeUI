@@ -1,6 +1,7 @@
 
 import { fabric } from 'fabric';
 import { Item } from './component';
+import { Field } from '../formField';
 
 export class CustomGroup extends Item {
   override connections: any[];
@@ -42,6 +43,14 @@ export class CustomGroup extends Item {
       });
 
 
+    
+  }
+
+  override loadDataToFormFields(): void {
+    
+  }
+
+  override unloadDataFromFormFields(): void {
     
   }
 
