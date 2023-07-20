@@ -9,7 +9,8 @@ export class Item extends fabric.Group  {
   connections: Connector[] = [];
   id:string;
   formFields: Field[] = [];
-  references: string[] = [];
+  // references: string[] = [];
+  references1: Set<string> = new Set();
   
   
 

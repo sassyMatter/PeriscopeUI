@@ -33,9 +33,9 @@ export class DialogComponent implements OnInit {
   
   }
 
-  references: string[] = [
-    "ref1", "ref2", "ref3", "ref4", "ref1", "ref2", "ref3"
-  ]
+  references!: Set<string>;
+
+  
 
   formFields: Field[] = [];
   
@@ -99,8 +99,9 @@ export class DialogComponent implements OnInit {
 
   ngOnChanges(): void{
     console.log("target manipulation ", this.target);
-    if(this.target?.references){
-      this.references = this.target?.references;
+    if(this.target?.references1){
+      // this.references = this.target?.referencesx;
+      this.references = this.target?.references1;
     }
     if(this.target?.formFields){
       // this.target.loadDataToFormFields();

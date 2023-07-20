@@ -34,8 +34,9 @@ export class Func extends Item {
     {
       "name": "functionType",
       "fieldlabel": "Function Type",
-      "type": formFieldType.SHORT_STRING,
-      "value": "Vanilla",
+      "type": formFieldType.DROP_DOWN,
+      "options": ["Vanilla", "Consumer", "Producer", "Consumer-Producer"],
+      "value": "",
     },
     {
       "name" : "functionName",
@@ -78,7 +79,9 @@ export class Func extends Item {
     }
   ];
 
-  override references: string[] = [];
+  // override references: string[] = [];
+
+  override references1: Set<string> = new Set();
 
 
   constructor(event: DragEvent, width: number, height: number) {
@@ -160,6 +163,9 @@ export class Func extends Item {
           break;
         case "functionName":
           this.functionName = field.value;
+          // this.references.push(this.functionName);
+          if(this.functionName !== '')
+            this.references1.add(this.functionName);
           break;
         case "functionBody":
           this.functionBody = field.value;
@@ -172,6 +178,9 @@ export class Func extends Item {
           break;
         case "topic":
           this.topic = field.value;
+          // this.references.push(this.topic);
+          if(this.topic !== '')
+          this.references1.add(this.topic);
           break;
         // Add cases for any other form fields you have in the class
       }

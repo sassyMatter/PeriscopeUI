@@ -79,7 +79,7 @@ override formFields: Field[] = [
     "name" : "httpMethod",
     "fieldlabel" : "Http Method",
     "type" : formFieldType.DROP_DOWN,
-    "options": [],
+    "options": ["POST", "GET"],
     "value": "",
   }
   ,
@@ -92,7 +92,9 @@ override formFields: Field[] = [
   
 ];
 
-override references: string[] = ["methodReference1", "methodRefence2"];
+// override references: string[] = [];
+
+override references1: Set<string> = new Set();
 
 constructor(event: DragEvent, width: number, height: number) {
   super();
@@ -150,8 +152,6 @@ constructor(event: DragEvent, width: number, height: number) {
           field.value = this.url;
           break;
         case "headers":
-       
-
           field.value = this.headers;
           break;
         case "requestBody":
@@ -180,6 +180,8 @@ constructor(event: DragEvent, width: number, height: number) {
       switch (field.name) {
         case "url":
           this.url = field.value;
+          // this.references.push(this.url);
+          this.references1.add(this.url);
           break;
         case "headers":
           this.headers = new Map<string, string>(field.value);
@@ -195,6 +197,8 @@ constructor(event: DragEvent, width: number, height: number) {
           break;
         case "httpMethod":
           this.httpMethod = field.value;
+          // this.references.push(this.httpMethod);
+          this.references1.add(this.httpMethod);
           break;
         case "methodName":
           this.methodName = field.value;

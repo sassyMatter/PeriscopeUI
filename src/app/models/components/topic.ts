@@ -37,7 +37,9 @@ export class Topic extends Item {
     },
   ];
 
-  override references: string[] = ["testQueue"];
+  // override references: string[] = [];
+
+  override references1: Set<string> = new Set(["kafkaProducer"]);
 
   constructor(event: DragEvent, width: number, height: number) {
     super();
@@ -94,6 +96,9 @@ export class Topic extends Item {
       switch (field.name) {
         case "topic":
           this.topic = field.value;
+          if(this.topic !== '')
+            // this.references.push(this.topic);
+            this.references1.add(this.topic);
           break;
        
         // Add cases for any other form fields you have in the class

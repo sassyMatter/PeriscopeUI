@@ -56,9 +56,9 @@ export class Database extends Item {
     }
   ];
 
-  override references: string[] = ["jdbcTemplate"];
+  // override references: string[] = ["jdbcTemplate"];
 
-
+  override references1: Set<string> = new Set(["jdbcTemplate"]);
 
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
@@ -118,6 +118,8 @@ export class Database extends Item {
     switch (field.name) {
       case "tableNames":
         this.tableNames = field.value.split(","); // Split the comma-separated values into an array
+        // this.references.push(...this.tableNames);
+        this.tableNames.forEach((name) => this.references1.add(name));
         break;
       case "tableDefinitions":
         this.tableDefinitions = [field.value]; // Assign the value to the tableDefinitions array

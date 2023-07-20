@@ -19,7 +19,9 @@ export class Input extends Item {
     },    
   ];
   
-  override references: string[] = ["apiReference1"];
+  // override references: string[] = ["apiReference1"];
+
+  override references1: Set<string> = new Set("apiReference");
 
   constructor(event: DragEvent, width: number, height: number) {
     super();
