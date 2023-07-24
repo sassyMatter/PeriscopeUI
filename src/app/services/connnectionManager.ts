@@ -15,11 +15,11 @@ export class ConnectionManager {
       const connector2 = new Connector(component2.id);
       component1.connections.push(connector2);
       // component1.references.push(...component2.references);
-      component2.references1.forEach((value) => component1.references1.add(value));
-      console.log("added references from " + component2 + " to " + component1 + " ::" + component1.references1);
+      component2.references.forEach((value) => component1.references.add(value));
+      console.log("added references from " + component2 + " to " + component1 + " ::" + component1.references);
       component2.connections.push(connector1);
       // component2.references.push(...component1.references);
-      component1.references1.forEach((value) => component2.references1.add(value));
+      component1.references.forEach((value) => component2.references.add(value));
       
     }
   
@@ -33,7 +33,7 @@ export class ConnectionManager {
             const connector = new Connector(component2.id);
             component1.connections.push(connector);
             // component1.references.push(...component2.references);
-            component2.references1.forEach((value) => component1.references1.add(value));
+            component2.references.forEach((value) => component1.references.add(value));
         }else{
            this.establishBiDirectionalConnection(component1, component2);
         }

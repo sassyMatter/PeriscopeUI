@@ -81,7 +81,7 @@ export class Func extends Item {
 
   // override references: string[] = [];
 
-  override references1: Set<string> = new Set();
+  override references: Set<string> = new Set();
 
 
   constructor(event: DragEvent, width: number, height: number) {
@@ -165,7 +165,7 @@ export class Func extends Item {
           this.functionName = field.value;
           // this.references.push(this.functionName);
           if(this.functionName !== '')
-            this.references1.add(this.functionName);
+            this.references.add(this.functionName);
           break;
         case "functionBody":
           this.functionBody = field.value;
@@ -180,7 +180,7 @@ export class Func extends Item {
           this.topic = field.value;
           // this.references.push(this.topic);
           if(this.topic !== '')
-          this.references1.add(this.topic);
+          this.references.add(this.topic);
           break;
         // Add cases for any other form fields you have in the class
       }

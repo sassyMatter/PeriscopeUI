@@ -7,6 +7,7 @@ import {KeyValue, NgFor} from '@angular/common';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Field } from '../models/formField';
 import { formFieldType } from '../models/enums/formFieldType';
+import { Connector } from '../models/components/connector';
 
 
 
@@ -25,6 +26,8 @@ export class DialogComponent implements OnInit {
   @Input() isOpen: boolean | undefined;
 
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
+
+  @Input() canvas: fabric.Canvas | null = null;;
 
   openDialog() {
     console.log("Open Dialog called:: we can populate the values here");
@@ -94,14 +97,23 @@ export class DialogComponent implements OnInit {
 
   
 
-
+ connectedObjects!: Connector[];
 
 
   ngOnChanges(): void{
     console.log("target manipulation ", this.target);
-    if(this.target?.references1){
+    if(this.target?.references){
       // this.references = this.target?.referencesx;
-      this.references = this.target?.references1;
+      this.references = this.target?.references;
+
+      // update all references
+      // get all connections objects and add to their refereces the references of target
+      // this.connectedObjects =  this.target?.connections;
+     // this.canvas?.getObjects().filter(object => {
+        
+      // } )
+      
+
     }
     if(this.target?.formFields){
       // this.target.loadDataToFormFields();

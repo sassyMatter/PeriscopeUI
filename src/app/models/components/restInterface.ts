@@ -71,7 +71,7 @@ override formFields: Field[] = [
     "name" : "apiType",
     "fieldlabel": "API Type",
     "type" : formFieldType.DROP_DOWN,
-    "options": ["POST", "GET"],
+    "options": ["PostMapping", "GetMapping"],
     "value" : "",
   }
   ,
@@ -79,7 +79,7 @@ override formFields: Field[] = [
     "name" : "httpMethod",
     "fieldlabel" : "Http Method",
     "type" : formFieldType.DROP_DOWN,
-    "options": ["POST", "GET"],
+    "options": ["PostMapping", "GetMapping"],
     "value": "",
   }
   ,
@@ -94,7 +94,7 @@ override formFields: Field[] = [
 
 // override references: string[] = [];
 
-override references1: Set<string> = new Set();
+override references: Set<string> = new Set();
 
 constructor(event: DragEvent, width: number, height: number) {
   super();
@@ -181,7 +181,7 @@ constructor(event: DragEvent, width: number, height: number) {
         case "url":
           this.url = field.value;
           // this.references.push(this.url);
-          this.references1.add(this.url);
+          this.references.add(this.url);
           break;
         case "headers":
           this.headers = new Map<string, string>(field.value);
@@ -198,7 +198,7 @@ constructor(event: DragEvent, width: number, height: number) {
         case "httpMethod":
           this.httpMethod = field.value;
           // this.references.push(this.httpMethod);
-          this.references1.add(this.httpMethod);
+          this.references.add(this.httpMethod);
           break;
         case "methodName":
           this.methodName = field.value;

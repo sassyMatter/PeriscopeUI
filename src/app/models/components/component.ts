@@ -10,7 +10,7 @@ export class Item extends fabric.Group  {
   id:string;
   formFields: Field[] = [];
   // references: string[] = [];
-  references1: Set<string> = new Set();
+  references: Set<string> = new Set();
   
   
 
