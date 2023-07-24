@@ -56,9 +56,9 @@ export class Database extends Item {
     }
   ];
 
-  override references: string[] = ["jdbcTemplate"];
+  // override references: string[] = ["jdbcTemplate"];
 
-
+  override references: Set<string> = new Set(["jdbcTemplate"]);
 
   imgUrl!: string;
   imageOptions!: fabric.IImageOptions;
@@ -118,6 +118,8 @@ export class Database extends Item {
     switch (field.name) {
       case "tableNames":
         this.tableNames = field.value.split(","); // Split the comma-separated values into an array
+        // this.references.push(...this.tableNames);
+        this.tableNames.forEach((name) => this.references.add(name));
         break;
       case "tableDefinitions":
         this.tableDefinitions = [field.value]; // Assign the value to the tableDefinitions array
@@ -134,7 +136,7 @@ export class Database extends Item {
         field.value = this.tableNames.join(","); // Join the tableNames array into a comma-separated string
         break;
       case "tableDefinitions":
-        field.value = this.tableDefinitions.join(","); // Assign the first value from tableDefinitions to the field value
+        field.value = this.tableDefinitions.join("\n"); // Assign the first value from tableDefinitions to the field value
         break;
       // Add cases for any other form fields you have in the class
     }

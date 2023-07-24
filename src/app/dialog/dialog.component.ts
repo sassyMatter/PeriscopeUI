@@ -7,6 +7,7 @@ import {KeyValue, NgFor} from '@angular/common';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Field } from '../models/formField';
 import { formFieldType } from '../models/enums/formFieldType';
+import { Connector } from '../models/components/connector';
 
 
 
@@ -26,6 +27,8 @@ export class DialogComponent implements OnInit {
 
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
+  @Input() canvas: fabric.Canvas | null = null;;
+
   openDialog() {
     console.log("Open Dialog called:: we can populate the values here");
     this.isOpen = true;
@@ -33,9 +36,9 @@ export class DialogComponent implements OnInit {
   
   }
 
-  references: string[] = [
-    "ref1", "ref2", "ref3", "ref4", "ref1", "ref2", "ref3"
-  ]
+  references!: Set<string>;
+
+  
 
   formFields: Field[] = [];
   
@@ -46,6 +49,7 @@ export class DialogComponent implements OnInit {
     console.log("emitting close event");
     this.onClose.emit();
     console.log("target :: {} ", this.target?.type);
+    console.log(this.formFields);
     if(this.target?.formFields){
       console.log(this.target.formFields + " \n" + this.formFields);
      this.target.formFields = this.formFields;
@@ -93,13 +97,23 @@ export class DialogComponent implements OnInit {
 
   
 
-
+ connectedObjects!: Connector[];
 
 
   ngOnChanges(): void{
     console.log("target manipulation ", this.target);
     if(this.target?.references){
+      // this.references = this.target?.referencesx;
       this.references = this.target?.references;
+
+      // update all references
+      // get all connections objects and add to their refereces the references of target
+      // this.connectedObjects =  this.target?.connections;
+     // this.canvas?.getObjects().filter(object => {
+        
+      // } )
+      
+
     }
     if(this.target?.formFields){
       // this.target.loadDataToFormFields();

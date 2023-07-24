@@ -71,7 +71,7 @@ override formFields: Field[] = [
     "name" : "apiType",
     "fieldlabel": "API Type",
     "type" : formFieldType.DROP_DOWN,
-    "options": ["POST", "GET"],
+    "options": ["PostMapping", "GetMapping"],
     "value" : "",
   }
   ,
@@ -79,7 +79,7 @@ override formFields: Field[] = [
     "name" : "httpMethod",
     "fieldlabel" : "Http Method",
     "type" : formFieldType.DROP_DOWN,
-    "options": [],
+    "options": ["PostMapping", "GetMapping"],
     "value": "",
   }
   ,
@@ -92,7 +92,9 @@ override formFields: Field[] = [
   
 ];
 
-override references: string[] = ["methodReference1", "methodRefence2"];
+// override references: string[] = [];
+
+override references: Set<string> = new Set();
 
 constructor(event: DragEvent, width: number, height: number) {
   super();
@@ -150,8 +152,6 @@ constructor(event: DragEvent, width: number, height: number) {
           field.value = this.url;
           break;
         case "headers":
-       
-
           field.value = this.headers;
           break;
         case "requestBody":
@@ -175,16 +175,19 @@ constructor(event: DragEvent, width: number, height: number) {
   }
 
   override unloadDataFromFormFields(): void {
+    console.log("unloading data from formFields into the object", this.formFields);
     for (const field of this.formFields) {
       switch (field.name) {
         case "url":
           this.url = field.value;
+          // this.references.push(this.url);
+          this.references.add(this.url);
           break;
         case "headers":
-          this.headers = new Map<string, string>(Object.entries(field.value));
+          this.headers = new Map<string, string>(field.value);
           break;
         case "requestBody":
-          this.requestBody = new Map<string, string>(Object.entries(field.value));
+          this.requestBody = new Map<string, string>(field.value);
           break;
         case "requestUrl":
           this.requestUrl = field.value;
@@ -194,6 +197,8 @@ constructor(event: DragEvent, width: number, height: number) {
           break;
         case "httpMethod":
           this.httpMethod = field.value;
+          // this.references.push(this.httpMethod);
+          this.references.add(this.httpMethod);
           break;
         case "methodName":
           this.methodName = field.value;
@@ -201,6 +206,9 @@ constructor(event: DragEvent, width: number, height: number) {
         // Add cases for any other form fields you have in the class
       }
     }
+    console.log("url ", this.url);
+    console.log("headers" , this.headers);
+    console.log("requestBody", this.requestBody);
   }
 
   override toObject(propertiesToInclude?: string[] | undefined) {
