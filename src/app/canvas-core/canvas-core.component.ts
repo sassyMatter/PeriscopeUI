@@ -519,15 +519,17 @@ if (canvasContainer) {
 
     var objects =  this.canvas?.getObjects();
     
-    
+    console.log("objects:: " , objects);
     const serializedCanvas = this.canvas?.toJSON(["id"]);
+    console.log("serializedCanvas ::", serializedCanvas);
     if (serializedCanvas) {
       const filteredCanvasObjects = serializedCanvas.objects.filter(
         (obj: any) => (obj.id !== 'grid-lines' && obj.type !== 'line')
       );
 
       const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
-      const serializedData = JSON.stringify(filteredCanvasData);
+      console.log("filteredCanvasData :: ", filteredCanvasData);
+      const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
 
       // const serializedData = JSON.stringify(serializedCanvas);
       console.log("serialized Data :: " , serializedData);
@@ -544,6 +546,29 @@ if (canvasContainer) {
       ).subscribe();
     }
   }
+
+
+  // these methods are used to add support for native Map object including deeply nested values
+  replacer(key: any, value: any) {
+    if(value instanceof Map) {
+      return {
+        dataType: 'Map',
+        value: Array.from(value.entries()), // or with spread: value: [...value]
+      };
+    } else {
+      return value;
+    }
+  }
+
+  reviver(key: any, value:any) {
+    if(typeof value === 'object' && value !== null) {
+      if (value.dataType === 'Map') {
+        return new Map(value.value);
+      }
+    }
+    return value;
+  }
+  
 
   runSimulation(){
 
