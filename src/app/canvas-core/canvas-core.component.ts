@@ -571,7 +571,34 @@ if (canvasContainer) {
   
 
   runSimulation(){
+    var objects =  this.canvas?.getObjects();
+    
+    console.log("objects:: " , objects);
+    const serializedCanvas = this.canvas?.toJSON(["id"]);
+    console.log("serializedCanvas ::", serializedCanvas);
+    if (serializedCanvas) {
+      const filteredCanvasObjects = serializedCanvas.objects.filter(
+        (obj: any) => (obj.id !== 'grid-lines' && obj.type !== 'line')
+      );
 
+      const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
+      console.log("filteredCanvasData :: ", filteredCanvasData);
+      const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
+
+      // const serializedData = JSON.stringify(serializedCanvas);
+      console.log("serialized Data :: " , serializedData);
+      this.helloworldService.sendCanvasData(serializedData).pipe(
+        tap((response: any) => {
+          // Handle the response from the backend
+          console.log('Post request successful', response);
+        }),
+        catchError((error) => {
+          // Handle any errors that occur during the request
+          console.error('Error occurred during post request', error);
+          return of(null); // Returning a non-error observable to prevent unhandled error
+        })
+      ).subscribe();
+    }
   }
 
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {

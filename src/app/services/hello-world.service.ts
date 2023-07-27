@@ -19,6 +19,15 @@ export class HelloWorldService {
   
   }
 
+  saveAndRunSimulation(canvasData : string | undefined): Observable<any>{
+  
+    const url = 'http://localhost:8080/canvas/run-simulation'; 
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers: headers };
+    return this.http.post(url, canvasData, options);
+  
+  }
+
   constructor(private http : HttpClient) { }
 
   getServerResponse(){
