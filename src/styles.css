@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 h1{
-    color: rgb(62, 126, 230);
+    color: rgb(6, 3, 22);
+    background-color: #007bff;
+    justify-content: center;
+    text-align: center; /* Center the text horizontally */
+    font-weight: bolder; /* Make the text bold */
+    padding: 10px;
+    
 }
+
+
 
 body{
     background-color:rgb(244, 238, 238);

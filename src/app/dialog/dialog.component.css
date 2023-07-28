@@ -103,10 +103,14 @@
     margin-left: 20px;
 }
 
-.options{
-    margin-left: 10px;
+.dropdown-container{
+    margin-left: 20px;
+    border-radius: 50px;
+    box-sizing: border-box;
 }
   
+
+
 
 
 .close-button {

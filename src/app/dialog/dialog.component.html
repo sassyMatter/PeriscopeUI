@@ -10,23 +10,24 @@
     </div>
    
     <div class="input-container" *ngFor="let field of formFields">
-        <label>{{ field.fieldlabel }}</label>
+        <label>{{ field.fieldlabel }}</label> 
         <ng-container class="input-container" [ngSwitch]="field.type">
           <!-- For SHORT_STRING type -->
           <input *ngSwitchCase="formFieldType.SHORT_STRING" type="text" [(ngModel)]="field.value" />
       
           <!-- For DROP_DOWN type -->
+          <div class="dropdown-container">
           <select *ngSwitchCase="formFieldType.DROP_DOWN" [(ngModel)]="field.value">
             <option class="options" *ngFor="let option of field.options" [value]="option">{{ option }}</option>
           </select>
-      
+         </div>
           <!-- For EXTENDIBLE_MAP type -->
           <div class="input-container" *ngSwitchCase="formFieldType.EXTENDIBLE_MAP">
         
           <ng-container class="input-container" *ngFor="let entry of field.value | keyvalue">
             <div class="entry-row">
-              <input class ="row" type="text" [(ngModel)]="entry.key"  (ngModelChange)="callOnKeyChange(entry)" (keyup.enter)="updateMapKey(field.name)" placeholder="Key" />
-              <input class="row" type="text" [(ngModel)]="entry.value" (ngModelChange)="callOnValueChange(entry)"  (keyup.enter)="updateMapValue(entry.key, field.name)" placeholder="Value" />
+              <input class ="row" type="text" [(ngModel)]="entry.key"  (ngModelChange)="callOnKeyChange(entry)" (keyup.enter)="updateMapKey(field.name)" placeholder="Value (unique)" />
+              <input class="row" type="text" [(ngModel)]="entry.value" (ngModelChange)="callOnValueChange(entry)"  (keyup.enter)="updateMapValue(entry.key, field.name)" placeholder="Type" />
               <button (click)="removeEntry(entry.key , field.name)">Remove</button>
             </div>
           </ng-container>

@@ -587,7 +587,7 @@ if (canvasContainer) {
 
       // const serializedData = JSON.stringify(serializedCanvas);
       console.log("serialized Data :: " , serializedData);
-      this.helloworldService.sendCanvasData(serializedData).pipe(
+      this.helloworldService.saveAndRunSimulation(serializedData).pipe(
         tap((response: any) => {
           // Handle the response from the backend
           console.log('Post request successful', response);
