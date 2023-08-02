@@ -1,13 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-h1{
+
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+    height: 25px;
+  }
+  
+  .logo {
+    margin-right: 10px; /* Add some space between the logo and the heading */
+  }
+  
+  .logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+  }
+  
+  h1 {
+    color: rgb(6, 3, 22);
+    font-weight: bolder; /* Make the text bold */
+    margin: 0; /* Remove any default margin */
+    flex: 1; /* Allow the heading to take up the remaining space */
+    text-align: center; /* Center the text horizontally */
+    padding: 10px;
+  }
+  
+  h1{
     color: rgb(6, 3, 22);
     background-color: #007bff;
     justify-content: center;
     text-align: center; /* Center the text horizontally */
     font-weight: bolder; /* Make the text bold */
     padding: 10px;
+
     
 }
+
 
 
 
