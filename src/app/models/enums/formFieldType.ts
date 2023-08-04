@@ -7,4 +7,6 @@ export enum formFieldType{
     EXTENDIBLE_MAP,
 
     DROP_DOWN,
+
+    EXTENDIBLE_LARGE_MAP,
 }

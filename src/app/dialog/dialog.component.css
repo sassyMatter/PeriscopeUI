@@ -63,6 +63,7 @@
     margin-right: 10px;
     border-radius: 10px;
     margin-left: 20px;
+    width: 500px;
     
 }
 
@@ -131,4 +132,5 @@
 
 .editor{
     width: 100%;
+    margin-bottom: 10px;
 }

@@ -10,13 +10,21 @@ export class Input extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
+  customTypes?: Map<string, string>;
+
   override formFields: Field[] = [
     {
       "name" : "inputSource",
       "fieldlabel": "Input Source",
       "type" : formFieldType.SHORT_STRING,
       "value": "",
-    },    
+    },   
+    {
+      "name" : "customTypes",
+      "fieldlabel": "Define Type",
+      "type" : formFieldType.EXTENDIBLE_LARGE_MAP,
+      "value" : new Map<String, String>(),
+    }, 
   ];
   
   // override references: string[] = ["apiReference1"];
@@ -56,18 +64,52 @@ export class Input extends Item {
         // this.canvas?.renderAll();
       });
 
+      this.customTypes = new Map<string, string>();
+
 
     
   }
 
 
   override loadDataToFormFields(): void {
-    
+    console.log("loading data from to formFields for ", this.type);
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "customTypes":
+          field.value = this.customTypes;
+          break;
+      
+      
+        // Add cases for any other form fields you have in the class
+      }
+    }
   }
 
   override unloadDataFromFormFields(): void {
-    
+    for (const field of this.formFields) {
+      switch (field.name) {
+        case "customTypes":
+          this.customTypes = new Map<string, string>(field.value);
+          // adding type reference to global scope
+          for (const item of this.customTypes.keys()) {
+             this.references.add(item);
+          }
+          break;
+        
+        // Add cases for any other form fields you have in the class
+      }
+    }
   }
+
+  override toObject(propertiesToInclude?: string[] | undefined) {
+    super.toObject();
+    return fabric.util.object.extend(super.toObject(propertiesToInclude), {
+      customTypes: this.customTypes 
+   });
+
+
+   
+ }
 
 
 //   static createWithImageAndConnections(
