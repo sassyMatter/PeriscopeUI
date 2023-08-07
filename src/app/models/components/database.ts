@@ -122,7 +122,7 @@ export class Database extends Item {
         this.tableNames.forEach((name) => this.references.add(name));
         break;
       case "tableDefinitions":
-        this.tableDefinitions = [field.value]; // Assign the value to the tableDefinitions array
+        this.tableDefinitions = field.value.split("$"); // Assign the value to the tableDefinitions array
         break;
       // Add cases for any other form fields you have in the class
     }
@@ -136,7 +136,8 @@ export class Database extends Item {
         field.value = this.tableNames.join(","); // Join the tableNames array into a comma-separated string
         break;
       case "tableDefinitions":
-        field.value = this.tableDefinitions.join(","); // Assign the first value from tableDefinitions to the field value
+        field.value = this.tableDefinitions.join(",");
+       // Assign the first value from tableDefinitions to the field value
         break;
       // Add cases for any other form fields you have in the class
     }
