@@ -45,6 +45,16 @@ export class Func extends Item {
       "value" : "toCamelCase",
     },
     {
+      "name" : "parameters",
+      "fieldlabel": "Parameters",
+      "type" : formFieldType.EXTENDIBLE_MAP,
+      "value" : new Map<String, String>(
+        [
+          ["String", "input"],
+        ]
+      ),
+    },
+    {
       "name" : "functionBody",
       "fieldlabel": "Function Body",
       "type" : formFieldType.CODE_EDITOR,
@@ -54,16 +64,6 @@ export class Func extends Item {
           camelCaseBuilder.append(words[i].substring(0, 1).toUpperCase()).append(words[i].substring(1).toLowerCase());
       }
       return camelCaseBuilder.toString();`,
-    },
-    {
-      "name" : "parameters",
-      "fieldlabel": "Parameters",
-      "type" : formFieldType.EXTENDIBLE_MAP,
-      "value" : new Map<String, String>(
-        [
-          ["String", "input"],
-        ]
-      ),
     },
     {
       "name" : "returnType",
@@ -76,6 +76,12 @@ export class Func extends Item {
       "fieldlabel" : "Topic",
       "type" : formFieldType.SHORT_STRING,
       "value" : ""
+    },
+    {
+      "name" : "deserializationClass",
+      "fieldlabel": "Deserialization Type",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : "String"
     }
   ];
 
@@ -150,6 +156,9 @@ export class Func extends Item {
         case "topic":
           field.value = this.topic;
           break;
+        case "deserializationClass":
+          field.value = this.deserializationClass;
+          break;
         // Add cases for any other form fields you have in the class
       }
     }
@@ -182,6 +191,9 @@ export class Func extends Item {
           if(this.topic !== '')
           this.references.add(this.topic);
           break;
+        case "deserializationClass":
+          this.deserializationClass = field.value;
+          break;
         // Add cases for any other form fields you have in the class
       }
     }
@@ -198,7 +210,8 @@ export class Func extends Item {
       functionType: this.functionType,
       parameters: this.parameters,
       returnType: this.returnType,
-      topic: this.topic
+      topic: this.topic,
+      deserializationClass: this.deserializationClass
     
     });
   }
