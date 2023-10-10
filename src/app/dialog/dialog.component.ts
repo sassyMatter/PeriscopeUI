@@ -61,7 +61,7 @@ export class DialogComponent implements OnInit {
   }
 
   codeMirrorOptions: any = {
-    mode: java,
+    mode: JSON,
     indentWithTabs: true,
     smartIndent: true,
     lineNumbers: true,
@@ -72,9 +72,9 @@ export class DialogComponent implements OnInit {
     matchBrackets: true,
     lint: true,
     theme: 'material',
+  
     
-     
-  };
+};
 
   query: string | undefined;
 
