@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanvasCoreComponent } from './canvas-core/canvas-core.component';
-import { ConverterComponent  } from './converter/converter.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
-  {path: 'hello-world', component : CanvasCoreComponent},
-  {path: 'converter', component: ConverterComponent}
+  {path: 'home', component : CanvasCoreComponent},
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

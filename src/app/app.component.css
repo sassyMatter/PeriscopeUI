@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+    height: 25px;
+  }
+  
+  .logo {
+    margin-right: 10px; /* Add some space between the logo and the heading */
+  }
+  
+  .logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+  }
