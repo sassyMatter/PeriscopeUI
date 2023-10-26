@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
-import { TokenStorageService } from './services/auth/token-storage.service';
-import { AuthService } from './services/auth/auth.service';
-
+import { TokenStorageService } from '../services/auth/token-storage.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent {
+export class HomeComponent {
+
+
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService, private authService: AuthService){ }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -28,6 +29,8 @@ export class AppComponent {
       this.username = user.username;
     }
   }
- 
-  
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

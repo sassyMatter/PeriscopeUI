@@ -5,10 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth/auth-gaurd.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
-  {path: 'home', component : CanvasCoreComponent , canActivate : [AuthGuard]},
+  {path: 'home', component : HomeComponent , canActivate : [AuthGuard]},
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

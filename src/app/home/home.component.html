@@ -1,6 +1,4 @@
-<!-- <canvas-core></canvas-core> -->
-
-<div id="app" *ngIf="!isLoggedIn">
+<div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
      <!-- <div class="header"> -->
         <div class="logo">
@@ -14,7 +12,7 @@
         </li>
       </ul>
   
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
         <li class="nav-item">
           <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
         </li>
@@ -23,6 +21,15 @@
         </li>
       </ul>
   
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <canvas-core></canvas-core>
+        <li class="nav-item">
+          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">LogOut</a>
+        </li>
+      </ul>
     </nav>
   
     <div class="container">

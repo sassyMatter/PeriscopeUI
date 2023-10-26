@@ -36,6 +36,14 @@ export class AuthService {
   // ideally should check token validity and everything, but let's just keep it for backend,
   //  mere existence of token is enough here since storage would be cleard 
   isLoggedIn(){
-    return !!this.tokenStorageService.getToken();
+    if(this.tokenStorageService.getToken()){
+      return true;
+    }
+    return false;
+  }
+
+  logout(){
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 }
