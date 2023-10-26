@@ -4,14 +4,15 @@ import { CanvasCoreComponent } from './canvas-core/canvas-core.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './services/auth/auth-gaurd.guard';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
-  {path: 'home', component : CanvasCoreComponent},
+  {path: 'home', component : CanvasCoreComponent , canActivate : [AuthGuard]},
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({
