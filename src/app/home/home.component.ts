@@ -21,6 +21,8 @@ export class HomeComponent {
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
 
+    console.log("logged In :: " , this.isLoggedIn);
+
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -29,6 +31,13 @@ export class HomeComponent {
       this.username = user.username;
     }
   }
+
+  ngOnChanges(){
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+
+
 
   logout(): void {
     this.authService.logout();
