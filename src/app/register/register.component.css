@@ -13,7 +13,7 @@ body {
     display:flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../../assets/image.jpg');
+/*     background-image: url('../../assets/image.jpg'); */
 }
 img{
   height:200px;
