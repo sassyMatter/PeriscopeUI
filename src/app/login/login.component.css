@@ -1,0 +1,103 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.center{
+  /* t-align: center;tex */
+  height:70em;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../register/image.jpg");
+  
+}
+img{
+  height:200px;
+  width: 200px;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+    margin: auto;
+    
+    margin-bottom: 10px;
+   
+    border-radius: 10px;
+}
+form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 18px;
+  background-color: #f9f9f9;
+  width: 800px;
+  /* height: 25em; */
+  margin-bottom: 10em;
+ 
+  
+
+  /* margin: auto; */
+}
+.form-group{
+text-align: center;
+}
+.form-class{
+  height: 1000 px;
+}
+label{
+font-size:22px;
+
+}
+.lab_username{
+  
+  display: block;
+  margin-top: 80px;
+  margin-right: 230px;
+  
+ 
+}
+
+.lab_password{
+  display: block;
+  color: black;
+  
+  margin-top: 15px;
+  margin-right: 230px;
+  
+}
+/* .input{
+  
+  margin-top:10px ;
+  margin-bottom: 10px;
+  margin-left: 220px;
+  width: 300px;
+} */
+.button_class{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:blue;
+  color:white;
+  height:1.5em;
+  width:15%;
+  /* max-width:300px; */
+  margin:0 auto;
+  margin-top: 20px;
+  border-radius:8px;
+  font-size: 19px;
+
+}
+.inpat{
+  /* size=10px; */
+  height: 1.5em;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin-top:20px ;
+  margin-bottom: 10px;
+  border-radius:8px;
+  
+  
+}

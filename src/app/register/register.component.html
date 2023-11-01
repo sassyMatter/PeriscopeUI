@@ -1,22 +1,27 @@
-<div class="col-md-12">
-    <div class="card card-container">
+
+
+<div class="col-md-12 container center">
+    <div class="card card-container ">
       <img
         id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        src="https://www.w3schools.com/w3images/avatar2.png"
+        
         class="profile-img-card"
       />
       <form
+        class="form-class"
         *ngIf="!isSuccessful"
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
         novalidate
+        
       >
         <div class="form-group">
-          <label for="username">Username</label>
+          <label class="lab_username" for="username">Username</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control inpat"
             name="username"
             [(ngModel)]="form.username"
             required
@@ -35,10 +40,10 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label class="lab_email" for="email">Email</label>
           <input
             type="email"
-            class="form-control"
+            class="form-control inpat"
             name="email"
             [(ngModel)]="form.email"
             required
@@ -53,10 +58,10 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label class="lab_password" for="password">Password</label>
           <input
             type="password"
-            class="form-control"
+            class="form-control inpat"
             name="password"
             [(ngModel)]="form.password"
             required
@@ -71,7 +76,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
+          <button class="btn btn-primary btn-block button_class">Sign Up</button>
         </div>
   
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
@@ -85,3 +90,7 @@
     </div>
   </div>
   
+
+  <!--  -->
+  
+    
