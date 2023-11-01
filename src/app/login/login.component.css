@@ -12,7 +12,7 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
-/*   background-image: url("../../assets/image.jpg"); */
+  
   
 }
 img{
@@ -26,6 +26,7 @@ img{
     margin-bottom: 10px;
    
     border-radius: 10px;
+   
 }
 form {
   border: 1px solid #ccc;
@@ -36,7 +37,7 @@ form {
   /* height: 25em; */
   margin-bottom: 10em;
  
-  
+  box-shadow: 5px ;
 
   /* margin: auto; */
 }
