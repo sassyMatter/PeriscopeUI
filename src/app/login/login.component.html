@@ -1,19 +1,21 @@
-<div class="col-md-12">
+<div class="col-md-12 center">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+     
       <form
+        class="form-class"
         *ngIf="!isLoggedIn"
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
         novalidate
       >
+      <img
+      id="profile-img"
+      src="../../assets/avatar2.png"
+      class="profile-img-card"
+    />
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username" class="lab_username">Username</label>
           <input
             type="text"
             class="form-control"
@@ -31,7 +33,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password" class="lab_password">Password</label>
           <input
             type="password"
             class="form-control"
@@ -53,7 +55,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block">
+          <button class="btn btn-primary btn-block button_class">
             Login
           </button>
         </div>

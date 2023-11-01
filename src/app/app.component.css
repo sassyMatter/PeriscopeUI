@@ -6,10 +6,68 @@
   height: 25px;
 }
   
+  
 .logo {
   margin-right: 10px; /* Add some space between the logo and the heading */
 }
   
+
+  .logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+  }
+
+
+
+
+.logo-image {
+  width: 60px; /* Adjust the width of the logo as needed */
+  height: 45px; /* Adjust the height of the logo as needed */
+}
+
+nav{
+  background-color: #242b2b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.navbar-brand{
+  color: white;
+  text-decoration: none;
+  font-size: large;
+}
+
+.nav-item{
+  list-style-type: none;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: #8a8c8c;
+  font-size: medium;
+  margin: 10px;
+}
+
+.nav-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right ul li{
+  justify-content: space-between;
+}
+/* >>>>>>> release */
+
 .logo-image {
   width: 60px; /* Adjust the width of the logo as needed */
   height: 45px; /* Adjust the height of the logo as needed */

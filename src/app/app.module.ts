@@ -48,4 +48,6 @@ import { HomeComponent } from './home/home.component';
   providers: [ComponentProvider, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}
