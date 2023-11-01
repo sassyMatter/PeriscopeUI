@@ -1,10 +1,6 @@
 <div class="col-md-12 center">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="https://www.w3schools.com/w3images/avatar2.png"
-        class="profile-img-card"
-      />
+     
       <form
         class="form-class"
         *ngIf="!isLoggedIn"
@@ -13,11 +9,16 @@
         #f="ngForm"
         novalidate
       >
+      <img
+      id="profile-img"
+      src="https://www.w3schools.com/w3images/avatar2.png"
+      class="profile-img-card"
+    />
         <div class="form-group">
           <label for="username" class="lab_username">Username</label>
           <input
             type="text"
-            class="form-control inpat"
+            class="form-control"
             name="username"
             [(ngModel)]="form.username"
             required
@@ -35,7 +36,7 @@
           <label for="password" class="lab_password">Password</label>
           <input
             type="password"
-            class="form-control inpat"
+            class="form-control"
             name="password"
             [(ngModel)]="form.password"
             required

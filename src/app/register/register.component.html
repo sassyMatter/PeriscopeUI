@@ -2,12 +2,7 @@
 
 <div class="col-md-12 container center">
     <div class="card card-container ">
-      <img
-        id="profile-img"
-        src="https://www.w3schools.com/w3images/avatar2.png"
-        
-        class="profile-img-card"
-      />
+      
       <form
         class="form-class"
         *ngIf="!isSuccessful"
@@ -17,11 +12,17 @@
         novalidate
         
       >
+      <img
+      id="profile-img"
+      src="https://www.w3schools.com/w3images/avatar2.png"
+      
+      class="profile-img-card"
+    />
         <div class="form-group">
           <label class="lab_username" for="username">Username</label>
           <input
             type="text"
-            class="form-control inpat"
+            class="form-control"
             name="username"
             [(ngModel)]="form.username"
             required
@@ -43,7 +44,7 @@
           <label class="lab_email" for="email">Email</label>
           <input
             type="email"
-            class="form-control inpat"
+            class="form-control"
             name="email"
             [(ngModel)]="form.email"
             required
@@ -61,7 +62,7 @@
           <label class="lab_password" for="password">Password</label>
           <input
             type="password"
-            class="form-control inpat"
+            class="form-control"
             name="password"
             [(ngModel)]="form.password"
             required
