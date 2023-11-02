@@ -1,116 +1,43 @@
-.header {
-  display: flex;
-  align-items: center;
-  background-color: #007bff;
-  padding: 10px;
-  height: 25px;
+body{
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+  max-height: 100vh;
 }
-  
-  
-.logo {
-  margin-right: 10px; /* Add some space between the logo and the heading */
-}
-  
-
-  .logo-image {
-    width: 60px; /* Adjust the width of the logo as needed */
-    height: 45px; /* Adjust the height of the logo as needed */
-  }
-
-
-
-
-.logo-image {
-  width: 60px; /* Adjust the width of the logo as needed */
-  height: 45px; /* Adjust the height of the logo as needed */
-}
-
 nav{
-  background-color: #242b2b;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  margin: auto;
-  padding: 0.5rem;
 }
-
-.navbar-brand{
-  color: white;
-  text-decoration: none;
-  font-size: large;
+.navbar-nav{
+  display: flex;
+  padding: 0;
 }
-
 .nav-item{
   list-style-type: none;
+  margin-inline: 20px;
+  margin-top: 10px;
 }
-
 .nav-link{
   text-decoration: none;
-  color: #8a8c8c;
-  font-size: medium;
-  margin: 10px;
+  font-size: 1rem;
+	background: #1E90FF;
+	padding: 1rem;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: box-shadow, transform;
+	transition-property: box-shadow, transform;
 }
-
-.nav-left{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-right ul{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-right ul li{
-  justify-content: space-between;
-}
-/* >>>>>>> release */
-
-.logo-image {
-  width: 60px; /* Adjust the width of the logo as needed */
-  height: 45px; /* Adjust the height of the logo as needed */
-}
-
-nav{
-  background-color: #242b2b;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: auto;
-  padding: 0.5rem;
-}
-
-.navbar-brand{
-  color: white;
-  text-decoration: none;
-  font-size: large;
-}
-
-.nav-item{
-  list-style-type: none;
-}
-
-.nav-link{
-  text-decoration: none;
-  color: #8a8c8c;
-  font-size: medium;
-  margin: 10px;
-}
-
-.nav-left{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-right ul{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-right ul li{
-  justify-content: space-between;
+.nav-link:hover, .nav-link:focus, .nav-link:active{
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
 }
