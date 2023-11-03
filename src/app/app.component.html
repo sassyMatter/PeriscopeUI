@@ -2,28 +2,14 @@
 
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <div class="nav-left">
-        <div class="logo">
-          <img src="assets/jio-logo-resized.png" alt="Logo" class="logo-image" />
-        </div>
-        <a href="#" class="navbar-brand">Periscope</a>
-        <ul class="navbar-nav mr-auto" routerLinkActive="active">
-          <li class="nav-item">
-            <a href="/home" class="nav-link" routerLink="home">Home </a>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="nav-right">
-        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-          <li class="nav-item">
-            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a href="/login" class="nav-link" routerLink="login">Login</a>
-          </li>
-        </ul>
-      </div>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Login</a>
+      </li>
+    </ul>
   </nav>
   
     <div class="container">
