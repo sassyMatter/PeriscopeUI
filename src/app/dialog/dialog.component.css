@@ -110,6 +110,13 @@
     box-sizing: border-box;
 }
   
+.container {
+    position: relative;
+    /* You can set the width and height as needed */
+    width: 100%;
+    height: 200px;
+    /* This sets up a container for relative positioning */
+  }
 
 
 
@@ -117,13 +124,17 @@
 .close-button {
     margin-top: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     border-radius: 5px;
     padding: 10px;
     background-color: #ccc;
     border: none;
     color: white;
     cursor: pointer;
+    position: absolute;
+    top: 0; /* Position from the top */
+    right: 0; /* Position from the right */
+    margin-right: 10px
   }
   
 .close-button:hover {
@@ -134,3 +145,4 @@
     width: 100%;
     margin-bottom: 10px;
 }
+

@@ -1,5 +1,8 @@
 <div *ngIf="isOpen" class="dialog-container" cdkDrag >
-    <h2 class="configure">Configuration  {{target?.type}}</h2>
+    <div class="head-container" >
+       <h2 class="configure">Configuration  {{target?.type}}</h2> 
+       <button class="close-button" (click)="closeDialog()">X</button>
+    </div>
     <p>References</p>
     <div class="references">
         <mat-chip-listbox>
@@ -69,5 +72,5 @@
       
 
 
-    <button class="close-button" (click)="closeDialog()">Close</button>
+    <!-- <button class="close-button" (click)="closeDialog()">Close</button> -->
 </div>
