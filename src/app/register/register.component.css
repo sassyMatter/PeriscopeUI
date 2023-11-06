@@ -44,14 +44,14 @@ form {
 .form-class{
     height: 1000 px;
 }
+
 label{
   font-size:22px;
  
 }
   .lab_username{
-    
+    margin-top: 40px;
     display: block;
-    margin-top: 80px;
     margin-right: 230px;
     
    
