@@ -4,7 +4,6 @@
     font-family: Arial;
   }
   
-  /* Links inside the navbar */
   .navbar_drop a {
     float: right;
     font-size: 16px;
@@ -14,13 +13,13 @@
     text-decoration: none;
   }
   
-  /* The dropdown container */
+
   .dropdown {
     float: left;
     overflow: hidden;
   }
   
-  /* Dropdown button */
+
   .dropdown .dropbtn {
     font-size: 16px;
     border: none;
