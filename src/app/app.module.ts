@@ -20,6 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
+import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 
 
 
@@ -34,6 +35,7 @@ import { ClickOutsideDirective } from '../customComponents/clickOutside.directiv
     HomeComponent,
     CreateProjectComponent,
     ClickOutsideDirective,
+    GetAllProjectsComponent,
   ],
   imports: [
     BrowserModule,

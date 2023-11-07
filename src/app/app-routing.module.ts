@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth/auth-gaurd.guard';
 import { HomeComponent } from './home/home.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate : [AuthGuard]},
   { path: 'createProject', component: CreateProjectComponent, canActivate : [AuthGuard]},
+  {path: 'getallprojects', component: GetAllProjectsComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
