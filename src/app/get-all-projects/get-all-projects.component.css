@@ -1,0 +1,181 @@
+.navbar_drop {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+  }
+  
+  /* Links inside the navbar */
+  .navbar_drop a {
+    float: right;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* The dropdown container */
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+  }
+  
+
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+/*-------------*/
+
+  .header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+    height: 25px;
+  }
+        
+.logo {
+    margin-right: 10px; /* Add some space between the logo and the heading */
+}
+    
+.logo-image {
+      width: 60px; /* Adjust the width of the logo as needed */
+      height: 45px; /* Adjust the height of the logo as needed */
+}
+
+.logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+}
+  
+nav{
+    background-color: #242b2b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    padding: 0.5rem;
+}
+  
+.navbar-brand{
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
+  
+.nav-item{
+    list-style-type: none;
+}
+  
+.nav-link{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: medium;
+    margin: 10px;
+}
+
+.nav-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.nav-right ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.nav-right ul li{
+    justify-content: space-between;
+}
+
+.logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+}
+  
+nav{
+    background-color: #242b2b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    padding: 0.5rem;
+}
+  
+.navbar-brand{
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
+  
+.nav-item{
+    list-style-type: none;
+}
+  
+.nav-link{
+    text-decoration: none;
+    color: #8a8c8c;
+    font-size: medium;
+    margin: 10px;
+}
+  
+.nav-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.nav-right ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.nav-right ul li{
+    justify-content: space-between;
+}
+
+  
