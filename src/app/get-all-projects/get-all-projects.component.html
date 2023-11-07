@@ -1,0 +1,63 @@
+
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav-left">
+      <div class="logo">
+        <img src="assets/jio-logo-resized.png" alt="Logo" class="logo-image" />
+      </div>
+      <a href="#" class="navbar-brand">Periscope</a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a href="/home" class="nav-link" routerLink="home">Home </a>
+          <a href="/getallprojects" class="nav-link" routerLink="getallprojects">All projects </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="nav-right" *ngIf="isLoggedIn">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="username">
+          <p>Logged in as {{ username }} </p> 
+        </li> -->
+        <li class="nav-item">
+          <a href="/profile" class="nav-link" routerLink="profile"> Profile </a> 
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  
+  
+  <div>
+    
+   
+        
+<div class="container-fluid">
+
+    <div class="navbar_drop">
+        <a href="/getallprojects">Edit</a>
+       
+        <a href="/getallprojects"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            Run</a>
+        <a href="/getallprojects"><i class="fa fa-circle" aria-hidden="true"></i>
+            Status</a>
+        <div class="dropdown">
+          <button class="dropbtn">Project
+          </button>
+          <div class="dropdown-content">
+            <div>Name:Queries Test</div>
+            <div>Running Status</div>
+            <div>Memory:2G</div>
+            <div>CPUS:4</div>
+            <div>Storage:5G</div>
+          </div>
+        </div>
+    </div>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <canvas-core></canvas-core>
+    </ul>
+</div>
+ 
