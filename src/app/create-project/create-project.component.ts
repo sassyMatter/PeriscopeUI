@@ -1,25 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 
-declare var test: any;
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.css']
+  styleUrls: ['./create-project.component.css'],
 })
 export class CreateProjectComponent {
 
-
-
+  isDropDownOpened: boolean = false;
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService, private _eref: ElementRef) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -39,12 +37,16 @@ export class CreateProjectComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-
-  f(){
-    new test();
-  }
-
   logout(): void {
     this.authService.logout();
   }
+
+  toggleDropDown(): void {
+    this.isDropDownOpened = !this.isDropDownOpened;
+  }
+
+  clickedOutside(): void {
+    this.isDropDownOpened = false;
+  }
+
 }

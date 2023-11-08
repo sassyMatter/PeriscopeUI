@@ -10,8 +10,8 @@
       </ul>
     </div>
     
-    <div class="nav-right">
-      <div class="profile-dropdown-btn" (click)='f()'>
+    <div class="nav-right" clickOutside (clickOutside)="clickedOutside()">
+      <div class="profile-dropdown-btn" (click)="toggleDropDown()">
         <div class="profile-img">
             <i class="fa-solid fa-circle"></i>
         </div>
@@ -20,7 +20,7 @@
             <i class="fa-solid fa-angle-down"></i>
         </span>
       </div>
-      <ul class="profile-dropdown-list">
+      <ul class="profile-dropdown-list" *ngIf="isDropDownOpened">
         <li class="profile-dropdown-list-item">
             <a href="#">
                 <i class="fa-regular fa-user"></i>

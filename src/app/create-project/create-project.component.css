@@ -55,8 +55,6 @@ nav{
     border-radius: 10px;
     list-style-type: none;
     padding: 0;
-    max-height: 0;
-    overflow: hidden;
     transition: max-height 0.5s;
 }
 
@@ -107,9 +105,9 @@ nav{
     text-align: center;
 }
 
-.profile-dropdown-list.active{
+/* .profile-dropdown-list.active{
     max-height: 500px;
-}
+} */
 
 .centerContainer{
     position: absolute;
