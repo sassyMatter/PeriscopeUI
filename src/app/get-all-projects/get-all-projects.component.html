@@ -28,35 +28,33 @@
       </ul>
     </div>
   </nav>
- 
+  
+  
+  
+  <div>
+    
+   
+        
+<div class="container-fluid">
 
-</div>
-
-
-
-<mat-drawer-container autosize>
-  <mat-drawer #drawer opened="true" mode="side" class="sidebar">
-    <mat-nav-list>
-      <mat-list-item>
-        <button   mat-button (click)="openproject1()"  [ngClass]="{'grey' : toggle1, 'black': !toggle1}">Project1 </button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="openproject2()"    [ngClass]="{'grey' : toggle2, 'black': !toggle2}">Project2 </button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="openproject3()"    [ngClass]="{'grey' : toggle3, 'black': !toggle3}">Project3 </button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button  (click)="openproject4()"   [ngClass]="{'grey' : toggle4, 'black': !toggle4}">Project4 </button>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div style=" min-height: 1000px; background-color: white;">
-      <div class="project" *ngIf="should_open">
-        <app-project-page></app-project-page>
-      </div>  
+    <div class="navbar_drop">
+        <a href="/getallprojects">Edit</a>
        
+        <a href="/getallprojects"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            Run</a>
+        <a href="/getallprojects"><i class="fa fa-circle" aria-hidden="true"></i>
+            Status</a>
+        <div class="dropdown">
+          <button class="dropbtn">Project
+          </button>
+          <div class="dropdown-content">
+            <div>Name:Queries Test</div>
+            <div>Running Status</div>
+            <div>Memory:2G</div>
+            <div>CPUS:4</div>
+            <div>Storage:5G</div>
+          </div>
+        </div>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
