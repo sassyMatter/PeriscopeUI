@@ -28,32 +28,102 @@
     </div>
   </nav>
   
-  
+  <div class="project-list">
+    <ul>
+      <div class="dropdown">
+        <button class="dropbtn" id="sidebar">PROJECT 1</button>
+      
+        <div class="dropdown-content">
+          <div class="items_status">Queries handler</div>
+          <div class="items_status">CPUS:1</div>
+          <div class="items_status">Storage:5GB</div>
+          <div class="items_status">Running status:false</div>
+        </div>
+        
+
+        
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" id="sidebar">PROJECT 2</button>
+      
+        <div class="dropdown-content">
+          <div class="items_status">Queries handler</div>
+          <div class="items_status">CPUS:2</div>
+          <div class="items_status">Storage:10GB</div>
+          <div class="items_status">Running status:false</div>
+        </div>
+        
+
+        
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" id="sidebar">PROJECT 3</button>
+      
+        <div class="dropdown-content">
+          <div class="items_status">Queries handler</div>
+          <div class="items_status">CPUS:5</div>
+          <div class="items_status">Storage:20GB</div>
+          <div class="items_status">Running Status:false</div>
+        </div>
+        
+
+        
+      </div>
+    </ul>
+  </div>
   
   <div>
+
+
+    
     
    
-        
-<div >
+<div class="outer-div">
+  <div class="projects_view">
 
     <div class="navbar_drop">
-        <a href="/getallprojects">Edit</a>
-       
-        <a href="/getallprojects"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-            Run</a>
-        <a href="/getallprojects"><i class="fa fa-circle" aria-hidden="true"></i>
-            Status</a>
-            <div class="dropdown">
-              <button class="dropbtn">Project</button>
-              <div class="dropdown-content">
-                <a href="">Link 1</a>
-                <a href="">Link 2</a>
-                <a href="">Link 3</a>
-              </div>
-            </div>
+      <div class="dropdown">
+        <button class="dropbtn">PROJECT</button>
+      
+        <div class="dropdown-content">
+          <div class="items_status">Queries Handler</div>
+          <div class="items_status">CPUS:5</div>
+          <div class="items_status">STORAGE:5G</div>
+   
+
+        </div>
+        
+
+        
+      </div>
+        
+
+
+
+
+
+
+      <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-circle" aria-hidden="true"></i>STATUS</button>
+      
+        <div class="dropdown-content">
+          <div class="items_status">Running</div>
+          <div class="items_status">Stopped</div>
+          <div class="items_status">Pause</div>
+          <div class="items_status">Continue</div>
+        </div>
+        
+
+        
+      </div>
+        
+      <a href="/projects">EDIT</a>
+
+      <a href="projects"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            RUN</a>
+        
+            
     </div>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-        <canvas-core></canvas-core>
-    </ul>
+    
 </div>
- 
+</div>        
