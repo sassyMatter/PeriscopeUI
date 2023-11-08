@@ -9,8 +9,7 @@
       <ul class="navbar-nav mr-auto" routerLinkActive="active">
         <li class="nav-item">
           <a href="/home" class="nav-link" routerLink="home">Home </a>
-          <a href="/getallprojects" class="nav-link" routerLink="getallprojects">All Projects </a>
-        </li>
+          
       </ul>
     </div>
     
@@ -35,7 +34,7 @@
     
    
         
-<div class="container-fluid">
+<div >
 
     <div class="navbar_drop">
         <a href="/getallprojects">Edit</a>
@@ -44,17 +43,14 @@
             Run</a>
         <a href="/getallprojects"><i class="fa fa-circle" aria-hidden="true"></i>
             Status</a>
-        <div class="dropdown">
-          <button class="dropbtn">Project
-          </button>
-          <div class="dropdown-content">
-            <div>Name:Queries Test</div>
-            <div>Running Status</div>
-            <div>Memory:2G</div>
-            <div>CPUS:4</div>
-            <div>Storage:5G</div>
-          </div>
-        </div>
+            <div class="dropdown">
+              <button class="dropbtn">Project</button>
+              <div class="dropdown-content">
+                <a href="">Link 1</a>
+                <a href="">Link 2</a>
+                <a href="">Link 3</a>
+              </div>
+            </div>
     </div>
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <canvas-core></canvas-core>
