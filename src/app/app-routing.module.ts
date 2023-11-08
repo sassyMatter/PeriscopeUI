@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate : [AuthGuard]},
   { path: 'createProject', component: CreateProjectComponent, canActivate : [AuthGuard]},
-  {path: 'getallprojects', component: GetAllProjectsComponent,canActivate:[AuthGuard]}
+  {path: 'getallprojects', component: GetAllProjectsComponent,canActivate:[AuthGuard]},
+  {path: 'projects', component: GetAllProjectsComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
