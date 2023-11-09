@@ -6,6 +6,12 @@ nav{
     margin: auto;
     padding: 0.5rem;
 }
+
+.navbar-brand{
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
   
 .nav-item{
     list-style-type: none;
@@ -104,10 +110,6 @@ nav{
     line-height: 2rem;
     text-align: center;
 }
-
-/* .profile-dropdown-list.active{
-    max-height: 500px;
-} */
 
 .centerContainer{
     position: absolute;

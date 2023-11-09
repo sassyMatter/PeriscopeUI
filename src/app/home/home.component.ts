@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class HomeComponent {
 
-
+  isDropDownOpened: boolean = false;
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
@@ -36,10 +36,15 @@ export class HomeComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-
-
-
   logout(): void {
     this.authService.logout();
+  }
+
+  toggleDropDown(): void {
+    this.isDropDownOpened = !this.isDropDownOpened;
+  }
+
+  clickedOutside(): void {
+    this.isDropDownOpened = false;
   }
 }
