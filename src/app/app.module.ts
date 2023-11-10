@@ -21,6 +21,25 @@ import { HomeComponent } from './home/home.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
+// import { MatSidenavContainer } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule, Routes }   from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatCardModule} from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -47,8 +66,21 @@ import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.com
     NgFor,
     FormsModule,
     CdkDrag,
-
-    
+    // MatSidenavContainer,
+    MatButtonModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
 
   ],
   providers: [ComponentProvider, authInterceptorProviders],
