@@ -18,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { authInterceptorProviders } from './services/auth/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 
 
 
@@ -29,7 +31,9 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    CreateProjectComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     BrowserModule,

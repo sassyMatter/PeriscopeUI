@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-create-project',
+  templateUrl: './create-project.component.html',
+  styleUrls: ['./create-project.component.css'],
 })
-export class HomeComponent {
+export class CreateProjectComponent {
 
   isDropDownOpened: boolean = false;
   private roles: string[] = [];
@@ -47,4 +48,5 @@ export class HomeComponent {
   clickedOutside(): void {
     this.isDropDownOpened = false;
   }
+
 }

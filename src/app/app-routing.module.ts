@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth/auth-gaurd.guard';
 import { HomeComponent } from './home/home.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent, canActivate : [AuthGuard]}
+  { path: 'profile', component: ProfileComponent, canActivate : [AuthGuard]},
+  { path: 'createProject', component: CreateProjectComponent, canActivate : [AuthGuard]},
 ];
 
 @NgModule({

@@ -7,21 +7,49 @@
     <a href="#" class="navbar-brand">Periscope</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a class="nav-link" routerLink="/home">Home </a>
       </li>
     </ul>
   </div>
   
-  <div class="nav-right" *ngIf="isLoggedIn">
-    <ul class="navbar-nav ml-auto">
-      <!-- <li class="username">
-        <p>Logged in as {{ username }} </p> 
-      </li> -->
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile"> Profile </a> 
+  <div class="nav-right" clickOutside (clickOutside)="clickedOutside()" *ngIf="isLoggedIn">
+    <div class="projectBtns">
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Projects View </a>
+        </li>
+        <li>
+          <a class="nav-link" routerLink="/createProject">Create New Project</a>
+        </li>
+      </ul>
+    </div>
+    <div class="profile-dropdown-btn" (click)="toggleDropDown()">
+      <div class="profile-img">
+          <i class="fa-solid fa-circle"></i>
+      </div>
+      <span>
+          {{ username }}
+          <i class="fa-solid fa-angle-down"></i>
+      </span>
+    </div>
+    <ul class="profile-dropdown-list" *ngIf="isDropDownOpened">
+      <li class="profile-dropdown-list-item">
+          <a routerLink="/profile">
+              <i class="fa-regular fa-user"></i>
+              Account
+          </a>
       </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">Logout</a>
+      <li class="profile-dropdown-list-item">
+          <a href="#">
+              <i class="fa-solid fa-sliders"></i>
+              Preferences
+          </a>
+        <hr>
+        </li><li class="profile-dropdown-list-item">
+          <a href class="nav-link" (click)="logout()">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              Logout
+          </a>
       </li>
     </ul>
   </div>
