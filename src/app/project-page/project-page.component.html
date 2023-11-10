@@ -1,0 +1,47 @@
+<!-- <mat-card class="card-class">
+    <mat-card-header>
+        <mat-card-title>Project name:Queries Handler</mat-card-title>
+        <mat-card-content>
+            <p>Memory:5GB<br>
+               CPU:10<br>
+               Storage:5GB
+        </p>
+        </mat-card-content>
+    </mat-card-header>
+    <mat-card-actions>
+        <button mat-button>Edit</button>
+        <button mat-button>Save</button>
+    </mat-card-actions>
+</mat-card> -->
+<form [formGroup]="projectform" (ngSubmit)="saveproject()">
+
+<mat-card>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label class="mat-50">Name</mat-label>
+            <input value="Query handler" matInput>
+
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="mat-50">Memory</mat-label>
+            <input value="5G" matInput>     
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="mat-50">Storage</mat-label>
+            <input value="20GB" matInput>
+            
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="mat-50">CPU</mat-label>
+            <input value="5"matInput>
+            
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+        <div>
+            <button mat-raised-button  type="submit" color="primary">Save</button>
+            <button mat-raised-button color="warn" (click)="closeform()">Close</button>
+        </div>
+    </mat-card-footer>
+</mat-card>
+</form>

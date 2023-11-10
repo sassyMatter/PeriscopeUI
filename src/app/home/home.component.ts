@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,7 @@ export class HomeComponent {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService, private router:Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -41,5 +43,11 @@ export class HomeComponent {
 
   logout(): void {
     this.authService.logout();
+  }
+  goToProjects(){
+  
+    this.router.navigate(['/projects']).then(() => {
+      window.location.reload();
+      });
   }
 }

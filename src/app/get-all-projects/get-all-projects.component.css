@@ -1,6 +1,6 @@
 
 
-  .header {
+.header {
     display: flex;
     align-items: center;
     background-color: #007bff;
@@ -111,151 +111,27 @@ nav{
     justify-content: space-between;
 }
 
+.sidebar{
+  width:200px;
+}
   
-
-.navbar_drop {
-  overflow: hidden;
-  background-color: #FFE4C4;
-  font-family: Arial;
+button{
+  font-size: 20px;
+  margin:auto;
 }
 
-.navbar_drop a {
-  float: right;
-  font-size: 16px;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+button:active { background-color:black;
 }
 
+.project{
+    margin-left:20px
+}
+.grey {
+    background-color: grey;
+}
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-  
+.red {
+    background-color: black;
 }
 
 
-.dropdown .dropbtn {
-  
-  font-size: 18px;
-  border: none;
-  outline: none;
-  color: black;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; 
-  
-  margin: 0; 
-}
-
-
-
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color:white;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-
-.dropdown-content a {
-  float: none;
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-/* .dropbtn{
-  color: black;
-  
-} */
-.navbar_drop a{
-  color: black;
-}
-.outer-div{
-  display: flex;
-    justify-content: center;
-    
-  height:500px;
-  width:45%;
-  background-color: white;
-  margin-top:12%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.projects_view{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  
-}
-
-
-.items_status{
-  font-size: 1.2em;
-  
-}
-
-
-
-
-/* Reset default margin and padding for ul and li */
-ul, li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Style the project list */
-.project-list {
-  background-color:#242b2b;
-  width: 10%; /* Adjust the width as needed */
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  margin-top: 66px;
-}
-
-/* Style the list items */
-.project-list ul {
-  padding: 10px;
-}
-
-.project-list li {
- 
-  margin-bottom: 10px;
-}
-
-.project-list a {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.project-list a:hover {
-  background-color: #555;
-}
-#sidebar{
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-}

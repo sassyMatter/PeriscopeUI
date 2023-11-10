@@ -1,0 +1,44 @@
+/* p{
+    color: black;
+}
+.card-class{
+    margin:3%;
+    width:30%;
+    text-align:center;
+    float:left;
+    height:20%;
+    background-color: white;
+}
+button{
+    background-color:black;
+    margin-left:10px;
+} */
+form{
+    height: 400px;
+    width:100%;
+}
+mat-form-field{
+    /* background-color: blue; */
+}
+mat-label{
+    background-color: white;
+    color:blue;
+    font-size: 1.5em;
+}
+mat-card{
+    margin:2%;
+    background-color: white;
+}
+.mat-mdc-form-field{
+    width:98%;
+    margin:3%;
+}
+
+
+button{
+    margin:2%;
+    float:right;
+}
+input{
+    color:green;
+}
