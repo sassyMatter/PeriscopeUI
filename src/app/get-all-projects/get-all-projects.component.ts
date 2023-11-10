@@ -44,7 +44,7 @@ export class GetAllProjectsComponent {
   logout(): void {
     this.authService.logout();
   }
-  
+
   openproject1(){
     this.should_open=true;
     this.toggle1=false;
