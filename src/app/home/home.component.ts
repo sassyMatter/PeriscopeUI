@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

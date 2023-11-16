@@ -22,6 +22,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
+
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -40,7 +42,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-
 
 
 @NgModule({
