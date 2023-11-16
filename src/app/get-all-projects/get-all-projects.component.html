@@ -1,0 +1,66 @@
+
+<div>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav-left">
+      
+      <div class="logo">
+        <img src="assets/jio-logo-resized.png" alt="Logo" class="logo-image" />
+      </div>
+      
+      
+      <a href="#" class="navbar-brand">Periscope</a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a  class="nav-link" routerLink="/home">Home </a>
+
+          <a  class="nav-link" (click)="drawer.toggle()" >Projects</a>
+
+        </li>
+
+      </ul>
+    </div>
+    
+    <div class="nav-right" *ngIf="isLoggedIn">
+      <ul class="navbar-nav ml-auto">
+       
+        <li class="nav-item">
+          <a  class="nav-link" routerLink="/profile"> Profile </a> 
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+ 
+
+</div>
+
+
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" class="sidebar">
+    <mat-nav-list>
+      <mat-list-item>
+        <button   mat-button (click)="openproject1()"  [ngClass]="{'grey' : toggle1, 'black': !toggle1}">Project1 </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="openproject2()"    [ngClass]="{'grey' : toggle2, 'black': !toggle2}">Project2 </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="openproject3()"    [ngClass]="{'grey' : toggle3, 'black': !toggle3}">Project3 </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button  (click)="openproject4()"   [ngClass]="{'grey' : toggle4, 'black': !toggle4}">Project4 </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style=" min-height: 1000px; background-color: white;">
+      <div class="project" *ngIf="should_open">
+        <app-project-page></app-project-page>
+      </div>  
+       
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

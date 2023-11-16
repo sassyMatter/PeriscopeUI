@@ -54,7 +54,7 @@ font-size:22px;
 .lab_username{
   
   display: block;
-  margin-top: 80px;
+  margin-top: 40px;
   margin-right: 230px;
   
  
@@ -63,8 +63,6 @@ font-size:22px;
 .lab_password{
   display: block;
   color: black;
-  
-  margin-top: 15px;
   margin-right: 230px;
   
 }
