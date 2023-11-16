@@ -20,6 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
+
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -40,7 +42,6 @@ import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     HomeComponent,
     GetAllProjectsComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
