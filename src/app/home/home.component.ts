@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,7 +9,7 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class HomeComponent {
 
-
+  isDropDownOpened: boolean = false;
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
@@ -38,11 +36,15 @@ export class HomeComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-
-
-
   logout(): void {
     this.authService.logout();
   }
-  
+
+  toggleDropDown(): void {
+    this.isDropDownOpened = !this.isDropDownOpened;
+  }
+
+  clickedOutside(): void {
+    this.isDropDownOpened = false;
+  }
 }
