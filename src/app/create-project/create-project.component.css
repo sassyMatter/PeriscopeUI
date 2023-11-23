@@ -1,3 +1,4 @@
+  
 nav{
     background-color: #242b2b;
     display: flex;
@@ -6,7 +7,7 @@ nav{
     margin: auto;
     padding: 0.5rem;
 }
-
+  
 .navbar-brand{
     color: white;
     text-decoration: none;
@@ -24,6 +25,10 @@ nav{
     margin: 10px;
 }
 
+.nav-link:hover{
+    text-decoration: underline;
+}
+
 .nav-left{
     display: flex;
     justify-content: center;
@@ -33,6 +38,21 @@ nav{
 .nav-right{
     position: relative;
     width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projectBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.nav-right .navbar-nav {
+    list-style-type: none;
+    display: flex;
 }
 
 .profile-img{
@@ -56,6 +76,7 @@ nav{
 
 .profile-dropdown-list {
     position: absolute;
+    top: 3rem;
     right: 0;
     background-color: #242b2b;
     border-radius: 10px;

@@ -21,7 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
-
+import { CreateProjectComponent } from './create-project/create-project.component';
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -53,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     GetAllProjectsComponent,
     ProjectPageComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
