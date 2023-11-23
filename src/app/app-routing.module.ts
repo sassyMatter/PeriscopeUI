@@ -6,7 +6,6 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth/auth-gaurd.guard';
 import { HomeComponent } from './home/home.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
