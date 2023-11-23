@@ -19,6 +19,7 @@ import { authInterceptorProviders } from './services/auth/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
+
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 import { CreateProjectComponent } from './create-project/create-project.component';
@@ -66,6 +67,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgFor,
     FormsModule,
     CdkDrag,
+    // MatSidenavContainer,
+    MatButtonModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
     // MatSidenavContainer,
     MatButtonModule,
     MatSidenavModule,
