@@ -18,10 +18,9 @@ import { RegisterComponent } from './register/register.component';
 import { authInterceptorProviders } from './services/auth/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
-import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
@@ -52,10 +51,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     ProfileComponent,
     HomeComponent,
-    CreateProjectComponent,
-    ClickOutsideDirective,
     GetAllProjectsComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
@@ -67,6 +65,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgFor,
     FormsModule,
     CdkDrag,
+    // MatSidenavContainer,
+    MatButtonModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
     // MatSidenavContainer,
     MatButtonModule,
     MatSidenavModule,
