@@ -79,7 +79,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatAutocompleteModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     // MatSidenavContainer,
     MatButtonModule,
     MatSidenavModule,
