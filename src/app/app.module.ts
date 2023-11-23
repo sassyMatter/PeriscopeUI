@@ -19,6 +19,7 @@ import { authInterceptorProviders } from './services/auth/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ClickOutsideDirective } from '../customComponents/clickOutside.directive';
 
@@ -53,7 +54,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     GetAllProjectsComponent,
     ProjectPageComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    CreateProjectComponent,
   ],
   imports: [
     BrowserModule,
