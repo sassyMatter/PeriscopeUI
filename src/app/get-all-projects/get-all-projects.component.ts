@@ -77,5 +77,6 @@ export class GetAllProjectsComponent {
 
   clickedOutside(): void {
     this.isDropDownOpened = false;
+    
   }
 }

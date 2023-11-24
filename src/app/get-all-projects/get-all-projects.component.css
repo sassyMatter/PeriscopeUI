@@ -7,17 +7,12 @@
   }
         
 .logo {
-    margin-right: 10px; /* Add some space between the logo and the heading */
+    margin-right: 10px; 
 }
     
 .logo-image {
-      width: 60px; /* Adjust the width of the logo as needed */
-      height: 45px; /* Adjust the height of the logo as needed */
-}
-
-.logo-image {
-    width: 60px; /* Adjust the width of the logo as needed */
-    height: 45px; /* Adjust the height of the logo as needed */
+      width: 60px; 
+      height: 45px; 
 }
   
 nav{
@@ -203,4 +198,7 @@ button:active { background-color:black;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
+}
+.side_navbar{
+    min-height: 1000px; background-color: white;
 }

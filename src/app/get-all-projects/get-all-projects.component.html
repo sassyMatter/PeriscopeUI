@@ -1,4 +1,4 @@
-<div>
+
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="nav-left">
       
@@ -20,13 +20,6 @@
     </div>
     
     <div class="nav-right" clickOutside (clickOutside)="clickedOutside()">
-      <div class="projectBtns">
-        <ul class="navbar-nav mr-auto" routerLinkActive="active">
-          
-            <a class="nav-link" routerLink="/createProject">Create New Project</a>
-          
-        </ul>
-      </div>
       <div class="profile-dropdown-btn" (click)="toggleDropDown()">
         <div class="profile-img">
             <i class="fa-solid fa-circle"></i>
@@ -38,7 +31,7 @@
       </div>
       <ul class="profile-dropdown-list" *ngIf="isDropDownOpened">
         <li class="profile-dropdown-list-item">
-            <a routerLink="/profile">
+            <a href="#">
                 <i class="fa-regular fa-user"></i>
                 Account
             </a>
@@ -60,7 +53,7 @@
   </nav>
  
 
-</div>
+
 
 
 
@@ -82,11 +75,11 @@
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
-    <div style=" min-height: 1000px; background-color: white;">
+    <div class="side_navbar" >
       <div class="project" *ngIf="should_open">
         <app-project-page></app-project-page>
       </div>  
        
     </div>
   </mat-drawer-content>
-</mat-drawer-container>
+</mat-drawer-container> 
