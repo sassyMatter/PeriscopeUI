@@ -70,14 +70,12 @@ nav{
 button{
   font-size: 20px;
   margin:auto;
+  border-radius: 15%;
 }
 
 button:active { background-color:black;
 }
 
-.project{
-    margin-left:20px
-}
 .grey {
     background-color: grey;
 }
@@ -87,6 +85,12 @@ button:active { background-color:black;
 }
 
 
+.projectBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
 
 .profile-img{
     position: relative;
@@ -200,5 +204,26 @@ button:active { background-color:black;
 	transform: scale(1.1);
 }
 .side_navbar{
-    min-height: 1000px; background-color: white;
+    height: 100vh;  background-color: #242b2b;
+    width: 12vw;
+    display: inline-block;
+    
+    
 }
+.side_navbar ul{
+    margin: 0;
+    margin-right:3px;
+    
+}
+button{
+    margin:1rem 0;
+}
+.container{
+    display:inline-flex;
+   
+    width:40%; 
+    background-color: white;
+    margin-left: 20vw;
+    margin-top:10vh; 
+    
+} 

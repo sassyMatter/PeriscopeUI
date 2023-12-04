@@ -16,6 +16,7 @@ export class CreateProjectComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  
 
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
 

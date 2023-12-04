@@ -41,6 +41,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewProjectComponent } from './new-project/new-project.component';
+
+
 
 
 @NgModule({
@@ -55,7 +58,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     GetAllProjectsComponent,
     ProjectPageComponent,
     ClickOutsideDirective,
-    CreateProjectComponent
+    CreateProjectComponent,
+    ProjectPageComponent,
+    NewProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -82,21 +87,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    // MatSidenavContainer,
-    MatButtonModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    RouterModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatCardModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule
+    
 
   ],
   providers: [ComponentProvider, authInterceptorProviders],
