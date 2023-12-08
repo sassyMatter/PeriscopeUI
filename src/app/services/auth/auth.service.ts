@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
+import { environment } from 'src/environments/environment';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+
+const AUTH_API = `${environment.baseURL}/api/auth/`;
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -2,14 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from './project-page/project';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  baseURL ="http://localhost:8080/user-space/get-all-projects";
-  baseURL1="http://localhost:8080/user-space/create-update-project";
-  baseURL2="http://localhost:8080/user-space/create-new-project";
+
+  baseURL =`${environment.baseURL}/user-space/get-all-projects`;
+  baseURL1=`${environment.baseURL}/user-space/create-update-project`;
+  baseURL2=`${environment.baseURL}/user-space/create-new-project`;
+
   constructor(private httpclient:HttpClient) { }
     /// get all projects request
     getAllProjects():Observable<Project[]>{
