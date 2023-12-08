@@ -66,13 +66,7 @@ font-size:22px;
   margin-right: 230px;
   
 }
-/* .input{
-  
-  margin-top:10px ;
-  margin-bottom: 10px;
-  margin-left: 220px;
-  width: 300px;
-} */
+
 .button_class{
   display: flex;
   justify-content: center;
@@ -81,7 +75,7 @@ font-size:22px;
   color:white;
   height:1.5em;
   width:15%;
-  /* max-width:300px; */
+ 
   margin:0 auto;
   margin-top: 20px;
   border-radius:8px;
@@ -89,7 +83,7 @@ font-size:22px;
 
 }
 input{
-  /* size=10px; */
+  
   height: 1.5em;
   justify-content: center;
   align-items: center;
