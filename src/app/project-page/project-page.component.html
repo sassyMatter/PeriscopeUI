@@ -1,47 +1,85 @@
-<!-- <mat-card class="card-class">
-    <mat-card-header>
-        <mat-card-title>Project name:Queries Handler</mat-card-title>
-        <mat-card-content>
-            <p>Memory:5GB<br>
-               CPU:10<br>
-               Storage:5GB
-        </p>
-        </mat-card-content>
-    </mat-card-header>
-    <mat-card-actions>
-        <button mat-button>Edit</button>
-        <button mat-button>Save</button>
-    </mat-card-actions>
-</mat-card> -->
-<form [formGroup]="projectform" (ngSubmit)="saveproject()">
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav-left">
+      <div class="logo">
+        <img src="assets/jio-logo-resized.png" alt="Logo" class="logo-image" />
+      </div>
+      <a href="#" class="navbar-brand">Periscope</a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home </a>
+          <a routerLink="/projects" class="nav-link" >Projects</a>
+        
+        </li>
+      </ul>
+    </div>
+    
+    <div class="nav-right" clickOutside (clickOutside)="clickedOutside()" *ngIf="isLoggedIn">
+      <div class="projectBtns">
+        <ul class="navbar-nav mr-auto" routerLinkActive="active">
+          <li>
+            <a class="nav-link" routerLink="/createProject">Create New Project</a>
+          </li>
+        </ul>
+      </div>
+      <div class="profile-dropdown-btn" (click)="toggleDropDown()">
+        <div class="profile-img">
+            <i class="fa-solid fa-circle"></i>
+        </div>
+        <span>
+            {{ username }}
+            <i class="fa-solid fa-angle-down"></i>
+        </span>
+      </div>
+      <ul class="profile-dropdown-list" *ngIf="isDropDownOpened">
+        <li class="profile-dropdown-list-item">
+            <a routerLink="/profile">
+                <i class="fa-regular fa-user"></i>
+                Account
+            </a>
+        </li>
+        <li class="profile-dropdown-list-item">
+            <a href="#">
+                <i class="fa-solid fa-sliders"></i>
+                Preferences
+            </a>
+          <hr>
+          </li><li class="profile-dropdown-list-item">
+            <a href class="nav-link" (click)="logout()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+      </ul>
+    </div>
+  </nav> -->
 
-    <mat-card>
-        <mat-card-content>
-            <mat-form-field>
-                <mat-label class="mat-50">Name</mat-label>
-                <input value="Query handler" matInput>
+<div class="form_div">
+    <form [formGroup]="projectform" (ngSubmit)="updateproject()">
+
+        <label>Name</label>
+        <input type="text" name="text" id="text" [(ngModel)]="project.projectName" placeholder="Queries handler" [ngModelOptions]="{standalone: true}">
+
+  
+  
+  
+        <label>Memory</label>
+        <input type="text" name="memory" id="memory" placeholder="10GB" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+  
+
+     
+        <label>CPU</label>
+        <input type="text" name="cpu" id="cpu" placeholder="5" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
     
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">Memory</mat-label>
-                <input value="5G" matInput>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">Storage</mat-label>
-                <input value="20GB" matInput>
+
+        <label>Storage</label>
+        <input type="text" name="Storage" id="storage" placeholder="20GB" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
     
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">CPU</mat-label>
-                <input value="5"matInput>
-    
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-footer>
-            <div>
-                <button mat-raised-button  type="submit" color="primary">Save</button>
-                <button mat-raised-button color="warn" (click)="closeform()">Close</button>
-            </div>
-        </mat-card-footer>
-    </mat-card>
+
+
+        
+        <button mat-button type="submit" class="black">Update</button>
+        <button mat-button type="submit" class="close" (click)="closeform()">Close</button>
+        <button mat-button type="submit" class="black" (click)="closeform()">Delete</button>
     </form>
+</div>
+    
