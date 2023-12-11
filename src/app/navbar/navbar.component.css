@@ -64,12 +64,6 @@ nav{
     align-items: center;
 }
 
-.projectBtns{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-}
 
 .nav-right .navbar-nav {
     list-style-type: none;
@@ -84,7 +78,7 @@ nav{
     background-size: contain;
     background-position-x: center;
     background-position-y: center;
-    background: url(../../assets/user_avatar.jpg);
+    background: #fff;
 }
 
 .profile-img i {
@@ -151,39 +145,4 @@ nav{
     width: 2rem;
     line-height: 2rem;
     text-align: center;
-}
-
-.centerContainer{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.twoBtns{
-    list-style-type: none;
-    display: grid;
-    padding: 1rem;
-}
-
-.btns{
-    text-decoration: none;
-    font-size: 1rem;
-    background: #1E90FF;
-	padding: 1rem;
-	text-align: center;
-    color: #fff;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	-webkit-transition-duration: 0.3s;
-	transition-duration: 0.3s;
-	-webkit-transition-property: box-shadow, transform;
-	transition-property: box-shadow, transform;
-}
-
-.btns:hover, .btns:focus, .btns:active{
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
 }
