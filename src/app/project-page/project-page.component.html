@@ -1,33 +1,30 @@
-<form (ngSubmit)="saveproject()">
-
-    <mat-card>
-        <mat-card-content>
-            <mat-form-field>
-                <mat-label class="mat-50">Name</mat-label>
-                <input value="Query handler" matInput [(ngModel)]="projectName" [ngModelOptions]="{standalone: true}">
+<div class="form_div">
+    <form [formGroup]="projectform" (ngSubmit)="updateproject()">
+ 
+        <label>Name</label>
+        <input type="text" name="text" id="text" [(ngModel)]="project.projectName" placeholder="Queries handler" [ngModelOptions]="{standalone: true}">
+ 
+  
+  
+  
+        <label>Memory</label>
+        <input type="text" name="memory" id="memory" placeholder="10GB" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+  
+ 
+     
+        <label>CPU</label>
+        <input type="text" name="cpu" id="cpu" placeholder="5" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
     
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">Memory</mat-label>
-                <input value="5G" matInput [(ngModel)]="memory" [ngModelOptions]="{standalone: true}">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">Storage</mat-label>
-                <input value="20GB" matInput [(ngModel)]="storage" [ngModelOptions]="{standalone: true}">
+ 
+        <label>Storage</label>
+        <input type="text" name="Storage" id="storage" placeholder="20GB" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
     
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label class="mat-50">CPU</mat-label>
-                <input value="5"matInput [(ngModel)]="cpus" [ngModelOptions]="{standalone: true}">
-    
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-footer>
-            <div>
-                <button mat-raised-button  type="submit" color="primary" (click)="saveproject()">Save</button>
-                <button mat-raised-button color="warn" (click)="closeform()">Close</button>
-            </div>
-        </mat-card-footer>
-    </mat-card>
-</form>
+ 
+ 
+        
+        <button mat-button type="submit" class="black">Update</button>
+        <button mat-button type="submit" class="close" (click)="closeform()">Close</button>
+        <button mat-button type="submit" class="black" (click)="closeform()">Delete</button>
+    </form>
+</div>
     
