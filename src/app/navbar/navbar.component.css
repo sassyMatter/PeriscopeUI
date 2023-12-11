@@ -1,3 +1,11 @@
+header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+    height: 25px;
+  }
+        
 .logo {
     margin-right: 10px; /* Add some space between the logo and the heading */
 }
@@ -11,7 +19,6 @@
     width: 60px; /* Adjust the width of the logo as needed */
     height: 45px; /* Adjust the height of the logo as needed */
 }
-
   
 nav{
     background-color: #242b2b;
@@ -34,20 +41,39 @@ nav{
   
 .nav-link{
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     font-size: medium;
     margin: 10px;
 }
-  
+
+.nav-link:hover{
+    text-decoration: underline;
+}
+
 .nav-left{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-  
+
 .nav-right{
     position: relative;
     width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projectBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.nav-right .navbar-nav {
+    list-style-type: none;
+    display: flex;
 }
 
 .profile-img{
@@ -71,6 +97,7 @@ nav{
 
 .profile-dropdown-list {
     position: absolute;
+    top: 3rem;
     right: 0;
     background-color: #242b2b;
     border-radius: 10px;
@@ -126,6 +153,13 @@ nav{
     text-align: center;
 }
 
+.centerContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .twoBtns{
     list-style-type: none;
     display: grid;
@@ -153,28 +187,3 @@ nav{
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
 }
-
-.sidebar{
-  width:13vw;
-}
-  
-button{
-  font-size: 20px;
-  margin:auto;
-}
-
-button:active { background-color:black;
-}
-
-.project{
-    margin-left:20px
-}
-.grey {
-    background-color: grey;
-}
-
-.red {
-    background-color: black;
-}
-
-  

@@ -16,7 +16,16 @@ export class ProjectPageComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-  Name:String |undefined;
+
+  projectName?: string;
+  memory?: string;
+  storage?: string;
+  cpus?: string;
+
+  
+
+
+
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
@@ -35,8 +44,8 @@ export class ProjectPageComponent implements OnInit {
    
 
    
-    console.log("Name:Project");
-    console.log(this.projectform.value);
+    // console.log("Name:Project");
+    // console.log(this.projectform.value);
     
   }
 
@@ -59,10 +68,11 @@ export class ProjectPageComponent implements OnInit {
   })
   
   saveproject(){
-    console.log(this.projectform.value);
+    // console.log(this.projectform.value);
     // this.router.navigate(['/projects']).then(() => {
     //   window.location.reload();
     //   });
+    console.log(this.projectName, this.memory, this.cpus, this.storage);
   }
   
   closeform(){

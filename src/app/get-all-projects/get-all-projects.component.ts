@@ -17,6 +17,7 @@ export class GetAllProjectsComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  isDropDownOpened: boolean = false;
 
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
 
@@ -38,7 +39,13 @@ export class GetAllProjectsComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
+  toggleDropDown(): void {
+    this.isDropDownOpened = !this.isDropDownOpened;
+  }
 
+  clickedOutside(): void {
+    this.isDropDownOpened = false;
+  }
 
 
   logout(): void {

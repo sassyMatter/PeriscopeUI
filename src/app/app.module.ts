@@ -41,6 +41,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectPageComponent,
     ClickOutsideDirective,
     CreateProjectComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatAutocompleteModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
 
   ],
   providers: [ComponentProvider, authInterceptorProviders],
