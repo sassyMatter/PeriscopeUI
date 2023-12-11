@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -18,6 +18,9 @@ export class GetAllProjectsComponent {
   showModeratorBoard = false;
   username?: string;
   isDropDownOpened: boolean = false;
+  side_Navbar=true;
+  showNav: boolean = true;
+  
 
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
 
@@ -39,14 +42,6 @@ export class GetAllProjectsComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-  toggleDropDown(): void {
-    this.isDropDownOpened = !this.isDropDownOpened;
-  }
-
-  clickedOutside(): void {
-    this.isDropDownOpened = false;
-  }
-
 
   logout(): void {
     this.authService.logout();
@@ -55,7 +50,7 @@ export class GetAllProjectsComponent {
   openproject1(){
     this.should_open=true;
     this.toggle1=false;
-    this.toggle2=true;this.toggle3=true;
+    this.toggle2=true;this.toggle4=true;
     this.toggle3=true;
   }
   openproject2(){
@@ -75,5 +70,17 @@ export class GetAllProjectsComponent {
     this.toggle4=false;
     this.toggle2=true;this.toggle1=true;
     this.toggle3=true;
+
+  }
+  toggleDropDown(): void {
+    this.isDropDownOpened = !this.isDropDownOpened;
+  }
+
+  clickedOutside(): void {
+    this.isDropDownOpened = false;
+    
+  }
+  opensideNavbar(){
+    this.side_Navbar=!this.side_Navbar;
   }
 }

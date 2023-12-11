@@ -33,7 +33,10 @@ nav{
 .nav-right{
     position: relative;
     width: fit-content;
+   
 }
+
+
 
 .profile-img{
     position: relative;
@@ -56,6 +59,7 @@ nav{
 
 .profile-dropdown-list {
     position: absolute;
+    top: 3rem;
     right: 0;
     background-color: #242b2b;
     border-radius: 10px;
