@@ -71,17 +71,27 @@ font-size:22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:blue;
+  background-color:#1E90FF;
   color:white;
-  height:1.5em;
-  width:15%;
- 
+  height:1.5rem;
+  padding: 1rem;
+  cursor: pointer;
   margin:0 auto;
   margin-top: 20px;
-  border-radius:8px;
-  font-size: 19px;
-
+  border-radius:5px;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: box-shadow, transform;
+	transition-property: box-shadow, transform;
 }
+.button_class:hover, .button_class:focus, .button_class:active{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
 input{
   
   height: 1.5em;
