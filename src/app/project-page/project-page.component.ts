@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project } from './project';
 import { ProjectService } from '../project.service';
@@ -21,6 +21,16 @@ export class ProjectPageComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+
+  projectName?: string;
+  memory?: string;
+  storage?: string;
+  cpus?: string;
+
+  
+
+
+
   showNav: boolean = true;
   projects?: Project[]  ;
   
@@ -88,7 +98,9 @@ export class ProjectPageComponent implements OnInit {
     // this.projectservice.saveprojects(this.project).subscribe();
   }
   
-
+  saveproject(){
+    
+  }
   
   
 }

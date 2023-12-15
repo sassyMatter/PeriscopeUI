@@ -1,0 +1,148 @@
+header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+    height: 25px;
+  }
+        
+.logo {
+    margin-right: 10px; /* Add some space between the logo and the heading */
+}
+    
+.logo-image {
+      width: 60px; /* Adjust the width of the logo as needed */
+      height: 45px; /* Adjust the height of the logo as needed */
+}
+
+.logo-image {
+    width: 60px; /* Adjust the width of the logo as needed */
+    height: 45px; /* Adjust the height of the logo as needed */
+}
+  
+nav{
+    background-color: #242b2b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    padding: 0.5rem;
+}
+  
+.navbar-brand{
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
+  
+.nav-item{
+    list-style-type: none;
+}
+  
+.nav-link{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: medium;
+    margin: 10px;
+}
+
+.nav-link:hover{
+    text-decoration: underline;
+}
+
+.nav-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-right{
+    position: relative;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.nav-right .navbar-nav {
+    list-style-type: none;
+    display: flex;
+}
+
+.profile-img{
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-size: contain;
+    background-position-x: center;
+    background-position-y: center;
+    background: #fff;
+}
+
+.profile-img i {
+    position: absolute;
+    right: 0;
+    bottom: 0.1rem;
+    font-size: 0.75rem;
+    color: green;
+}
+
+.profile-dropdown-list {
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    background-color: #242b2b;
+    border-radius: 10px;
+    list-style-type: none;
+    padding: 0;
+    transition: max-height 0.5s;
+}
+
+.profile-dropdown-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid grey;
+    cursor: pointer;
+    border-radius: 50px;
+    color: white;
+}
+
+.profile-dropdown-btn:hover{
+    background-color: grey;
+    transition: 0.2s;
+}
+
+.profile-dropdown-btn span{
+    margin: 0 0.5rem;
+    margin-right: 0;
+}
+
+.profile-dropdown-list-item{
+    padding-right: 0.3rem;
+}
+
+.profile-dropdown-list-item:hover {
+    cursor: pointer;
+}
+
+.profile-dropdown-list-item a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+}
+
+.profile-dropdown-list-item a i {
+    margin-right: 0.8rem;
+    width: 2rem;
+    line-height: 2rem;
+    text-align: center;
+}

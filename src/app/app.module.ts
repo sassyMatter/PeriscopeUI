@@ -41,6 +41,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 
 
@@ -59,6 +60,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
     ProjectPageComponent,
     ClickOutsideDirective,
     CreateProjectComponent,
+    NavbarComponent,
     ProjectPageComponent,
     NewProjectComponent
   ],
@@ -87,7 +89,22 @@ import { NewProjectComponent } from './new-project/new-project.component';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    
+    // MatSidenavContainer,
+    MatButtonModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
 
   ],
   providers: [ComponentProvider, authInterceptorProviders],
