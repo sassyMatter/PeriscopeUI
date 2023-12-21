@@ -1,10 +1,10 @@
-.form_div {
-    margin:20px auto;
+  .form_div {
+    margin:4% auto;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    width:90%;
-    height: 37vh;
+    width:70%;
+   
     border-radius: 15px;
   }
   input[type=text], select {
@@ -24,7 +24,6 @@
   }
   button{
     border-radius: 40%;
-    /* margin:4%; */
     float:right;
     margin: 6px 2%;
   }
@@ -36,3 +35,65 @@
     background-color:red;
     color:white;
   }
+  @media only screen and (min-width:950px) and (max-width: 1300px) {
+    .form_div {
+    
+      margin: 0;
+      
+      border-radius: 5px;
+  
+      padding: 20px;
+      width:80vw;
+      padding-bottom:2rem;
+      border-radius: 15px;
+    }
+    input[type=text], select {
+      width: 100%;
+      padding: 8px 16px;
+      margin: 5px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button{
+      border-radius: 20%;
+      background-color: green;
+      float:right;
+      margin: 4px 1%;
+      
+    }
+    .btns{
+      height:30px;
+      width:20px;
+    }
+  } 
+  @media only screen and (max-width: 950px) {
+    .form_div {
+    
+      margin:0;
+      
+      border-radius: 3px;
+      padding: 15px;
+      width:80%;
+      padding-bottom:2.5rem;
+      border-radius: 15px;
+    }
+    input[type=text], select {
+      
+      padding: 8px 16px;
+      margin: 5px 0;
+    
+    }
+    label{
+      
+      width:150px;
+    }
+    
+    .btns{
+      height:30px;
+      width:20px;
+      border-radius: 40%;
+      font-size: small;
+    }
+  } 

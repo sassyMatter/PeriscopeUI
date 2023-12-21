@@ -2,13 +2,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
-  
+   
   }
-
 .center{
-    /* t-align: center;tex */
     height:70em;
     display:flex;
     justify-content: center;
@@ -16,66 +13,49 @@ body {
     
 }
 img{
-  height:200px;
-  width: 200px;
+    height:200px;
+    width: 200px;
     display:flex;
     justify-content: center;
     align-items: center; 
-    margin: auto;
-    margin-bottom: 10px;
-    margin-top:0px;
-    border-radius: 10px;
+    margin:auto;
+    border-radius:1rem;
+    cursor: pointer;
 }
-form {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 18px;
-    background-color: #f9f9f9;
-    width: 800px;
-    /* height: 25em; */
-    
 
-    /* margin: auto; */
-    margin-bottom: 10em;
+form {
+    border: 3px solid #ccc;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #f9f9f9;
+    width:50rem;
+
+  
   }
 .form-group{
+  
   text-align: center;
 }
-.form-class{
-    height: 1000 px;
-}
 
+/* label wali chize change krni hai */
 label{
   font-size:22px;
- 
+  display: block;
+  color: black;
+  margin-right: 230px;
+  margin-top: 15px;
 }
   .lab_username{
     margin-top: 40px;
-    display: block;
-    margin-right: 230px;
-    
-   
   }
   .lab_email{
-    display: block;
-    margin-top: 15px;
+    
     margin-right: 270px;
   }
   .lab_password{
-    display: block;
-    color: black;
-    
-    margin-top: 15px;
-    margin-right: 230px;
     
   }
-  /* .input{
-    
-    margin-top:10px ;
-    margin-bottom: 10px;
-    margin-left: 220px;
-    width: 300px;
-  } */
+
   .button_class{
     display: flex;
     justify-content: center;
@@ -84,22 +64,83 @@ label{
     color:white;
     height:2em;
     width:15%;
-    /* max-width:300px; */
-    margin:0 auto;
-    margin-top: 20px;
+    margin:0.5rem auto;
     border-radius:8px;
     font-size: 16px;
+    cursor: pointer;
 
   }
   input{
-    /* size=10px; */
-    height: 1.5em;
     justify-content: center;
     align-items: center;
     width: 40%;
-    margin-top:10px ;
-    margin-bottom: 10px;
+    margin:0.5rem auto;
     border-radius:8px;
-    
-    
   }
+
+
+  @media only screen and (max-width: 1000px) {
+    .center{
+      height:50em;
+  }
+    img{
+      height:140px;
+      width: 140px;
+      margin:auto;
+      border-radius:0.5rem;
+      cursor: pointer;
+    }
+  
+    form {
+      border: 2px solid #ccc;
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: #f9f9f9;
+      width:25rem;
+      
+    }
+    .form-group{
+    
+      text-align: center;
+    
+    }
+  
+  /* label wali chize change krni hai */
+    label{
+      font-size:18px;
+      margin-top: 10px;
+    
+    }
+    .lab_username{
+      margin-top: 40px;
+      margin-right: 130px;
+    }
+    .lab_email{
+     
+      margin-right: 165px;
+    }
+    .lab_password{
+      margin-right: 130px;
+
+      
+    }
+  
+    .button_class{
+      
+      background-color:blue;
+      color:white;
+      height:2.5em;
+      width:20%;
+      margin:1rem auto;
+      border-radius:8px;
+      font-size: 14px;
+      cursor: pointer;
+  
+    }
+    input{
+      width: 50%;
+      margin:0.5rem auto;
+      border-radius:8px;
+    }
+  
+}
