@@ -8,10 +8,11 @@ import { Field } from '../formField';
 export class Item extends fabric.Group  {
   connections: Connector[] = [];
   id:string;
+  // type ids=Record<id,id>;
   formFields: Field[] = [];
   // references: string[] = [];
   references: Set<string> = new Set();
-  
+  values: number=0;
   
 
   constructor() {

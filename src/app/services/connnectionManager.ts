@@ -38,4 +38,11 @@ export class ConnectionManager {
            this.establishBiDirectionalConnection(component1, component2);
         }
     }
+    deleteObject(component1: Item){
+      console.log("deleteobject");
+      if(component1.connections.length==0){
+        //delete this object
+      }
+      
+    }
   }
