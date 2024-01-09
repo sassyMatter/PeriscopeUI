@@ -3,7 +3,7 @@ import { Item } from './component';
 import { formFieldType } from '../enums/formFieldType';
 import { Field } from '../formField';
 
-export class RestInterface extends Item {
+export class RestInterfaceTemp extends Item {
 
 
 //   override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
@@ -14,107 +14,107 @@ export class RestInterface extends Item {
 //  override createObject(componentType: string, event: DragEvent){
 
 //   }
-override connections: any[];
-imgUrl!: string;
-imageOptions!: fabric.IImageOptions;
-objects?: fabric.Object[];
+  override connections: any[];
+  imgUrl!: string;
+  imageOptions!: fabric.IImageOptions;
+  objects?: fabric.Object[];
 
 // custom Properties
-url: string;
+  url: string;
 // type: string;
-headers: Map<string, string>;
-requestBody: Map<string, string>;
-requestUrl: string;
-apiType: string;
-httpMethod: string;
-methodName: string;
+  headers: Map<string, string>;
+  requestBody: Map<string, string>;
+  requestUrl: string;
+  apiType: string;
+  httpMethod: string;
+  methodName: string;
 
 
-override formFields: Field[] = [
-  {
-    "name" : "url",
-    "fieldlabel": "URL",
-    "type" : formFieldType.SHORT_STRING,
-    "value" : "",
-  },
-  {
-    "name" : "type",
-    "fieldlabel": "Type",
-    "type" : formFieldType.DROP_DOWN,
-    "options" : [],
-    "value" : ""
-  },
-  {
-    "name" : "headers",
-    "fieldlabel": "Headers",
-    "type" : formFieldType.EXTENDIBLE_MAP,
-    "value" : new Map<string, string>([
-      ["key1", "value1"],
-      ["key2", "value2"]
-    ])
-  },
-  {
-    "name" : "requestBody",
-    "fieldlabel": "Request Body",
-    "type" : formFieldType.EXTENDIBLE_MAP,
-    "value" : new Map<string, string>()
-  }
-  ,
-  {
-    "name" : "requestUrl",
-    "fieldlabel": "Request URL",
-    "type" : formFieldType.SHORT_STRING,
-    "value" : "",
-  }
-  ,
-  {
-    "name" : "apiType",
-    "fieldlabel": "API Type",
-    "type" : formFieldType.DROP_DOWN,
-    "options": ["PostMapping", "GetMapping"],
-    "value" : "",
-  }
-  ,
-  {
-    "name" : "httpMethod",
-    "fieldlabel" : "Http Method",
-    "type" : formFieldType.DROP_DOWN,
-    "options": ["PostMapping", "GetMapping"],
-    "value": "",
-  }
-  ,
-  {
-    "name" : "methodName",
-    "fieldlabel" : "Method Name",
-    "type" : formFieldType.SHORT_STRING,
-    "value" : ""
-  }
+  override formFields: Field[] = [
+    {
+      "name" : "url",
+      "fieldlabel": "URL",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : "",
+    },
+    {
+      "name" : "type",
+      "fieldlabel": "Type",
+      "type" : formFieldType.DROP_DOWN,
+      "options" : [],
+      "value" : ""
+    },
+    {
+      "name" : "headers",
+      "fieldlabel": "Headers",
+      "type" : formFieldType.EXTENDIBLE_MAP,
+      "value" : new Map<string, string>([
+        ["key1", "value1"],
+        ["key2", "value2"]
+      ])
+    },
+    {
+      "name" : "requestBody",
+      "fieldlabel": "Request Body",
+      "type" : formFieldType.EXTENDIBLE_MAP,
+      "value" : new Map<string, string>()
+    }
+    ,
+    {
+      "name" : "requestUrl",
+      "fieldlabel": "Request URL",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : "",
+    }
+    ,
+    {
+      "name" : "apiType",
+      "fieldlabel": "API Type",
+      "type" : formFieldType.DROP_DOWN,
+      "options": ["PostMapping", "GetMapping"],
+      "value" : "",
+    }
+    ,
+    {
+      "name" : "httpMethod",
+      "fieldlabel" : "Http Method",
+      "type" : formFieldType.DROP_DOWN,
+      "options": ["PostMapping", "GetMapping"],
+      "value": "",
+    }
+    ,
+    {
+      "name" : "methodName",
+      "fieldlabel" : "Method Name",
+      "type" : formFieldType.SHORT_STRING,
+      "value" : ""
+    }
 
-];
+  ];
 
 // override references: string[] = [];
 
-override references: Set<string> = new Set();
+  override references: Set<string> = new Set();
 
-constructor(event: DragEvent, width: number, height: number) {
-  super();
-  this.connections = [];
-  this.imgUrl = "assets/restCall.png";
-  this.type = "rest";
-  this.imageOptions = {
-      width: width + 14,
-      height: height + 14,
-      left: event.offsetX-25,
-      top: event.offsetY-25,
+  constructor(width: number, height: number, left : number, top : number) {
+    super();
+    this.connections = [];
+    this.imgUrl = "assets/restCall.png";
+    this.type = "rest";
+    this.imageOptions = {
+      width: width,
+      height: height,
+      left: left,
+      top: top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',
     }
 
 
-  fabric.Image.fromURL(this.imgUrl, (img) => {
+    fabric.Image.fromURL(this.imgUrl, (img) => {
 
-    // setting image options
+      // setting image options
       img.set(this.imageOptions);
 
       console.log("image is : " , img);
@@ -131,7 +131,7 @@ constructor(event: DragEvent, width: number, height: number) {
 
     // initialzing custom properties
 
-      this.url = '',
+    this.url = '',
       // type is already in parent class;
       // this.type = '',
       this.headers = new Map<string, string>(),
@@ -217,14 +217,14 @@ constructor(event: DragEvent, width: number, height: number) {
       // already called super, do we really need it
       // connections: this.connections,
       // id: this.id,
-     url: this.url,
-     headers: this.headers,
-     requestBody: this.requestBody,
-     requestUrl: this.requestUrl,
-     apiType: this.apiType,
-     httpMethod: this.httpMethod,
-     methodName: this.methodName
-   });
+      url: this.url,
+      headers: this.headers,
+      requestBody: this.requestBody,
+      requestUrl: this.requestUrl,
+      apiType: this.apiType,
+      httpMethod: this.httpMethod,
+      methodName: this.methodName
+    });
 
- }
+  }
 }

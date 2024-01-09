@@ -1,18 +1,14 @@
-import { ChangeDetectorRef,  Component,  OnInit, createComponent, Injectable } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
-
-import { CanvasService } from '../services/canvas-service';
-
+import { CanvasService} from "../services/canvas-service";
 import { fabric } from 'fabric';
-
-import { Database } from '../models/components/database';
-import { Point } from 'fabric/fabric-impl';
 import { CustomGroup } from '../models/components/customGroup';
 import { ComponentProvider } from '../services/componentProvider';
 import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
+
 
 
 
@@ -25,12 +21,11 @@ export class CanvasCoreComponent implements OnInit {
 
   public response = 'Could not connect to server!!';
 
-  
   canvas : fabric.Canvas | null = null;
 
   isDialogOpen = false;
   targetObjectForDialog : any;
-  
+
   openDialog() {
       console.log("setting isDialogOpen to true")
       this.isDialogOpen = true;
@@ -40,26 +35,23 @@ export class CanvasCoreComponent implements OnInit {
     console.log("setting isDialogOpen to false")
     this.isDialogOpen = false;
   }
-  
-  
-
 
   constructor(
     private helloworldService : HelloWorldService,
     private componentFactory : ComponentProvider,
-    private connectionManager: ConnectionManager
-    // private canvasService : CanvasService,
+    private connectionManager: ConnectionManager,
+    private canvasService : CanvasService,
    ){
 
     this.canvas = new fabric.Canvas('canvas');
    }
 
-  
+
   ngOnInit(): void {
     this.showServerData();
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
-    
+
     // this.changeDetectorRef.detectChanges();
 
 const container = document.getElementById('canvas-container') as HTMLDivElement;
@@ -184,7 +176,7 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
       canvas.remove(target);
     }
   });
-  
+
 });
 
 
@@ -197,7 +189,7 @@ canvas.on('mouse:dblclick', (options) => {
     console.log('Object double-clicked:', target);
     this.openDialog();
     this.targetObjectForDialog = target as Item;
-    
+
      // Perform any desired actions
 
   }
@@ -211,9 +203,9 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
   const target = event.target as CustomGroup;
   const mouseEvent = event.e as MouseEvent;
   const isCommandPressed = mouseEvent.metaKey;
-  
 
-  
+
+
 
   // Check if the target object has an ID
   if (isCommandPressed && target.id && target.left && target.width && target.top && target.height) {
@@ -240,17 +232,17 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
     });
 
     // Attach an event listener to the `mouse:up` event on the canvas
-    
+
     canvas.on('mouse:up', (mouseUpevent: fabric.IEvent) => {
       // Check if the line intersects with any other objects
-     // getting the point 
+     // getting the point
      const pointer = canvas.getPointer(event.e);
      const point = new fabric.Point(pointer.x , pointer.y);
 
      const e = mouseUpevent.e as MouseEvent;
      const isShiftKeyPressed = e.shiftKey;
 
-     
+
 
       var isConnected = false
       const allObjects = canvas.getObjects().filter(obj=>{
@@ -261,24 +253,24 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
         return false;
       });
       console.log("all objects ", allObjects);
-      
-      
+
+
 
       for(let index = 0; index < allObjects.length; index++){
         const obj = allObjects.at(index) as fabric.Object;
         console.log("interating for " , obj);
-        
+
         if(obj.containsPoint(point)){
           console.log("Intersecting");
         }
 
         console.log("obj:: ", obj, " target:: ", target);
-       
+
         if(obj.containsPoint(point) && obj !== target){
           console.log("line intersects with :: " , obj as fabric.Group);
           console.log("target:: ", target);
           console.log("obj:: ", obj);
-        
+
         // if (obj.name && obj.name !== target.name && line.intersectsWithObject(obj)) {
           // Perform the desired action when the line intersects with another object
           console.log("is connected ", isConnected)
@@ -289,10 +281,10 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
                 const line = this.createConnectLine(target, obj, isShiftKeyPressed);
                 canvas.add(line);
                 canvas.renderAll();
-                
+
           }
         }
-          
+
         // }
         target.selectable = true;
         target.lockMovementX = false;
@@ -300,7 +292,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
       }
       console.log("Event for mouse up")
 
- 
+
 
       // Remove the line from the canvas
       canvas.remove(line);
@@ -316,13 +308,6 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
 });
 
 
-
-
-
-
-
-
-  
 function handleDragStart(this: HTMLImageElement, e: DragEvent): void {
   console.log("drag started:: ", e);
   const images: NodeListOf<HTMLImageElement> = document.querySelectorAll('.grid-item img');
@@ -359,21 +344,21 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
   }
   const img: HTMLImageElement | null = document.querySelector('.grid-item img.img-dragging');
   console.log("adding img ", img);
-  
+
   if (img) {
     console.log("id for image is", img.getAttribute("id"));
     const componentType : string  = img.getAttribute("id") as string;
     // const newImage = createFabricObject(componentType);
     // const image = createFabricObject2(componentType, e);
-   
-    
+
+
 
     console.log(img.width, img.height);
     const width = img.clientWidth;
     const height = img.clientHeight;
 
     const newImage = createFabricObject(componentType, e, width, height);
-    
+
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
     canvas.add(newImage);
@@ -382,10 +367,10 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
       originX: 'center',
       originY: 'center'
     });
-    
+
     // Call `setCoords` to update the coordinates of the fabric object
     newImage.setCoords();
-    
+
     // Render the canvas
     canvas.renderAll();
     this.classList.remove('over');
@@ -425,7 +410,7 @@ if (canvasContainer) {
 
 // canvas.on("dragover", function(options){
 //     console.log("Dragging over ", options);
-    
+
 // })
 
 // canvas.on("drop", function(options){
@@ -477,18 +462,27 @@ if (canvasContainer) {
 //   }
 // }
 
-   
-   
+
+
   }
 
   createFabricObject(componentType : string, event: DragEvent, width:number, height: number): fabric.Group{
     console.log("calling factory");
 
     const componentProvider = new ComponentProvider();
-    
+
     return componentProvider.createComponent(componentType, event, width, height);
-   
+
   }
+
+  recreateFabricObject(componentType : string, width:number, height: number, left: number, top : number): fabric.Group{
+
+    const componentProvider = new ComponentProvider();
+
+    return componentProvider.recreateComponent(componentType, width, height, left, top);
+
+  }
+
 
   showServerData(){
     this.helloworldService.getServerResponse()
@@ -498,8 +492,8 @@ if (canvasContainer) {
     });
   }
 
-  
- 
+
+
   // sendCanvasDataToBackend(){
   //   const serializedCanvas = this.canvas?.toJSON();
   //   this.helloworldService.sendCanvasData(JSON.stringify(serializedCanvas))
@@ -518,7 +512,7 @@ if (canvasContainer) {
   sendCanvasDataToBackend(): void {
 
     var objects =  this.canvas?.getObjects();
-    
+
     console.log("objects:: " , objects);
     const serializedCanvas = this.canvas?.toJSON(["id"]);
     console.log("serializedCanvas ::", serializedCanvas);
@@ -568,37 +562,40 @@ if (canvasContainer) {
     }
     return value;
   }
-  
+
 
   runSimulation(){
-    var objects =  this.canvas?.getObjects();
-    
-    console.log("objects:: " , objects);
-    const serializedCanvas = this.canvas?.toJSON(["id"]);
-    console.log("serializedCanvas ::", serializedCanvas);
-    if (serializedCanvas) {
-      const filteredCanvasObjects = serializedCanvas.objects.filter(
-        (obj: any) => (obj.id !== 'grid-lines' && obj.type !== 'line')
-      );
-
-      const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
-      console.log("filteredCanvasData :: ", filteredCanvasData);
-      const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
-
-      // const serializedData = JSON.stringify(serializedCanvas);
-      console.log("serialized Data :: " , serializedData);
-      this.helloworldService.saveAndRunSimulation(serializedData).pipe(
+      this.helloworldService.getCanvasData().pipe(
         tap((response: any) => {
           // Handle the response from the backend
-          console.log('Post request successful', response);
+          let components = response[0]['objects'];
+          let hashMap = new Map<string, fabric.Group>();
+          for(let i of components) {
+            let tp=i['top'];
+            let lft=i['left'];
+            let newImage: fabric.Group = this.recreateFabricObject(i['type'], i['width'], i['height'], lft, tp);
+            this.canvas?.add(newImage);
+            hashMap.set(i['id'],newImage);
+          }
+          for(let i of components) {
+            for(let j of i['connections']){
+              let src = hashMap.get(i['id']);
+              let dest = hashMap.get(j['id']);
+              if (src && dest) {
+                const newLine = this.createConnectLine(src, dest, true);
+                this.canvas?.add(newLine);
+              }
+            }
+          }
+          this.canvas?.renderAll();
+
         }),
         catchError((error) => {
           // Handle any errors that occur during the request
-          console.error('Error occurred during post request', error);
+          console.error('Error occurred during get request', error);
           return of(null); // Returning a non-error observable to prevent unhandled error
         })
       ).subscribe();
-    }
   }
 
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
@@ -612,27 +609,25 @@ if (canvasContainer) {
         id: "grid-lines"
       }
     };
-  
+
     const gridLen = Math.max(width, height) / options.distance;
-  
+
     for (let i = 0; i < gridLen; i++) {
       const distance = i * options.distance;
-  
+
       const horizontal = new fabric.Line(
         [distance, 0, distance, height],
         options.param,
       );
-  
+
       const vertical = new fabric.Line(
         [0, distance, width, distance],
         options.param
       );
-     
-     
-      
+
       canvas.add(horizontal);
       canvas.add(vertical);
-  
+
       if (i % 5 === 0) {
         horizontal.set({ stroke: '#cccccc' });
         vertical.set({ stroke: '#cccccc' });
@@ -641,7 +636,7 @@ if (canvasContainer) {
   }
 
 
-  // creating connection lines 
+  // creating connection lines
   updateLine(line: fabric.Line, obj1: fabric.Group, point:string) {
     const centerPoint = obj1.getCenterPoint();
     line.set({
@@ -649,10 +644,10 @@ if (canvasContainer) {
       [`y${point}`]: centerPoint.y
     });
   }
-  
+
  createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
    console.log("Create line called for ", obj1, obj2);
-    
+
     const centerPointSource = obj1.getCenterPoint();
     const centerPointTarget = obj2.getCenterPoint();
 
@@ -670,9 +665,9 @@ if (canvasContainer) {
       }
     );
 
-    const ob =    obj1 as Item;
+    const ob = obj1 as Item;
     const oc = obj2 as Item;
-  
+
     obj1.on("moving", () => this.updateLine(connectLine, obj1, "1"));
     obj1.on("scaling", () => this.updateLine(connectLine, obj1, "1"));
     obj2.on("moving", () => this.updateLine(connectLine, obj2, "2"));
@@ -683,10 +678,7 @@ if (canvasContainer) {
 
     return connectLine;
   }
-  
-  
-  
-    
+
 }
 
 
