@@ -348,6 +348,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
   if (img) {
     console.log("id for image is", img.getAttribute("id"));
     const componentType : string  = img.getAttribute("id") as string;
+    console.log("component type when dropping ", componentType);
     // const newImage = createFabricObject(componentType);
     // const image = createFabricObject2(componentType, e);
 
@@ -357,7 +358,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const width = img.clientWidth;
     const height = img.clientHeight;
 
-    const newImage = createFabricObject(componentType, e, width, height);
+    const newImage = createFabricObject(componentType, width, height, undefined, undefined, e);
 
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
@@ -466,21 +467,15 @@ if (canvasContainer) {
 
   }
 
-  createFabricObject(componentType : string, event: DragEvent, width:number, height: number): fabric.Group{
+  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent): fabric.Group{
     console.log("calling factory");
 
     const componentProvider = new ComponentProvider();
-
-    return componentProvider.createComponent(componentType, event, width, height);
-
-  }
-
-  recreateFabricObject(componentType : string, width:number, height: number, left: number, top : number): fabric.Group{
-
-    const componentProvider = new ComponentProvider();
-
-    return componentProvider.recreateComponent(componentType, width, height, left, top);
-
+    if(event){
+      return componentProvider.createComponent(componentType, width, height, undefined, undefined, event);
+    }
+    console.log("component Type: ", componentType);
+    return componentProvider.createComponent(componentType, width, height, left, top);
   }
 
 
@@ -491,23 +486,6 @@ if (canvasContainer) {
       this.response = data.response;
     });
   }
-
-
-
-  // sendCanvasDataToBackend(){
-  //   const serializedCanvas = this.canvas?.toJSON();
-  //   this.helloworldService.sendCanvasData(JSON.stringify(serializedCanvas))
-  //   .subscribe(
-  //     response => {
-  //       // Handle the response from the backend
-  //       console.log('Post request successful', response);
-  //     },
-  //     error => {
-  //       // Handle any errors that occur during the request
-  //       console.error('Error occurred during post request', error);
-  //     }
-  //   );
-  // }
 
   sendCanvasDataToBackend(): void {
 
@@ -573,7 +551,7 @@ if (canvasContainer) {
           for(let i of components) {
             let tp=i['top'];
             let lft=i['left'];
-            let newImage: fabric.Group = this.recreateFabricObject(i['type'], i['width'], i['height'], lft, tp);
+            let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
           }

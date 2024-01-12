@@ -9,13 +9,13 @@ export class CustomGroup extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
-  constructor(event: DragEvent, width: number, height: number) {
+  constructor(width: number, height: number,left?: number, top?: number, event?: DragEvent) {
     super();
-
     this.connections = [];
     this.imgUrl = "assets/databaseResized.png";
-    this.type = "CustomGroup";
-    this.imageOptions = {
+    this.type = "customGroup";
+    if(event){
+      this.imageOptions = {
         width: width + 14,
         height: height + 14,
         left: event.offsetX-25,
@@ -24,7 +24,18 @@ export class CustomGroup extends Item {
         originX: 'center',
         originY: 'center',
       }
-
+    }
+    else{
+      this.imageOptions = {
+        width: width,
+        height: height,
+        left: left,
+        top: top,
+        centeredScaling: true,
+        originX: 'center',
+        originY: 'center',
+      }
+    }
 
     fabric.Image.fromURL(this.imgUrl, (img) => {
 

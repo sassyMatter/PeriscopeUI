@@ -5,7 +5,7 @@ import { Field } from '../formField';
 
 export class Func extends Item {
 
-    
+
   // override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
   //   const fabricObject = super.createFabricObject(width, height, image, position);
   //   // Add additional customization specific to Function class
@@ -13,7 +13,7 @@ export class Func extends Item {
   // }
 
   // override createObject(componentType: string, event: DragEvent){
-    
+
   // }
   override connections: any[];
   imgUrl!: string;
@@ -90,34 +90,42 @@ export class Func extends Item {
   override references: Set<string> = new Set();
 
 
-  constructor(event: DragEvent, width: number, height: number) {
+  constructor(width: number, height: number,left?: number, top?: number, event?: DragEvent) {
     super();
     this.connections = [];
     this.imgUrl = "assets/LamdaResize.png";
-    this.type = "func";
-    this.imageOptions = { 
-        width: width + 14,
-        height: height + 14,
-        left: event.offsetX-25,
-        top: event.offsetY-25,
-        centeredScaling: true,
-        originX: 'center', 
-        originY: 'center',
-      }
-    
-   
+    this.type = "function";
+    this.imageOptions = event ? {
+      width: width + 14,
+      height: height + 14,
+      left: event.offsetX - 25,
+      top: event.offsetY - 25,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    } : {
+      width: width,
+      height: height,
+      left: left,
+      top: top,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    };
+
+
     fabric.Image.fromURL(this.imgUrl, (img) => {
 
       // setting image options
         img.set(this.imageOptions);
-  
+
         console.log("image is : " , img);
         // Add the image to the custom group
         this.addWithUpdate(img);
-  
+
         // // Set the connections property
         // this.connections = connections;
-  
+
         // Render the custom group
         // this.canvas?.renderAll();
       });
@@ -212,7 +220,7 @@ export class Func extends Item {
       returnType: this.returnType,
       topic: this.topic,
       deserializationClass: this.deserializationClass
-    
+
     });
   }
 

@@ -96,12 +96,13 @@ override formFields: Field[] = [
 
 override references: Set<string> = new Set();
 
-constructor(event: DragEvent, width: number, height: number) {
+constructor(width: number, height: number, left?: number, top?: number, event?: DragEvent) {
   super();
   this.connections = [];
   this.imgUrl = "assets/restCall.png";
-  this.type = "rest";
-  this.imageOptions = {
+  this.type = "restInterface";
+  if(event){
+    this.imageOptions = {
       width: width + 14,
       height: height + 14,
       left: event.offsetX-25,
@@ -110,7 +111,18 @@ constructor(event: DragEvent, width: number, height: number) {
       originX: 'center',
       originY: 'center',
     }
-
+  }
+  else{
+    this.imageOptions = {
+      width: width,
+      height: height,
+      left: left,
+      top: top,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    }
+  }
 
   fabric.Image.fromURL(this.imgUrl, (img) => {
 

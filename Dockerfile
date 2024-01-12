@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 
 # Argument for environment (default to production)
-ARG NODE_ENV=development
+ARG NODE_ENV=production
 
 # Build the Angular app based on the environment argument
 RUN if [ "$NODE_ENV" = "production" ] ; then npm run build --prod ; else npm run build ; fi

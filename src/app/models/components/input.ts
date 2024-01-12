@@ -18,48 +18,60 @@ export class Input extends Item {
       "fieldlabel": "Input Source",
       "type" : formFieldType.SHORT_STRING,
       "value": "",
-    },   
+    },
     {
       "name" : "customTypes",
       "fieldlabel": "Define Type",
       "type" : formFieldType.EXTENDIBLE_LARGE_MAP,
       "value" : new Map<String, String>(),
-    }, 
+    },
   ];
-  
+
   // override references: string[] = ["apiReference1"];
 
   override references: Set<string> = new Set(["apiReference"]);
 
-  constructor(event: DragEvent, width: number, height: number) {
+  constructor(width: number, height: number, left?: number, top?: number, event?: DragEvent) {
     super();
-   
+
     this.connections = [];
     this.imgUrl = "assets/big-data.png";
     this.type = "input";
-    this.imageOptions = { 
+    if(event){
+      this.imageOptions = {
         width: width + 14,
         height: height + 14,
         left: event.offsetX-25,
         top: event.offsetY-25,
         centeredScaling: true,
-        originX: 'center', 
+        originX: 'center',
         originY: 'center',
       }
-    
-   
+    }
+    else{
+      this.imageOptions = {
+        width: width,
+        height: height,
+        left: left,
+        top: top,
+        centeredScaling: true,
+        originX: 'center',
+        originY: 'center',
+      }
+    }
+
     fabric.Image.fromURL(this.imgUrl, (img) => {
 
       // setting image options
         img.set(this.imageOptions);
-  
+
         console.log("image is : " , img);
         // Add the image to the custom group
         this.addWithUpdate(img);
-  
+
         // // Set the connections property
         // this.connections = connections;
-  
+
         // Render the custom group
         // this.canvas?.renderAll();
       });
@@ -67,7 +79,7 @@ export class Input extends Item {
       this.customTypes = new Map<string, string>();
 
 
-    
+
   }
 
 
@@ -78,8 +90,8 @@ export class Input extends Item {
         case "customTypes":
           field.value = this.customTypes;
           break;
-      
-      
+
+
         // Add cases for any other form fields you have in the class
       }
     }
@@ -95,7 +107,7 @@ export class Input extends Item {
              this.references.add(item);
           }
           break;
-        
+
         // Add cases for any other form fields you have in the class
       }
     }
@@ -104,11 +116,11 @@ export class Input extends Item {
   override toObject(propertiesToInclude?: string[] | undefined) {
     super.toObject();
     return fabric.util.object.extend(super.toObject(propertiesToInclude), {
-      customTypes: this.customTypes 
+      customTypes: this.customTypes
    });
 
 
-   
+
  }
 
 
