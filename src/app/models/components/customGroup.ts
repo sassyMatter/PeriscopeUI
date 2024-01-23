@@ -45,7 +45,7 @@ export class CustomGroup extends Item {
         console.log("image is : " , img);
         // Add the image to the custom group
         this.addWithUpdate(img);
-
+        img.setCoords();
         // // Set the connections property
         // this.connections = connections;
 

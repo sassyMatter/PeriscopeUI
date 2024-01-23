@@ -132,7 +132,7 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
       console.log("image is : " , img);
       // Add the image to the custom group
       this.addWithUpdate(img);
-
+      img.setCoords();
       // // Set the connections property
       // this.connections = connections;
 

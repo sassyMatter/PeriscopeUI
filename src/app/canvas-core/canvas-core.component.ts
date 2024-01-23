@@ -517,6 +517,7 @@ if (canvasContainer) {
         })
       ).subscribe();
     }
+    this.canvas?.clear();
   }
 
 
@@ -552,6 +553,7 @@ if (canvasContainer) {
             let tp=i['top'];
             let lft=i['left'];
             let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+            newImage.setCoords();
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
           }
@@ -625,7 +627,6 @@ if (canvasContainer) {
 
  createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
    console.log("Create line called for ", obj1, obj2);
-
     const centerPointSource = obj1.getCenterPoint();
     const centerPointTarget = obj2.getCenterPoint();
 
