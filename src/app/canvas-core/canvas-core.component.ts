@@ -517,7 +517,6 @@ if (canvasContainer) {
         })
       ).subscribe();
     }
-    this.canvas?.clear();
   }
  
  
