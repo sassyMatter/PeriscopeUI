@@ -4,20 +4,20 @@ import { Field } from '../formField';
 import { formFieldType } from '../enums/formFieldType';
 
 export class Topic extends Item {
-    
- 
+
+
 
   // override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
   //   const fabricObject = super.createFabricObject(width, height, image, position);
   //   // Add additional customization specific to Topic class
-    
-    
+
+
   //   return fabricObject;
   // }
 
 
   //  override createObject(componentType: string, event: DragEvent){
-    
+
   // }
   override connections: any[];
   imgUrl!: string;
@@ -41,34 +41,42 @@ export class Topic extends Item {
 
   override references: Set<string> = new Set(["kafkaProducer"]);
 
-  constructor(event: DragEvent, width: number, height: number) {
+  constructor(width: number, height: number, left?: number, top?: number, event?: DragEvent) {
     super();
     this.connections = [];
     this.imgUrl = "assets/QueueResized.png";
     this.type = "queue";
-    this.imageOptions = { 
-        width: width + 14,
-        height: height + 14,
-        left: event.offsetX-25,
-        top: event.offsetY-25,
-        centeredScaling: true,
-        originX: 'center', 
-        originY: 'center',
-      }
-    
-   
+    this.imageOptions = event ? {
+      width: width + 14,
+      height: height + 14,
+      left: event.offsetX - 25,
+      top: event.offsetY - 25,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    } : {
+      width: width,
+      height: height,
+      left: left,
+      top: top,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    };
+
+
     fabric.Image.fromURL(this.imgUrl, (img) => {
 
       // setting image options
         img.set(this.imageOptions);
-  
+
         console.log("image is : " , img);
         // Add the image to the custom group
         this.addWithUpdate(img);
-  
+        img.setCoords();
         // // Set the connections property
         // this.connections = connections;
-  
+
         // Render the custom group
         // this.canvas?.renderAll();
       });
@@ -77,7 +85,7 @@ export class Topic extends Item {
       // initializing custom topics
       this.topic = '';
 
-    
+
   }
   override loadDataToFormFields(): void {
     for (const field of this.formFields) {
@@ -85,7 +93,7 @@ export class Topic extends Item {
         case "topic":
           field.value = this.topic;
           break;
-       
+
         // Add cases for any other form fields you have in the class
       }
     }
@@ -100,7 +108,7 @@ export class Topic extends Item {
             // this.references.push(this.topic);
             this.references.add(this.topic);
           break;
-       
+
         // Add cases for any other form fields you have in the class
      }
     }

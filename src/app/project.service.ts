@@ -13,6 +13,7 @@ export class ProjectService {
   baseURL1=`${environment.baseURL}/user-space/create-update-project`;
   baseURL2=`${environment.baseURL}/user-space/create-new-project`;
 
+
   constructor(private httpclient:HttpClient) { }
     /// get all projects request
     getAllProjects():Observable<Project[]>{
@@ -29,7 +30,7 @@ export class ProjectService {
     saveprojects(project ?: Project):Observable<Object>{
       return this.httpclient.post<Project>(`${this.baseURL2}`,project);
     }
-  
+
 }
 
 
