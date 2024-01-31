@@ -12,21 +12,25 @@ export class HelloWorldService {
 
 
   sendCanvasData(canvasData : string | undefined): Observable<any>{
-  
-    const url = `${environment.baseURL}/canvas/post-canvas-data`; 
+
+    const url = `${environment.baseURL}/canvas/post-canvas-data`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     return this.http.post(url, canvasData, options);
-  
+
+  }
+
+  getCanvasData(){
+    return this.http.get<string>(`${environment.baseURL}/canvas/get-canvas`)
   }
 
   saveAndRunSimulation(canvasData : string | undefined): Observable<any>{
-  
-    const url = `${environment.baseURL}/canvas/run-simulation`; 
+
+    const url = `${environment.baseURL}/canvas/run-simulation`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     return this.http.post(url, canvasData, options);
-  
+
   }
 
   constructor(private http : HttpClient) { }
@@ -35,6 +39,6 @@ export class HelloWorldService {
     return this.http.get<Message>(`${environment.baseURL}/hello`);
   }
 
-  
+
 }
 

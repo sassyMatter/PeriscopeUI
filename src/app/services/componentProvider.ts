@@ -7,28 +7,44 @@ import { Topic } from "../models/components/topic";
 import { CustomGroup } from "../models/components/customGroup";
 import { Input } from "../models/components/input";
 
-
 @Injectable({
   providedIn: 'root'
 }
 )
 export class ComponentProvider {
 
-    createComponent(type: string, event: DragEvent, width: number, height : number): Item {
-      console.log("calling create component");
+    createComponent(type: string, width: number, height : number, left?: number, top?: number, event?: DragEvent): Item {
       switch (type) {
         case 'database':
-          return new Database(event, width, height);
+          if(!event){
+            return new Database(width, height, left, top);                              //creating component from backend
+          }
+          return new Database(width, height, undefined, undefined, event);    //creating component on frontend
         case 'function':
-          return new Func(event, width, height);
+          if(!event){
+            return new Func(width, height, left, top);
+          }
+          return new Func(width, height, undefined, undefined, event);
         case 'restInterface':
-          return new RestInterface(event, width, height);
-        case 'topic':
-          return new Topic(event, width, height);
+          if(!event){
+            return new RestInterface(width, height, left, top);
+          }
+          return new RestInterface(width, height, undefined, undefined, event);
+        case 'queue':
+          if(!event){
+            return new Topic(width, height, left, top);
+          }
+          return new Topic(width, height, undefined, undefined, event);
         case 'customGroup':
-          return new CustomGroup(event, width, height);
+          if(!event){
+            return new CustomGroup(width, height, left, top);
+          }
+          return new CustomGroup(width, height, undefined, undefined, event);
         case 'input':
-          return new Input(event, width, height);
+          if(!event){
+            return new Input(width, height, left, top);
+          }
+          return new Input(width, height, undefined, undefined, event);
         default:
           throw new Error('Invalid component type.');
       }

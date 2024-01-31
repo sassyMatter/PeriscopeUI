@@ -5,14 +5,14 @@ import { Field } from '../formField';
 
 export class RestInterface extends Item {
 
-    
+
 //   override createFabricObject(width?: number, height?: number, image?: string, position?: fabric.IPoint): fabric.Object {
 //     const fabricObject = super.createFabricObject(width, height, image, position);
 //     // Add additional customization specific to RestInterface class
 //     return fabricObject;
 //   }
 //  override createObject(componentType: string, event: DragEvent){
-    
+
 //   }
 override connections: any[];
 imgUrl!: string;
@@ -89,29 +89,41 @@ override formFields: Field[] = [
     "type" : formFieldType.SHORT_STRING,
     "value" : ""
   }
-  
+
 ];
 
 // override references: string[] = [];
 
 override references: Set<string> = new Set();
 
-constructor(event: DragEvent, width: number, height: number) {
+constructor(width: number, height: number, left?: number, top?: number, event?: DragEvent) {
   super();
   this.connections = [];
   this.imgUrl = "assets/restCall.png";
-  this.type = "rest";
-  this.imageOptions = { 
+  this.type = "restInterface";
+  if(event){
+    this.imageOptions = {
       width: width + 14,
       height: height + 14,
       left: event.offsetX-25,
       top: event.offsetY-25,
       centeredScaling: true,
-      originX: 'center', 
+      originX: 'center',
       originY: 'center',
     }
-  
- 
+  }
+  else{
+    this.imageOptions = {
+      width: width,
+      height: height,
+      left: left,
+      top: top,
+      centeredScaling: true,
+      originX: 'center',
+      originY: 'center',
+    }
+  }
+
   fabric.Image.fromURL(this.imgUrl, (img) => {
 
     // setting image options
@@ -120,7 +132,7 @@ constructor(event: DragEvent, width: number, height: number) {
       console.log("image is : " , img);
       // Add the image to the custom group
       this.addWithUpdate(img);
-
+      img.setCoords();
       // // Set the connections property
       // this.connections = connections;
 
@@ -130,7 +142,7 @@ constructor(event: DragEvent, width: number, height: number) {
 
 
     // initialzing custom properties
-    
+
       this.url = '',
       // type is already in parent class;
       // this.type = '',
@@ -141,7 +153,7 @@ constructor(event: DragEvent, width: number, height: number) {
       this.httpMethod = '',
       this.methodName = ''
 
-  
+
   }
 
   override loadDataToFormFields(): void {

@@ -1,0 +1,14 @@
+.container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns:100vw;
+    grid-template-rows: 0.2fr max-content;
+    grid-template-areas: "app_nav"
+    "canvas";
+}
+.app_nav{
+    grid-area: app_nav;
+}
+.canvas{
+    grid-area:canvas;
+}

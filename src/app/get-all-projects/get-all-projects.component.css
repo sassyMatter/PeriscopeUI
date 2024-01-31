@@ -1,53 +1,90 @@
-.sidebar{
-  width:13vw;
-}
-  
-button{
-  font-size: 20px;
-  margin:auto;
-  border-radius: 15%;
-}
 
-button:active { background-color:black;
-}
-
-.grey {
-    background-color: grey;
-}
-
-.red {
-    background-color: black;
-}
-
-
-.projectBtns{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-}
-
-.side_navbar{
-    height: 100vh;  background-color: #242b2b;
-    width: 12vw;
-    display: inline-block;
+    button{
+        font-size: 18px;
+        margin:auto;
+        border-radius: 4%;
+        cursor: pointer;
+    }
+    button:active { background-color:black;
+    }
+    
+    .grey {
+        background-color: grey;
+    }
+    
+    .red {
+        background-color: black;
+    }
     
     
-}
-.side_navbar ul{
-    margin: 0;
-    margin-right:3px;
+    .side_navbar{
+        background-color: #242b2b;
+        width: 10vw;
+        height: 100vh;
+        display: inline-block;
+        
+        
+    }
+    .side_navbar ul{
+        margin: 0;
+        margin-right:3px;
+        
+    }
+    button{
+        margin:1rem 0;
+    }
+    .container{
+        display:inline-flex;
+        
+        width:40%; 
     
-}
-button{
-    margin:1rem 0;
-}
-.container{
-    display:inline-flex;
-   
-    width:40%; 
-    background-color: white;
-    margin-left: 20vw;
-    margin-top:10vh; 
+        margin-left: 20vw;
+        margin-top:10vh; 
+        
+    } 
+    @media only screen and (min-width:950px) and (max-width: 1400px){
+        .side_navbar{
+             background-color: #242b2b;
+             height: 95vh;
+            width: 14vw;
+            display: inline-block;
+            
+            
+        }
+       
+        
+        button{
+            height: 45px;
+            width: 90px;
+            font-size: 18px;
+            margin-top:8px;
+        }
+        .container{
+            width:50%;
+            margin-top:5px;
+        }
+        
+        
+        
+    } 
+    @media only screen and (max-width: 950px){
+        .side_navbar{
+             background-color: #242b2b;
+             height: 100vh;
+            width: 140px;
+            display: inline-block;
+            
+            
+        }
+        button{
+            height: 40px;
+            width: 80px;
+            font-size: 13px;
+            margin-top:8px;
+        }
+        .container{
+            width:50%;
+            margin-top:5px;
+        }    
+    } 
     
-} 

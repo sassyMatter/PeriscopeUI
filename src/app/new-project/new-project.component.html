@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<div class="container">
+  <app-navbar class="app_nav"></app-navbar>
   <div class="form_div">
     <form [formGroup]="projectform" (ngSubmit)="saveproject()">
 
@@ -26,5 +27,6 @@
         <button mat-button type="submit" class="black">Save</button>
         <button mat-button type="reset" class="close" (click)="closeform()">Close</button>
     </form>
-</div>
+  </div>
     
+</div>

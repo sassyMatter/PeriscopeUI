@@ -32,3 +32,31 @@
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
 }
+.container{
+    display:grid;
+    height:100vh;
+    grid-template-columns:1fr 1.5fr 1fr;
+    grid-template-rows:0.1fr 0.4fr 0.6fr 0.4fr ;
+	grid-template-areas:"nav nav nav"
+	
+	"center center center"
+	;
+} 
+.nav{
+	grid-area: nav;
+}
+.centerContainer{
+	grid-area: center;
+}
+@media only screen and (max-width: 900px) {
+	.twoBtns{
+		padding: 0.5rem;
+	}
+	
+	.btns{
+		font-size: 0.9rem;	
+		padding: 0.8rem;
+	}
+	
+	
+}
