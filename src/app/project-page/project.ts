@@ -9,7 +9,8 @@ export class Project{
     sourceDir ?: string;
     sourceDirName ?:string;
     canvasData ?: string;
-
+    
+    
     constructor(configurations:Configurations){
         this.configurations=configurations;
     }

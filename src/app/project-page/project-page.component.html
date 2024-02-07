@@ -1,26 +1,59 @@
-<div class="form_div">
-    <form [formGroup]="projectform" (ngSubmit)="updateproject()">
+<div class="form_div" *ngFor="let item of projectdata">
+    <form [formGroup]="projectform" (ngSubmit)="f.form.valid &&updateproject()"  #f="ngForm" >
  
         <label>Name</label>
-        <input type="text" name="text" id="text" [(ngModel)]="project.projectName" placeholder="Queries handler" [ngModelOptions]="{standalone: true}">
- 
-  
-  
+        <input type="text" name="text" id="text"  required #text="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}">
+
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="item.projectName==null&& f.submitted"
+          >
+          Project name is required!
+        </div>
   
         <label>Memory</label>
-        <input type="text" name="memory" id="memory" placeholder="10GB" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+        <input type="text" name="memory" id="memory" required #memory="ngModel" placeholder="Enter the memory" [(ngModel)]="configurationdata.memory"
+         [ngModelOptions]="{standalone: true}">
   
- 
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="configurationdata.memory==null && f.submitted"
+          >
+  
+          Memory is required!
+        </div>
      
         <label>CPU</label>
-        <input type="text" name="cpu" id="cpu" placeholder="5" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
-    
- 
+        <input type="text" name="cpu" id="cpus" required #cpus="ngModel" placeholder="Enter the number of cpus" [(ngModel)]="configurationdata.cpus" [ngModelOptions]="{standalone: true}">
+        
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="configurationdata.cpus==null && f.submitted"
+          >
+  
+          Number of cpus are required!
+        </div>
+
+
         <label>Storage</label>
-        <input type="text" name="Storage" id="storage" placeholder="20GB" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
-        <button mat-button type="submit" class="btns black">Update</button>
-        <button mat-button type="submit" class="btns close" (click)="closeform()">Close</button>
-        <button mat-button type="submit" class="btns black" (click)="closeform()">Delete</button>
+        <input type="text" name="Storage" id="storage" required  #Storage="ngModel" placeholder="Enter the storage" [(ngModel)]="configurationdata.storage" [ngModelOptions]="{standalone: true}">
+    
+        <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="configurationdata.storage==null && f.submitted"
+        >
+
+        Storage is required!
+        </div>
+        
+        
+        <button mat-button type="submit" class="btns black" (click)="closeform()">Update</button>
+        <button mat-button type="submit" class="btns close" (click)="opencanvas()">Open</button>
+        <button mat-button class="btns black" (click)="deleteproject()">Delete</button>
     </form>
 </div>
     

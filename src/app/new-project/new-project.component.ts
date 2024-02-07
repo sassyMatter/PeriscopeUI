@@ -25,6 +25,7 @@ export class NewProjectComponent implements OnInit {
   username?: string;
   showNav: boolean = true;
   projects?: Project[]  ;
+  errorMessage=' ';
   
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
 
@@ -42,7 +43,7 @@ export class NewProjectComponent implements OnInit {
     }
     
    
-    this.getAllProject();
+    // this.getAllProject();
    
     
     
@@ -75,19 +76,26 @@ export class NewProjectComponent implements OnInit {
   }
   // 
   
-  getAllProject(){
-    this.projectservice.getAllProjects().subscribe(data=>{
-      this.projects=data;
-    })
-  }
-  
+  // getAllProject(){
+  //   this.projectservice.getAllProjects().subscribe(data=>{
+  //     this.projects=data;
+  //   })
+  // }
+ 
   saveproject(){
     console.log(this.project);
+    
+    if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
+    {
+      this.projectservice.saveupdateprojects(this.project).subscribe();
+      
+    }
     // this.router.navigate(['/projects']).then(() => {
     //   window.location.reload();
     //   });
-    this.projectservice.saveprojects(this.project).subscribe();
-    // this.projectservice.saveprojects(this.project).subscribe();
+    
+    
+     
   }
   
 }

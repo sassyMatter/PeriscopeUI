@@ -566,6 +566,7 @@ if (canvasContainer) {
               }
             }
           }
+          this.canvas?.setZoom(1);
           this.canvas?.renderAll();
  
         }),

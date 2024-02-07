@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
 import { FormBuilder} from '@angular/forms';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Project } from './project';
 import { ProjectService } from '../project.service';
 import { Configurations } from './configurations';
+
 @Component({
   selector: 'app-project-page',
   templateUrl: './project-page.component.html',
@@ -14,25 +15,27 @@ import { Configurations } from './configurations';
 export class ProjectPageComponent implements OnInit {
   configurations : Configurations =new Configurations;
   project: Project= new Project(this.configurations);
-  
   private roles: string[] = [];
   isDropDownOpened: boolean = false;
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
-  projectName?: string;
+  check :boolean=false;
+  projectName?:string;
   memory?: string;
   storage?: string;
   cpus?: string;
+  configurationsdata?:Configurations;
 
+  @Input() projectdata?:Project[];
   
+  @Input () configurationdata= new Configurations;
 
 
 
   showNav: boolean = true;
-  projects?: Project[]  ;
+  projects?: Project ;
   
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
 
@@ -40,6 +43,15 @@ export class ProjectPageComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     console.log("logged In :: " , this.isLoggedIn);
+   
+    //  this.project.projectName=this.projectdata[0].projectName;
+    for(let item of this.projectdata as Project[]){
+        this.projects=item;
+    }
+    
+   console.log(this.projects?.configurations);
+   this.configurationsdata=new Configurations;
+   this.configurationsdata=this.projects?.configurations;
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -48,9 +60,10 @@ export class ProjectPageComponent implements OnInit {
       this.showAdminBoard = this.roles.includes('ROLE_USER');
       this.username = user.username;
     }
-    
+    // this.project.projectName=this.projectdata.projectName;
+    // this.project.configurations=this.projectdata.configurations;
    
-    this.getAllProject();
+    // this.getAllProject();
    
     
     
@@ -58,16 +71,21 @@ export class ProjectPageComponent implements OnInit {
   ngOnChanges(){
     this.isLoggedIn = this.authService.isLoggedIn();
   }
+  ngModel(){
+
+  }
 
   
   projectform=this.builder.group({
-    
+   
   })
   
   closeform(){
-    this.router.navigate(['/projects']).then(() => {
-      window.location.reload();
-      });
+    console.log(this.projectdata);
+    // this.router.navigate(['/projects']).then(() => {
+    //   window.location.reload();
+    //   });
+      
   }
   
   logout(): void {
@@ -83,24 +101,46 @@ export class ProjectPageComponent implements OnInit {
   }
   // 
   
-  getAllProject(){
-    this.projectservice.getAllProjects().subscribe(data=>{
-      this.projects=data;
-    })
-  }
+ 
   
   updateproject(){
-    console.log(this.project);
-    // this.router.navigate(['/projects']).then(() => {
-    //   window.location.reload();
-    //   });
-    this.projectservice.updateprojects(this.project).subscribe();
-    // this.projectservice.saveprojects(this.project).subscribe();
-  }
-  
-  saveproject(){
     
+    // console.log(this.projectdata);
+    if(this.check==false){
+    // console.log(this.project);
+    console.log(this.configurationdata);
+    this.configurations=this.configurationdata;
+    console.log(this.configurations);
+    this.project.configurations=this.configurationsdata;
+    for(let item of this.projectdata as Project[]){
+      this.project.projectName=item.projectName;
+    }
+    console.log(this.project);
+    if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
+    {
+      this.projectservice.saveupdateprojects(this.project).subscribe();
+    }}
+    this.check=false;
+
+    
+   
   }
+  opencanvas(){
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+      });
+  }
+   deleteproject(){
+        this.check=true;
+        this.projectservice.deleteprojects(this.projects).subscribe();
+      // this.router.navigate(['/projects']).then(() => {
+      //   window.location.reload();
+      //   });
+      
+  }
+ 
+  
+  
   
   
 }

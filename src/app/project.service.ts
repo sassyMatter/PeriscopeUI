@@ -8,28 +8,31 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProjectService {
-
+  public projects: Project[] =[] ;
   baseURL =`${environment.baseURL}/user-space/get-all-projects`;
   baseURL1=`${environment.baseURL}/user-space/create-update-project`;
-  baseURL2=`${environment.baseURL}/user-space/create-new-project`;
+  baseURL2=`${environment.baseURL}/user-space/delete-project`;
 
 
   constructor(private httpclient:HttpClient) { }
     /// get all projects request
-    getAllProjects():Observable<Project[]>{
-      return this.httpclient.get<Project[]>(`${this.baseURL}`);
+    getAllProjects(){
+
+      return this.httpclient.get<string>(`${this.baseURL}`);
 
 
     }
-    //update project request
-    updateprojects(project? : Project):Observable<Project>{
+    //save or update project request
+    saveupdateprojects(project? : Project):Observable<Project>{
       return this.httpclient.post<Project>(`${this.baseURL1}`,project);
 
     }
-    // save project request
-    saveprojects(project ?: Project):Observable<Object>{
+    deleteprojects(project?:Project):Observable<Project>{
+      console.log(project);
       return this.httpclient.post<Project>(`${this.baseURL2}`,project);
     }
+    // save project request
+   
 
 }
 

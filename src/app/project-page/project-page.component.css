@@ -1,5 +1,5 @@
   .form_div {
-    margin:4% auto;
+    margin:0 auto;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
@@ -23,16 +23,17 @@
     width:200px;
   }
   button{
-    border-radius: 40%;
+    border-radius: 10%;
     float:right;
     margin: 6px 2%;
   }
   .black{
-    background-color: black;
+
+    background-color:#1E90FF;
     color:white;
   }
   .close{
-    background-color:red;
+    background-color:#1E90FF;
     color:white;
   }
   @media only screen and (min-width:950px) and (max-width: 1300px) {
