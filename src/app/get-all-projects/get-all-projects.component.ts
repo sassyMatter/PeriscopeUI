@@ -1,9 +1,12 @@
 import { Component,Input } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
-
-
-
+import { HttpClient } from '@angular/common/http';
+import { Project } from '../project-page/project';
+import { ProjectService } from '../project.service';
+import { catchError, of, tap } from 'rxjs';
+import { Configurations } from '../project-page/configurations';
+import { CdkPortal } from '@angular/cdk/portal';
 @Component({
   selector: 'app-get-all-projects',
   templateUrl: './get-all-projects.component.html',
@@ -20,9 +23,14 @@ export class GetAllProjectsComponent {
   isDropDownOpened: boolean = false;
   side_Navbar=true;
   showNav: boolean = true;
-  
+  public projects: Project[] =[] ;
+  project ?:Project;
+  projectsend :Project[]=[];
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  configurationsend: Configurations= new Configurations;
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private http:HttpClient,private projectservice:ProjectService) {
+    this.getAllProject();
+   }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -47,31 +55,22 @@ export class GetAllProjectsComponent {
     this.authService.logout();
   }
 
-  openproject1(){
+  openproject(item:Project){
     this.should_open=true;
-    this.toggle1=false;
-    this.toggle2=true;this.toggle4=true;
-    this.toggle3=true;
-  }
-  openproject2(){
-    this.should_open=true;
-    this.toggle2=false;
-    this.toggle1=true;this.toggle4=true;
-    this.toggle3=true;
-  }
-  openproject3(){
-    this.should_open=true;
-    this.toggle3=false;
-    this.toggle2=true;this.toggle4=true;
-    this.toggle1=true;
-  }
-  openproject4(){
-    this.should_open=true;
-    this.toggle4=false;
-    this.toggle2=true;this.toggle1=true;
-    this.toggle3=true;
+    
+   
+    this.project=item;
+    this.projectsend=[];
+    this.projectsend.push(item);
+  
+    for(let item of this.projectsend)
+    {
+      this.configurationsend=(item.configurations as Configurations);
+    }
+ 
 
   }
+  
   toggleDropDown(): void {
     this.isDropDownOpened = !this.isDropDownOpened;
   }
@@ -83,4 +82,39 @@ export class GetAllProjectsComponent {
   opensideNavbar(){
     this.side_Navbar=!this.side_Navbar;
   }
+  addition(ob:Project){
+   console.log(this.username+"-"+ob.projectName);
+    
+    this.projects.push(ob);
+
+    
+    // console.log(ob.sourceDir);
+  }
+  getAllProject(){
+   
+    this.projectservice.getAllProjects().pipe (
+      tap((response: any) => {
+       
+        console.log(response.data);
+      
+       for(let i of response.data){
+        
+        this.addition(i);
+        
+       
+       }
+       for(let i of this.projects){
+          console.log(i);
+       }
+        console.log(this.projects);
+       
+      }),
+      catchError((error) => {
+        // Handle any errors that occur during the request
+        console.error('Error occurred during get request', error);
+        return of(null); // Returning a non-error observable to prevent unhandled error
+      })
+    ).subscribe();
+
+}
 }
