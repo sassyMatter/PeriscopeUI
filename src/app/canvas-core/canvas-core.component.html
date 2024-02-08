@@ -153,20 +153,18 @@
 </div>
 
 <div id="canvas-container">
-   <canvas id="canvas"></canvas>
+   <canvas id="canvas" ></canvas>
    <app-dialog
    [target]="targetObjectForDialog"
    [isOpen]="isDialogOpen"
    [canvas]="canvas"
    (onClose)="closeDialog()">
-
   </app-dialog>
 </div>
 
 <div class="button-container">
   <div>
      <button type="button" (click)="sendCanvasDataToBackend()">Save</button>
-     <button type="button" (click)="runSimulation()">Go Live!</button>
   </div>
 </div>
 </div>

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Project } from './project';
 import { ProjectService } from '../project.service';
 import { Configurations } from './configurations';
+import { CanvasCoreComponent } from '../canvas-core/canvas-core.component';
+
 
 @Component({
   selector: 'app-project-page',
@@ -33,11 +35,10 @@ export class ProjectPageComponent implements OnInit {
   @Input () configurationdata= new Configurations;
 
 
-
   showNav: boolean = true;
   projects?: Project ;
   
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice : ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -129,6 +130,9 @@ export class ProjectPageComponent implements OnInit {
     this.router.navigate(['/home']).then(() => {
       window.location.reload();
       });
+      console.log("test");
+      
+      
   }
    deleteproject(){
         this.check=true;

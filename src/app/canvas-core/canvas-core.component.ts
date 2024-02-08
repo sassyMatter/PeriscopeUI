@@ -51,6 +51,8 @@ export class CanvasCoreComponent implements OnInit {
     this.showServerData();
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
+
+    this.runSimulation();
  
     // this.changeDetectorRef.detectChanges();
  
@@ -566,7 +568,6 @@ if (canvasContainer) {
               }
             }
           }
-          this.canvas?.setZoom(1);
           this.canvas?.renderAll();
  
         }),

@@ -6,7 +6,7 @@ import { Project } from '../project-page/project';
 import { ProjectService } from '../project.service';
 import { catchError, of, tap } from 'rxjs';
 import { Configurations } from '../project-page/configurations';
-import { CdkPortal } from '@angular/cdk/portal';
+
 @Component({
   selector: 'app-get-all-projects',
   templateUrl: './get-all-projects.component.html',

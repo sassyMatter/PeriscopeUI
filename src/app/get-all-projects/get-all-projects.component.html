@@ -1,5 +1,7 @@
  <app-navbar></app-navbar>
+<!-- <div class="test" *ngIf="projects.length == 0">
 
+</div> -->
   <div class="side_navbar" *ngIf="side_Navbar && projects.length!=0" >
     <div *ngFor="let item of projects">
       <ul><button  (click)="openproject(item)" >{{item.projectName}}</button></ul>
