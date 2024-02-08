@@ -56,12 +56,15 @@ export class GetAllProjectsComponent {
   }
 
   openproject(item:Project){
+    
     this.should_open=true;
     
-   
+    this.projectservice.setcurrentproject(item as Project);
+    console.log(this.projectservice.currentproject);
     this.project=item;
     this.projectsend=[];
     this.projectsend.push(item);
+    console.log(this.projectservice.getcurrentproject())
   
     for(let item of this.projectsend)
     {
@@ -77,18 +80,12 @@ export class GetAllProjectsComponent {
 
   clickedOutside(): void {
     this.isDropDownOpened = false;
-    
   }
   opensideNavbar(){
     this.side_Navbar=!this.side_Navbar;
   }
-  addition(ob:Project){
-   console.log(this.username+"-"+ob.projectName);
-    
-    this.projects.push(ob);
-
-    
-    // console.log(ob.sourceDir);
+  addition(ob:Project){  
+    this.projects.push(ob); 
   }
   getAllProject(){
    
@@ -103,10 +100,7 @@ export class GetAllProjectsComponent {
         
        
        }
-       for(let i of this.projects){
-          console.log(i);
-       }
-        console.log(this.projects);
+      
        
       }),
       catchError((error) => {

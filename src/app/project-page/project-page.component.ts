@@ -31,7 +31,7 @@ export class ProjectPageComponent implements OnInit {
   @Input() projectdata?:Project[];
   
   @Input () configurationdata= new Configurations;
-
+  
 
 
   showNav: boolean = true;
@@ -126,6 +126,7 @@ export class ProjectPageComponent implements OnInit {
    
   }
   opencanvas(){
+    
     this.router.navigate(['/home']).then(() => {
       window.location.reload();
       });

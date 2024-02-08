@@ -5,7 +5,7 @@ export class Project{
     projectName ?: string;
     imageURL ?: string; 
     configurations ?:Configurations;
-    running =true;
+    running ?:boolean;
     sourceDir ?: string;
     sourceDirName ?:string;
     canvasData ?: string;
