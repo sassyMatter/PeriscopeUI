@@ -43,7 +43,7 @@ export class NewProjectComponent implements OnInit {
     }
     
    
-    // this.getAllProject();
+   
    
     
     
@@ -58,9 +58,7 @@ export class NewProjectComponent implements OnInit {
   })
   
   closeform(){
-    this.router.navigate(['/projects']).then(() => {
-      window.location.reload();
-      });
+    this.router.navigate(['/projects']);
   }
   
   logout(): void {
@@ -76,14 +74,10 @@ export class NewProjectComponent implements OnInit {
   }
   // 
   
-  // getAllProject(){
-  //   this.projectservice.getAllProjects().subscribe(data=>{
-  //     this.projects=data;
-  //   })
-  // }
+ 
  
   saveproject(){
-    console.log(this.project);
+ 
     
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
