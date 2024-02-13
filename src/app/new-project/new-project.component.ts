@@ -81,7 +81,7 @@ export class NewProjectComponent implements OnInit {
     
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
-      this.projectservice.saveupdateprojects(this.project).subscribe();
+      this.projectservice.saveprojects(this.project).subscribe();
      
     }
     
