@@ -25,7 +25,7 @@ export class NewProjectComponent implements OnInit {
   username?: string;
   showNav: boolean = true;
   projects?: Project[]  ;
-  errorMessage=' ';
+  
   
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
 
@@ -82,8 +82,9 @@ export class NewProjectComponent implements OnInit {
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
       this.projectservice.saveupdateprojects(this.project).subscribe();
-      
+     
     }
+    
     // this.router.navigate(['/projects']).then(() => {
     //   window.location.reload();
     //   });

@@ -28,7 +28,7 @@ export class HomeComponent {
     this.project=this.projectservice.currentproject as Project;
     console.log(this.projectservice.currentproject.projectName);
     console.log("dbd",JSON.stringify(this.project));
-    
+
     console.log(this.project.sourceDir);
     console.log(this.projectservice.getcurrentproject());
     if (this.isLoggedIn) {

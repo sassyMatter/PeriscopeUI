@@ -9,7 +9,7 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
-import { Project } from '../project-page/project';
+
  
  
  
@@ -54,9 +54,12 @@ export class CanvasCoreComponent implements OnInit {
  
   ngOnInit(): void {
     this.showServerData();
+
     if(this.projectservice.currentproject.canvasData!=null){
+      console.log("running simulation");
       this.runSimulation();
     }
+    
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
    
@@ -553,6 +556,7 @@ if (canvasContainer) {
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
+        console.log("data coming");
         let hashMap = new Map<string, fabric.Group>();
           for(let i of canvasData['objects']) {
             let tp=i['top'];
@@ -572,7 +576,6 @@ if (canvasContainer) {
               }
             }
           }
-          this.canvas?.setZoom(1);
           this.canvas?.renderAll();
  
       }

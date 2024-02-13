@@ -42,8 +42,6 @@ export class HelloWorldService {
   }
 
   getCanvasData(){
-    console.log("running");
-    console.log(this.projectservice.currentproject);
     return this.http.get<string>(`${environment.baseURL}/canvas/get-canvas`);
   }
 

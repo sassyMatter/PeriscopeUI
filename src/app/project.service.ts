@@ -15,23 +15,28 @@ export class ProjectService {
   
   
   public projects: Project[] =[] ;
-  baseURL =`${environment.baseURL}/user-space/get-all-projects`;
-  baseURL1=`${environment.baseURL}/user-space/create-update-project`;
-  baseURL2=`${environment.baseURL}/user-space/delete-project`;
-
+  baseURLgetProjects =`${environment.baseURL}/user-space/get-all-projects`;
+  baseURLcreateProject=`${environment.baseURL}/user-space/create-project`;
+  baseURLdeleteProject=`${environment.baseURL}/user-space/delete-project`;
+  baseURLupdateProject=`${environment.baseURL}/user-space/update-project`;
 
   constructor(private httpclient:HttpClient) { }
     /// get all projects request
     getAllProjects(){
-      return this.httpclient.get<string>(`${this.baseURL}`);
+      return this.httpclient.get<string>(`${this.baseURLgetProjects}`);
     }
-    //save or update project request
+    //save project request
     saveupdateprojects(project? : Project):Observable<Project>{
-      return this.httpclient.post<Project>(`${this.baseURL1}`,project);
+      return this.httpclient.post<Project>(`${this.baseURLcreateProject}`,project);
 
     }
-    deleteprojects(project?:Project):Observable<Project>{
-      return this.httpclient.post<Project>(`${this.baseURL2}`,project);
+    // delete project 
+      deleteprojects(project?:Project):Observable<Project>{
+      return this.httpclient.post<Project>(`${this.baseURLdeleteProject}`,project);
+    }
+    // update project
+    updateproject(project?:Project):Observable<Project>{
+      return this.httpclient.post<Project>(`${this.baseURLupdateProject}`,project);
     }
     //setting value of project which is being opened
     setcurrentproject(project :Project){
@@ -41,6 +46,9 @@ export class ProjectService {
     getcurrentproject(){
       return this.currentproject as Project;  
     }
+    
+
+    
     
    
 

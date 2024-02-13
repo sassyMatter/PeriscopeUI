@@ -117,7 +117,7 @@ export class ProjectPageComponent implements OnInit {
    
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
-      this.projectservice.saveupdateprojects(this.project).subscribe();
+      this.projectservice.updateproject(this.project).subscribe();
     }}
     this.check=false;
 
@@ -131,9 +131,8 @@ export class ProjectPageComponent implements OnInit {
 
         this.check=true;
         this.projectservice.deleteprojects(this.projects).subscribe();
-      // this.router.navigate(['/projects']).then(() => {
-      //   window.location.reload();
-      //   });
+      this.router.navigate(['/projects']);
+
       
   }
  
