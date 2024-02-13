@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ProjectService } from '../project.service';
 
 
 @Component({
@@ -18,13 +19,13 @@ export class CreateProjectComponent {
   username?: string;
   
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private projectservice:ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     console.log("logged In :: " , this.isLoggedIn);
-
+    console.log("pro",this.projectservice.getcurrentproject());
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;

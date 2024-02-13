@@ -8,7 +8,7 @@ export class Project{
     running ?:boolean;
     sourceDir ?: string;
     sourceDirName ?:string;
-    canvasData ?: string;
+    canvasData ?: any;
     
     
     constructor(configurations:Configurations){

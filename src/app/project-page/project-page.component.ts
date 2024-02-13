@@ -49,7 +49,7 @@ export class ProjectPageComponent implements OnInit {
     for(let item of this.projectdata as Project[]){
         this.projects=item;
     }
-    
+    console.log(this.projects);
    console.log(this.projects?.configurations);
    this.configurationsdata=new Configurations;
    this.configurationsdata=this.projects?.configurations;
@@ -105,21 +105,20 @@ export class ProjectPageComponent implements OnInit {
  
   
   updateproject(){
-    
+  console.log( this.projectservice.getcurrentproject());
     // console.log(this.projectdata);
     if(this.check==false){
-    // console.log(this.project);
-    console.log(this.configurationdata);
+  
     this.configurations=this.configurationdata;
-    console.log(this.configurations);
+
     this.project.configurations=this.configurationsdata;
     for(let item of this.projectdata as Project[]){
-      this.project.projectName=item.projectName;
+      this.project=item as Project;
     }
-    console.log(this.project);
+   
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
-      this.projectservice.saveupdateprojects(this.project).subscribe();
+      this.projectservice.updateproject(this.project).subscribe();
     }}
     this.check=false;
 
@@ -127,20 +126,14 @@ export class ProjectPageComponent implements OnInit {
    
   }
   opencanvas(){
-    
-    this.router.navigate(['/home']).then(() => {
-      window.location.reload();
-      });
-      console.log("test");
-      
-      
+    this.router.navigate(['/home']);
   }
    deleteproject(){
+
         this.check=true;
         this.projectservice.deleteprojects(this.projects).subscribe();
-      // this.router.navigate(['/projects']).then(() => {
-      //   window.location.reload();
-      //   });
+      this.router.navigate(['/projects']);
+
       
   }
  

@@ -16,7 +16,7 @@ export class HomeComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
- 
+  project ?:Project;
 
 
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private projectservice:ProjectService) { }
@@ -25,7 +25,11 @@ export class HomeComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
     
     console.log("logged In :: " , this.isLoggedIn);
-    console.log(this.projectservice.currentproject );
+    this.project=this.projectservice.currentproject as Project;
+    console.log(this.projectservice.currentproject.projectName);
+    console.log("dbd",JSON.stringify(this.project));
+
+    console.log(this.project.sourceDir);
     console.log(this.projectservice.getcurrentproject());
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
