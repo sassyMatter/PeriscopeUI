@@ -51,7 +51,7 @@ export class CanvasCoreComponent implements OnInit {
     this.showServerData();
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
-
+    console.log("bruhhhhhhhhhhhhhhhhhhhhhh")
     this.runSimulation();
  
     // this.changeDetectorRef.detectChanges();
@@ -547,6 +547,7 @@ if (canvasContainer) {
   runSimulation(){
       this.helloworldService.getCanvasData().pipe(
         tap((response: any) => {
+          console.log("res", response);
           // Handle the response from the backend
           let components = response[0]['objects'];
           let hashMap = new Map<string, fabric.Group>();

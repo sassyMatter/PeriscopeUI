@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
-
+import { Project } from '../project-page/project';
+import { ProjectService } from '../project.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,14 +16,17 @@ export class HomeComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+ 
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private projectservice:ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
-
+    
     console.log("logged In :: " , this.isLoggedIn);
-
+    console.log(this.projectservice.currentproject );
+    console.log(this.projectservice.getcurrentproject());
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
