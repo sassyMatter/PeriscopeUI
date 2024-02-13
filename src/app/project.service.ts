@@ -26,16 +26,19 @@ export class ProjectService {
       return this.httpclient.get<string>(`${this.baseURLgetProjects}`);
     }
     //save project request
-    saveupdateprojects(project? : Project):Observable<Project>{
+    saveprojects(project? : Project):Observable<Project>{
       return this.httpclient.post<Project>(`${this.baseURLcreateProject}`,project);
 
     }
     // delete project 
-      deleteprojects(project?:Project):Observable<Project>{
+    deleteprojects(project?:Project):Observable<Project>{
       return this.httpclient.post<Project>(`${this.baseURLdeleteProject}`,project);
     }
     // update project
     updateproject(project?:Project):Observable<Project>{
+      console.log("going uopdate");
+      
+      console.log(project?.canvasData);
       return this.httpclient.post<Project>(`${this.baseURLupdateProject}`,project);
     }
     //setting value of project which is being opened

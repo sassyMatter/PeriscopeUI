@@ -32,13 +32,16 @@ export class HelloWorldService {
   sendCanvasData(canvasData : string | undefined): Observable<Project>{
     //for testing
     if(canvasData!=null)
-    this.projectservice.currentproject.canvasData=JSON.parse(canvasData);
+    {
+        this.projectservice.currentproject.canvasData=JSON.parse(canvasData);
+    }
+   
     
     // const url = `${environment.baseURL}/canvas/post-canvas-data`;
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     // const options = { headers: headers };
     // return this.http.post(url, this.projectservice.currentproject,options);
-    return this.projectservice.saveupdateprojects(this.projectservice.currentproject);
+    return this.projectservice.updateproject(this.projectservice.currentproject);
   }
 
   getCanvasData(){
