@@ -1,31 +1,60 @@
 <div class="container">
   <app-navbar class="app_nav"></app-navbar>
   <div class="form_div">
-    <form [formGroup]="projectform" (ngSubmit)="saveproject()">
+    <form [formGroup]="projectform" (ngSubmit)="f.form.valid && saveproject()"  #f="ngForm">
 
         <label>Name</label>
-        <input type="text" name="text" id="text" [(ngModel)]="project.projectName" placeholder="Enter the project name" [ngModelOptions]="{standalone: true}">
-
+        <input type="text" name="text" id="text"  required #text="ngModel" [(ngModel)]="project.projectName" placeholder="Enter the project name" [ngModelOptions]="{standalone: true}">
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="project.projectName==null&& f.submitted"
+          >
   
-  
+          Project name is required!
+        </div>
   
         <label>Memory</label>
-        <input type="text" name="memory" id="memory" placeholder="Enter the memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+        <input type="text" name="memory" id="memory" required #memory="ngModel" placeholder="Enter the memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
   
-
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="configurations.memory==null && f.submitted"
+          >
+  
+          Memory is required!
+        </div>
      
         <label>CPU</label>
-        <input type="text" name="cpu" id="cpus" placeholder="Enter the number of cpus" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
-    
+        <input type="text" name="cpu" id="cpus" required #cpus="ngModel" placeholder="Enter the number of cpus" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
+        
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="configurations.cpus==null && f.submitted"
+          >
+  
+          Number of cpus are required!
+        </div>
+
 
         <label>Storage</label>
-        <input type="text" name="Storage" id="storage" placeholder="Enter the storage" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
+        <input type="text" name="Storage" id="storage" required  #Storage="ngModel" placeholder="Enter the storage" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
     
+        <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="configurations.storage==null && f.submitted"
+        >
 
+        Storage is required!
+        </div>
 
         
         <button mat-button type="submit" class="black">Save</button>
         <button mat-button type="reset" class="close" (click)="closeform()">Close</button>
+       
     </form>
   </div>
     

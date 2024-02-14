@@ -1,6 +1,6 @@
 .form_div {
     background-color:  #f2f2f2;
-    padding: 20px;
+    /* padding: 20px; */
     width:35%;
     position: relative;
     justify-content: center;
@@ -36,11 +36,11 @@
     margin: 6px 2%;
   }
   .black{
-    background-color: black;
+    background-color:#1E90FF;
     color:white;
   }
   .close{
-    background-color:red;
+    background-color:#1E90FF;
     color:white;
   }
 
@@ -54,7 +54,7 @@
     .form_div {
       border-radius: 5px;
       background-color:  #f2f2f2;
-      padding: 20px;
+
       width:60%;
       display: flex;
       margin:15%  auto;

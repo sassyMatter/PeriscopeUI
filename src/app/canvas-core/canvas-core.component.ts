@@ -8,6 +8,8 @@ import { ComponentProvider } from '../services/componentProvider';
 import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
+import { ProjectService } from '../project.service';
+
  
  
  
@@ -25,7 +27,9 @@ export class CanvasCoreComponent implements OnInit {
  
   isDialogOpen = false;
   targetObjectForDialog : any;
- 
+
+  
+  
   openDialog() {
       console.log("setting isDialogOpen to true")
       this.isDialogOpen = true;
@@ -41,6 +45,7 @@ export class CanvasCoreComponent implements OnInit {
     private componentFactory : ComponentProvider,
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
+    private projectservice:ProjectService
    ){
  
     this.canvas = new fabric.Canvas('canvas');
@@ -49,9 +54,15 @@ export class CanvasCoreComponent implements OnInit {
  
   ngOnInit(): void {
     this.showServerData();
+
+    if(this.projectservice.currentproject.canvasData!=null){
+      console.log("running simulation");
+      this.runSimulation();
+    }
+    
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
- 
+   
     // this.changeDetectorRef.detectChanges();
  
 const container = document.getElementById('canvas-container') as HTMLDivElement;
@@ -480,11 +491,11 @@ if (canvasContainer) {
  
  
   showServerData(){
-    this.helloworldService.getServerResponse()
-    .subscribe((data: Message) => {
-      console.log(data.response);
-      this.response = data.response;
-    });
+    // this.helloworldService.getServerResponse()
+    // .subscribe((data: Message) => {
+    //   console.log(data.response);
+    //   this.response = data.response;
+    // });
   }
  
   sendCanvasDataToBackend(): void {
@@ -543,12 +554,11 @@ if (canvasContainer) {
  
  
   runSimulation(){
-      this.helloworldService.getCanvasData().pipe(
-        tap((response: any) => {
-          // Handle the response from the backend
-          let components = response[0]['objects'];
-          let hashMap = new Map<string, fabric.Group>();
-          for(let i of components) {
+      let canvasData = this.projectservice.currentproject.canvasData;
+      if(canvasData != null){
+        console.log("data coming");
+        let hashMap = new Map<string, fabric.Group>();
+          for(let i of canvasData['objects']) {
             let tp=i['top'];
             let lft=i['left'];
             let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
@@ -556,7 +566,7 @@ if (canvasContainer) {
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
           }
-          for(let i of components) {
+          for(let i of canvasData['objects']) {
             for(let j of i['connections']){
               let src = hashMap.get(i['id']);
               let dest = hashMap.get(j['id']);
@@ -568,13 +578,43 @@ if (canvasContainer) {
           }
           this.canvas?.renderAll();
  
-        }),
-        catchError((error) => {
-          // Handle any errors that occur during the request
-          console.error('Error occurred during get request', error);
-          return of(null); // Returning a non-error observable to prevent unhandled error
-        })
-      ).subscribe();
+      }
+      
+
+
+      // this.helloworldService.getCanvasData().pipe(
+      //   tap((response: any) => {
+      //     // Handle the response from the backend
+      //     let components = response[0]['objects'];
+      //     let hashMap = new Map<string, fabric.Group>();
+      //     for(let i of components) {
+      //       let tp=i['top'];
+      //       let lft=i['left'];
+      //       let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+      //       newImage.setCoords();
+      //       this.canvas?.add(newImage);
+      //       hashMap.set(i['id'],newImage);
+      //     }
+      //     for(let i of components) {
+      //       for(let j of i['connections']){
+      //         let src = hashMap.get(i['id']);
+      //         let dest = hashMap.get(j['id']);
+      //         if (src && dest) {
+      //           const newLine = this.createConnectLine(src, dest, true);
+      //           this.canvas?.add(newLine);
+      //         }
+      //       }
+      //     }
+      //     this.canvas?.setZoom(1);
+      //     this.canvas?.renderAll();
+ 
+      //   }),
+      //   catchError((error) => {
+      //     // Handle any errors that occur during the request
+      //     console.error('Error occurred during get request', error);
+      //     return of(null); // Returning a non-error observable to prevent unhandled error
+      //   })
+      // ).subscribe();
   }
  
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
