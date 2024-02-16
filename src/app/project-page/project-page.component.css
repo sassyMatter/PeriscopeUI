@@ -36,7 +36,7 @@
     background-color:#1E90FF;
     color:white;
   }
-  @media only screen and (min-width:950px) and (max-width: 1300px) {
+  /* @media only screen and (min-width:950px) and (max-width: 1300px) {
     .form_div {
     
       margin: 0;
@@ -96,5 +96,4 @@
       width:20px;
       border-radius: 40%;
       font-size: small;
-    }
-  } 
+    } */

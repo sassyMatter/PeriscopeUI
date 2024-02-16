@@ -60,11 +60,9 @@ export class GetAllProjectsComponent {
     this.should_open=true;
     
     this.projectservice.setcurrentproject(item as Project);
-    console.log(this.projectservice.currentproject);
     this.project=item;
     this.projectsend=[];
     this.projectsend.push(item);
-    console.log(this.projectservice.getcurrentproject())
   
     for(let item of this.projectsend)
     {

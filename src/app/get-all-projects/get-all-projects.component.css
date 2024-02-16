@@ -1,90 +1,74 @@
+.sidebar {
+  width: max-content;
+    background-color: #242b2b;
+    overflow-y: auto;
+    height: 100vh;
+    display: inline-block;
+  }
 
-    button{
-        font-size: 18px;
-        margin:auto;
-        border-radius: 4%;
-        cursor: pointer;
+  .side_navbar button{
+    display: block;
+    color: black;
+    padding: 1rem;
+    text-decoration: none;
+    width: -webkit-fill-available;
+    margin-right: 2vw;
+    background: white;
+    border-radius: 0.25rem;
+    font-size: medium;
+    border: none;
+    outline: none;
+    box-shadow: 0 9px #999;
+  }
+
+  .side_navbar button:hover {
+    cursor: pointer;
+    transform: scale(0.98); 
+    background-color: #555 !important;
+    color: white !important;
+  }
+  
+  .side_navbar button:active, .side_navbar button:focus, .side_navbar button:visited{
+    background-color: #555 !important;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+    color: white !important;
+    transition: 0.2s all;
+  }
+
+  div.configForm {
+    display: inline-flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10vw;
+    margin-top: 25vh;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      border-top: groove;
+      width: 100%;
+      height: auto;
+      position: relative;
     }
-    button:active { background-color:black;
+    .side_navbar button {
+      float: left;
+      width: fit-content;
+      margin-bottom: 1rem;
+      font-size: smaller;
     }
-    
-    .grey {
-        background-color: grey;
+    div.configForm {
+      display: grid;
+      position: absolute;
+      margin-left: 5vw;
+      margin-top: 10vh;
     }
-    
-    .red {
-        background-color: black;
+  }
+  
+  @media screen and (max-width: 400px) {
+    .side_navbar button {
+      text-align: center;
+      float: none;
     }
-    
-    
-    .side_navbar{
-        background-color: #242b2b;
-        width: 10vw;
-        height: 100vh;
-        display: inline-block;
-        
-        
-    }
-    .side_navbar ul{
-        margin: 0;
-        margin-right:3px;
-        
-    }
-    button{
-        margin:1rem 0;
-    }
-    .container{
-        display:inline-flex;
-        
-        width:40%; 
-    
-        margin-left: 20vw;
-        margin-top:10vh; 
-        
-    } 
-    @media only screen and (min-width:950px) and (max-width: 1400px){
-        .side_navbar{
-             background-color: #242b2b;
-             height: 95vh;
-            width: 14vw;
-            display: inline-block;
-            
-            
-        }
-       
-        
-        button{
-            height: 45px;
-            width: 90px;
-            font-size: 18px;
-            margin-top:8px;
-        }
-        .container{
-            width:50%;
-            margin-top:5px;
-        }
-        
-        
-        
-    } 
-    @media only screen and (max-width: 950px){
-        .side_navbar{
-             background-color: #242b2b;
-             height: 100vh;
-            width: 140px;
-            display: inline-block;
-            
-            
-        }
-        button{
-            height: 40px;
-            width: 80px;
-            font-size: 13px;
-            margin-top:8px;
-        }
-        .container{
-            width:50%;
-            margin-top:5px;
-        }    
-    } 
-    
+  }
