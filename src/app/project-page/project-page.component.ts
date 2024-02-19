@@ -106,7 +106,7 @@ export class ProjectPageComponent implements OnInit {
   updateproject(){
   console.log( this.projectservice.getcurrentproject());
     // console.log(this.projectdata);
-    if(this.check==false){
+   
   
     this.configurations=this.configurationdata;
 
@@ -118,8 +118,7 @@ export class ProjectPageComponent implements OnInit {
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
       this.projectservice.updateproject(this.project).subscribe();
-    }}
-    this.check=false;
+    }
 
     
    
@@ -129,10 +128,13 @@ export class ProjectPageComponent implements OnInit {
   }
    deleteproject(){
 
-        this.check=true;
-        this.projectservice.deleteprojects(this.projects).subscribe();
-      this.router.navigate(['/projects']);
-
+      this.check=true;
+      this.projectservice.deleteprojects(this.projects).toPromise().then(()=>{
+        this.router.navigate(['/projects']).then(() => {
+          window.location.reload();
+          });
+      });
+      
       
   }
  

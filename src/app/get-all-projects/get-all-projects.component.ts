@@ -7,6 +7,7 @@ import { ProjectService } from '../project.service';
 import { catchError, of, tap } from 'rxjs';
 import { Configurations } from '../project-page/configurations';
 import { CdkPortal } from '@angular/cdk/portal';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-get-all-projects',
   templateUrl: './get-all-projects.component.html',
@@ -28,7 +29,7 @@ export class GetAllProjectsComponent {
   projectsend :Project[]=[];
 
   configurationsend: Configurations= new Configurations;
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private http:HttpClient,private projectservice:ProjectService) {
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private http:HttpClient,private projectservice:ProjectService,private router:Router) {
     this.getAllProject();
    }
 
@@ -60,18 +61,13 @@ export class GetAllProjectsComponent {
     this.should_open=true;
     
     this.projectservice.setcurrentproject(item as Project);
-    console.log(this.projectservice.currentproject);
-    this.project=item;
     this.projectsend=[];
     this.projectsend.push(item);
-    console.log(this.projectservice.getcurrentproject())
-  
+    console.log(this.projectservice.getcurrentproject());
     for(let item of this.projectsend)
     {
       this.configurationsend=(item.configurations as Configurations);
     }
- 
-
   }
   
   toggleDropDown(): void {
@@ -81,34 +77,26 @@ export class GetAllProjectsComponent {
   clickedOutside(): void {
     this.isDropDownOpened = false;
   }
+
   opensideNavbar(){
     this.side_Navbar=!this.side_Navbar;
   }
-  addition(ob:Project){  
-    this.projects.push(ob); 
-  }
-  getAllProject(){
-   
-    this.projectservice.getAllProjects().pipe (
-      tap((response: any) => {
-       
-        console.log(response.data);
-      
-       for(let i of response.data){
-        
-        this.addition(i);
-        
-       
-       }
-      
-       
-      }),
-      catchError((error) => {
-        // Handle any errors that occur during the request
-        console.error('Error occurred during get request', error);
-        return of(null); // Returning a non-error observable to prevent unhandled error
-      })
-    ).subscribe();
 
-}
+  getAllProject(){
+    this.projectservice.getAllProjects();
+    
+    this.projects=this.projectservice.userprojects;
+    console.log(this.projects.length);
+    if(this.projects.length==0){
+      // console.log("going to project page");
+        this.gotocreateprojectpage();
+    }
+  }
+  gotocreateprojectpage(){
+    // alert("You don't have projects to view");
+    // console.log("aa rha kuch");
+    // this.router.navigate(['/newproject']).then(() => {
+    //   window.location.reload();
+    //   });
+  }
 }
