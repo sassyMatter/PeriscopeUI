@@ -57,6 +57,7 @@ export class ProjectService {
     
     //save project request
     saveprojects(project? : Project):Observable<Project>{
+      this.setcurrentproject (project as Project ) ;
       return this.httpclient.post<Project>(`${this.baseURLcreateProject}`,project);
 
     }
@@ -66,6 +67,7 @@ export class ProjectService {
     }
     // update project
     updateproject(project?:Project):Observable<Project>{
+      this.setcurrentproject (project as Project ) ;
       return this.httpclient.post<Project>(`${this.baseURLupdateProject}`,project);
     }
 
@@ -79,7 +81,9 @@ export class ProjectService {
     getcurrentproject(){
       return this.currentproject as Project;  
     }
-    
+    logout(){
+      localStorage.clear();
+    }
 
     
     

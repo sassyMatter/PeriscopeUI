@@ -554,7 +554,6 @@ if (canvasContainer) {
  
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
-      this.canvas?.clear();
       if(canvasData != null){
         console.log("data coming");
         let hashMap = new Map<string, fabric.Group>();
