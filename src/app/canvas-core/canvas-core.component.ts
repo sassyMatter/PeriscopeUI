@@ -48,17 +48,16 @@ export class CanvasCoreComponent implements OnInit {
     private projectservice:ProjectService
    ){
  
-    this.canvas = new fabric.Canvas('canvas');
+    this.canvas = new fabric.Canvas('canvas', { renderOnAddRemove: false });
    }
  
  
   ngOnInit(): void {
     this.showServerData();
 
-    if(this.projectservice.currentproject.canvasData!=null){
+   
       console.log("running simulation");
       this.runSimulation();
-    }
     
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;

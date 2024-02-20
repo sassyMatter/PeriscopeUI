@@ -1,22 +1,16 @@
- <app-navbar></app-navbar>
-<!-- <div class="test" *ngIf="projects.length == 0">
-
-</div> -->
+<app-navbar></app-navbar>
+<div class="sidebar">
   <div class="side_navbar" *ngIf="side_Navbar && projects.length!=0" >
     <div *ngFor="let item of projects">
-      <ul><button  (click)="openproject(item)" >{{item.projectName}}</button></ul>
-
-
+      <ul><button (click)="openproject(item)">{{item.projectName}}</button></ul>
     </div> 
-    <!-- <div *ngFor="let item of data">
-      <ul><button  (click)="openproject1()"  [ngClass]="{'grey' : toggle1, 'black': !toggle1}">data.property</button></ul>
-    </div> -->
   </div>
- 
-   
-    
- <app-project-page [projectdata]="projectsend" [configurationdata]="configurationsend" class="container"  *ngIf="should_open" ></app-project-page>
+</div>
 
+<div class="configForm">
+  <app-project-page [projectdata]="projectsend" [configurationdata]="configurationsend" class="container"  *ngIf="should_open" ></app-project-page>
+</div>
+ 
 
  
  

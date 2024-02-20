@@ -79,15 +79,18 @@ export class NewProjectComponent implements OnInit {
   saveproject(){
  
     
-    if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
+    if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
-      this.projectservice.saveprojects(this.project).subscribe();
+      // this.projectservice.saveprojects(this.project).subscribe();
+        this.projectservice.saveprojects(this.project).toPromise().then(()=>{
+          this.router.navigate(['/projects']).then(() => {
+          window.location.reload();
+          });
+        })
      
     }
     
-    // this.router.navigate(['/projects']).then(() => {
-    //   window.location.reload();
-    //   });
+    
     
     
      
