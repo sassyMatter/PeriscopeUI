@@ -30,13 +30,14 @@ export class GetAllProjectsComponent {
 
   configurationsend: Configurations= new Configurations;
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private http:HttpClient,private projectservice:ProjectService,private router:Router) {
-    this.getAllProject();
+   
    }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     console.log("logged In :: " , this.isLoggedIn);
+    this.getAllProject();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -49,6 +50,7 @@ export class GetAllProjectsComponent {
 
   ngOnChanges(){
     this.isLoggedIn = this.authService.isLoggedIn();
+    
   }
 
 
@@ -83,20 +85,16 @@ export class GetAllProjectsComponent {
   }
 
   getAllProject(){
-    this.projectservice.getAllProjects();
-    
-    this.projects=this.projectservice.userprojects;
-    console.log(this.projects.length);
-    if(this.projects.length==0){
-      // console.log("going to project page");
-        this.gotocreateprojectpage();
-    }
+    this.projectservice.getAllProjects().toPromise().then(()=>{
+      this.projects=this.projectservice.userprojects;
+      if(this.projects.length==0){
+        // console.log("going to project page");
+          this.gotocreateprojectpage();
+      }
+    });  
   }
   gotocreateprojectpage(){
-    // alert("You don't have projects to view");
-    // console.log("aa rha kuch");
-    // this.router.navigate(['/newproject']).then(() => {
-    //   window.location.reload();
-    //   });
+    alert("You don't have projects to view");
+    this.router.navigate(['/newproject']);
   }
 }

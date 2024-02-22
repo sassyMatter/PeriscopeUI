@@ -73,18 +73,24 @@ export class NewProjectComponent implements OnInit {
     this.isDropDownOpened = false;
   }
   // 
+  isValidInput(projectName :string) {
+    const regex = /^[a-zA-Z0-9]+$/; // Matches only alphanumeric characters
+    return regex.test(projectName);
+  }
+  
   
  
  
   saveproject(){
- 
+    
     
     if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
       // this.projectservice.saveprojects(this.project).subscribe();
+      
         this.projectservice.saveprojects(this.project).toPromise().then(()=>{
           this.router.navigate(['/projects']).then(() => {
-          window.location.reload();
+          // window.location.reload();
           });
         })
      

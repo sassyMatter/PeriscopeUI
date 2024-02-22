@@ -50,7 +50,7 @@ export class ProjectService {
           console.error('Error occurred during get request', error);
           return of(null); // Returning a non-error observable to prevent unhandled error
         })
-      ).subscribe();;
+      );
       
         
     }
@@ -63,6 +63,7 @@ export class ProjectService {
     }
     // delete project 
     deleteprojects(project?:Project):Observable<Project>{
+      this.setcurrentproject(this.projectstate as Project);
       return this.httpclient.post<Project>(`${this.baseURLdeleteProject}`,project);
     }
     // update project

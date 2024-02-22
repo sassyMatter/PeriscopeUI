@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
+<div *ngIf="projects.length==0" gotocreateprojectpage>
+
+</div>
 <div class="sidebar">
   <div class="side_navbar" *ngIf="side_Navbar && projects.length!=0" >
     <div *ngFor="let item of projects">

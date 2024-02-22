@@ -49,8 +49,6 @@ export class ProjectPageComponent implements OnInit {
     for(let item of this.projectdata as Project[]){
         this.projects=item;
     }
-    console.log(this.projects);
-   console.log(this.projects?.configurations);
    this.configurationsdata=new Configurations;
    this.configurationsdata=this.projects?.configurations;
 
@@ -60,14 +58,8 @@ export class ProjectPageComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_USER');
       this.username = user.username;
-    }
-    // this.project.projectName=this.projectdata.projectName;
-    // this.project.configurations=this.projectdata.configurations;
-   
-    // this.getAllProject();
-   
-    
-    
+    }   
+      
   }
   ngOnChanges(){
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -128,9 +120,10 @@ export class ProjectPageComponent implements OnInit {
     this.router.navigate(['/home']);
   }
    deleteproject(){
-
+      
       this.check=true;
       this.projectservice.deleteprojects(this.projects).toPromise().then(()=>{
+        
         this.router.navigate(['/projects']).then(() => {
           window.location.reload();
           });
