@@ -584,7 +584,42 @@ if (canvasContainer) {
           this.canvas?.renderAll();
  
       }
+      
 
+
+      // this.helloworldService.getCanvasData().pipe(
+      //   tap((response: any) => {
+      //     // Handle the response from the backend
+      //     let components = response[0]['objects'];
+      //     let hashMap = new Map<string, fabric.Group>();
+      //     for(let i of components) {
+      //       let tp=i['top'];
+      //       let lft=i['left'];
+      //       let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+      //       newImage.setCoords();
+      //       this.canvas?.add(newImage);
+      //       hashMap.set(i['id'],newImage);
+      //     }
+      //     for(let i of components) {
+      //       for(let j of i['connections']){
+      //         let src = hashMap.get(i['id']);
+      //         let dest = hashMap.get(j['id']);
+      //         if (src && dest) {
+      //           const newLine = this.createConnectLine(src, dest, true);
+      //           this.canvas?.add(newLine);
+      //         }
+      //       }
+      //     }
+      //     this.canvas?.setZoom(1);
+      //     this.canvas?.renderAll();
+ 
+      //   }),
+      //   catchError((error) => {
+      //     // Handle any errors that occur during the request
+      //     console.error('Error occurred during get request', error);
+      //     return of(null); // Returning a non-error observable to prevent unhandled error
+      //   })
+      // ).subscribe();
   }
  
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
