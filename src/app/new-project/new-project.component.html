@@ -3,7 +3,7 @@
   <div class="form_div">
     <form  class="card-form" [formGroup]="projectform" (ngSubmit)="f.form.valid && saveproject()"  #f="ngForm">
         <div class="input">
-          <input class="input-field" id="projectname" type="text" name="text" is  #text="ngModel"  [(ngModel)]="project.projectName"  [ngModelOptions]="{standalone: true}" required/>
+          <input class="input-field" id="projectname" type="text" name="text"   #projectName="ngModel" value="Project" [(ngModel)]="project.projectName"  [ngModelOptions]="{standalone: true}" required/>
           <label class="input-label">Project Name</label>
           
         </div>
@@ -17,7 +17,7 @@
           Please fill project name!
         </div>
         <div class="input">
-          <input class="input-field" id="memory" type="text" name="memory"  required #memory="ngModel" value="Memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+          <input class="input-field" id="memory" type="text" name="memory"  required #memory="ngModel" value="Memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}" required>
           <label class="input-label">Memory</label>
           
         </div>
@@ -32,7 +32,7 @@
           Memory is required!
         </div>
         <div class="input">
-          <input class="input-field" id="cpus" type="number" name="cpu"  required #cpus="ngModel"  [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
+          <input class="input-field" id="cpus" type="number" min="0" name="cpu" #cpus="ngModel"  [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}" required>
           <label class="input-label" >CPU</label>
          
         
@@ -48,7 +48,7 @@
         </div>
 
         <div class="input">
-          <input class="input-field" id="storage" type="text" name="Storage"  required  #Storage="ngModel" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
+          <input class="input-field" id="storage" type="text" name="Storage" #Storage="ngModel" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}" required>
           <label class="input-label">Storage</label>
          
     
@@ -64,7 +64,7 @@
         </div>
 
         
-        <button mat-button type="submit" class="black">Save</button>
+        <button mat-button type="submit" [disabled]="issaving" class="black">Save</button>
       
        
     </form>

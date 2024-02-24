@@ -26,6 +26,7 @@ export class NewProjectComponent implements OnInit {
   showNav: boolean = true;
   projects?: Project[]  ;
   
+  issaving:boolean=false;
   
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
 
@@ -86,12 +87,15 @@ export class NewProjectComponent implements OnInit {
     
     if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
+      this.issaving=true;
       // this.projectservice.saveprojects(this.project).subscribe();
-      
+      console.log(this.project);
+      console.log(this.configurations);
         this.projectservice.saveprojects(this.project).toPromise().then(()=>{
           this.router.navigate(['/projects']).then(() => {
           // window.location.reload();
           });
+          this.issaving=false;
         })
      
     }

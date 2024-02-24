@@ -1,8 +1,8 @@
 <div class="form_div" *ngFor="let item of projectdata">
     <form [formGroup]="projectform" (ngSubmit)="f.form.valid &&updateproject()"  #f="ngForm" >
         <div class="input">
-          <input class="input-field" type="text" id="projectname" name="projectName" required   #projectName="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}">
-          <label class="input-label">Projectname</label>
+          <input class="input-projectfield" type="text" id="projectname" name="projectName" required   #projectName="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}" [readOnly]="true">
+          <label class="input-projectlabel">Projectname</label>
         </div>
          
 
@@ -34,7 +34,7 @@
         
       
         <div class="input">
-          <input class="input-field" id="cpus" type="number" name="cpu" id="cpus" required #cpus="ngModel" [(ngModel)]="configurationdata.cpus" [ngModelOptions]="{standalone: true}">
+          <input class="input-field" id="cpus" type="number"[min]="0" name="cpu" id="cpus" required #cpus="ngModel" [(ngModel)]="configurationdata.cpus" [ngModelOptions]="{standalone: true}">
           <label class="input-label">CPU</label>
          
           
@@ -65,9 +65,9 @@
         </div>
         
         
-        <button mat-button type="submit" class="btns black" (click)="closeform()">Update</button>
-        <button mat-button type="button" class="btns close"  (click)="opencanvas()">Open</button>
-        <button mat-button type="button" class="btns black"   (click)="deleteproject()">Delete</button>
+        <button mat-button [disabled]="issaving" type="submit" class="btns black"  (click)="closeform()">Update</button>
+        <button mat-button [disabled]="issaving" type="button" class="btns close"  (click)="opencanvas()">Open</button>
+        <button mat-button [disabled]="issaving" type="button" class="btns black"  (click)="deleteproject()">Delete</button>
     </form>
 </div>
     

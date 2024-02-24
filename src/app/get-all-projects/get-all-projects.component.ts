@@ -27,6 +27,7 @@ export class GetAllProjectsComponent {
   public projects: Project[] =[] ;
   project ?:Project;
   projectsend :Project[]=[];
+  selectedProjectname:any;
 
   configurationsend: Configurations= new Configurations;
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private http:HttpClient,private projectservice:ProjectService,private router:Router) {
@@ -53,7 +54,14 @@ export class GetAllProjectsComponent {
     
   }
 
-
+  selectProject(projectname:any){
+    for(let item of this.projects){
+        if(item.projectName==projectname)
+        {
+          this.selectedProjectname =item.projectName;
+        }
+    }
+  }
   logout(): void {
     this.authService.logout();
   }
@@ -61,7 +69,7 @@ export class GetAllProjectsComponent {
   openproject(item:Project){
     
     this.should_open=true;
-    
+    this.selectProject(item.projectName);
     this.projectservice.setcurrentproject(item as Project);
     this.projectsend=[];
     this.projectsend.push(item);
@@ -70,6 +78,7 @@ export class GetAllProjectsComponent {
     {
       this.configurationsend=(item.configurations as Configurations);
     }
+    console.log(this.selectedProjectname);
   }
   
   toggleDropDown(): void {
@@ -97,4 +106,5 @@ export class GetAllProjectsComponent {
     alert("You don't have projects to view");
     this.router.navigate(['/newproject']);
   }
+  
 }

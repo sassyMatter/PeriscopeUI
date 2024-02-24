@@ -20,22 +20,27 @@
     outline: none;
     box-shadow: 0 9px #999;
   }
+  .selected button{
+    background-color:#555;
+    transition: 0.3s all;
+    cursor: pointer;
+    color:white;
+  }
 
   .side_navbar button:hover {
     cursor: pointer;
     transform: scale(0.98); 
-    background-color: #555 !important;
-    color: white !important;
+   
   }
   
-  .side_navbar button:active, .side_navbar button:focus, .side_navbar button:visited{
+  /* .side_navbar button:active, .side_navbar button:focus, .side_navbar button:visited{
     background-color: #555 !important;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
     color: white !important;
     transition: 0.2s all;
-  }
-
+  } */
+ 
   div.configForm {
     display: inline-flex;
     position: absolute;

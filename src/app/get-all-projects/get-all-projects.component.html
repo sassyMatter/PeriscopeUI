@@ -4,8 +4,14 @@
 </div>
 <div class="sidebar">
   <div class="side_navbar" *ngIf="side_Navbar && projects.length!=0" >
-    <div *ngFor="let item of projects">
-      <ul><button (click)="openproject(item)">{{item.projectName}}</button></ul>
+    <div *ngFor="let item of projects "  
+   
+    >
+      <ul
+      [class.selected]="item.projectName === selectedProjectname"
+      (click)="selectProject(item.projectName)"><button (click)="openproject(item)"
+       
+        >{{item.projectName}}</button></ul>
     </div> 
   </div>
 </div>
