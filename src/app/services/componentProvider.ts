@@ -13,13 +13,19 @@ import { Input } from "../models/components/input";
 )
 export class ComponentProvider {
 
+  public canvasData: any;
+
+    
+
     createComponent(type: string, width: number, height : number, left?: number, top?: number, event?: DragEvent): Item {
       switch (type) {
         case 'database':
           if(!event){
             return new Database(width, height, left, top);                              //creating component from backend
           }
-          return new Database(width, height, undefined, undefined, event);    //creating component on frontend
+          const database = new Database(width, height, undefined, undefined, event); 
+          database.tableDefinitions = this.canvasData['tableDefinitions'];
+          database.tableNames = this.canvasData['tableNames']   //creating component on frontend
         case 'function':
           if(!event){
             return new Func(width, height, left, top);

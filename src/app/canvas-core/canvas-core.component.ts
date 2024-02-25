@@ -9,6 +9,8 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
+import { Database } from '../models/components/database';
+
 
  
  
@@ -477,10 +479,12 @@ if (canvasContainer) {
  
   }
  
-  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent): fabric.Group{
+  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent, canvasData: any): fabric.Group{
     console.log("calling factory");
  
     const componentProvider = new ComponentProvider();
+    componentProvider.canvasData = canvasData;
+    
     if(event){
       return componentProvider.createComponent(componentType, width, height, undefined, undefined, event);
     }
@@ -488,6 +492,7 @@ if (canvasContainer) {
     return componentProvider.createComponent(componentType, width, height, left, top);
   }
  
+  
  
   showServerData(){
     // this.helloworldService.getServerResponse()
@@ -560,7 +565,9 @@ if (canvasContainer) {
           for(let i of canvasData['objects']) {
             let tp=i['top'];
             let lft=i['left'];
-            let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+            
+            let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp, undefined, i);
+            // configureObject(newImage, i);
             newImage.setCoords();
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
@@ -700,4 +707,28 @@ createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
  
  
  
+
+// function configureObject(newImage: fabric.Group, i: any) {
+//   switch (i['type']) {
+//     case 'database':
+//       // set the custom parameters
+      
+
+       
+//     case 'function':
+ 
+//     case 'restInterface':
+    
+//     case 'queue':
+
+//     case 'customGroup':
+
+//     case 'input':
+     
+//     default:
+//       throw new Error('Invalid component type.');
+//   }
+// }
+
+}
  
