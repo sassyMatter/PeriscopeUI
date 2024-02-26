@@ -40,7 +40,34 @@
     color: white !important;
     transition: 0.2s all;
   } */
- 
+  .dialog{
+  
+   width:400px;
+   height:100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: grey;
+   /* display: inline-flex;
+    position: absolute;
+    top:  18%;
+    left:  40%;
+    transform: translate(-15%, -40%); */
+   margin: 25rem auto;
+
+   
+    /* j */
+  }
+  .dialog-button{
+    background-color:#1E90FF;
+    color:white; 
+    display: block;
+  }
+  .message{
+   color:white;
+   display: inline-block;
+   font-size: 1em;
+  }
   div.configForm {
     display: inline-flex;
     position: absolute;

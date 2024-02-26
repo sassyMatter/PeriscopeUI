@@ -560,8 +560,9 @@ if (canvasContainer) {
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
-        console.log("data coming");
+        console.log("data is coming");
         let hashMap = new Map<string, fabric.Group>();
+        let hashMap2=new Map<fabric.Group,number>();
           for(let i of canvasData['objects']) {
             let tp=i['top'];
             let lft=i['left'];

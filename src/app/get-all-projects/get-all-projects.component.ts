@@ -96,14 +96,15 @@ export class GetAllProjectsComponent {
   getAllProject(){
     this.projectservice.getAllProjects().toPromise().then(()=>{
       this.projects=this.projectservice.userprojects;
+      console.log(this.projects.length);
       if(this.projects.length==0){
-        // console.log("going to project page");
-          this.gotocreateprojectpage();
+        console.log("going to project page");
+          // this.gotocreateprojectpage();
       }
     });  
   }
   gotocreateprojectpage(){
-    alert("You don't have projects to view");
+    
     this.router.navigate(['/newproject']);
   }
   

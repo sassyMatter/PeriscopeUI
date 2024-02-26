@@ -12,7 +12,7 @@ export class ProjectService {
   configurations : Configurations =new Configurations;
  
   currentproject: Project =new Project(this.configurations);
-  
+  ishome:boolean=false;
   projectstate:Project=new Project(this.configurations);
   public userprojects: Project[] =[] ;
   baseURLgetProjects =`${environment.baseURL}/user-space/get-all-projects`;
@@ -58,11 +58,13 @@ export class ProjectService {
     //save project request
     saveprojects(project? : Project):Observable<Project>{
       this.setcurrentproject (project as Project ) ;
+      this.ishome=true;
       return this.httpclient.post<Project>(`${this.baseURLcreateProject}`,project);
 
     }
     // delete project 
     deleteprojects(project?:Project):Observable<Project>{
+      this.ishome=false;
       this.setcurrentproject(this.projectstate as Project);
       return this.httpclient.post<Project>(`${this.baseURLdeleteProject}`,project);
     }
@@ -74,15 +76,18 @@ export class ProjectService {
 
     //setting value of project which is being opened
     setcurrentproject(project :Project){
+      this.ishome=true;
       this.currentproject =project;
       localStorage.setItem('appState', JSON.stringify(this.currentproject));
     }
 
     //getting value of currentproject
     getcurrentproject(){
+      this.ishome=true;
       return this.currentproject as Project;  
     }
     logout(){
+ 
       localStorage.clear();
     }
 
