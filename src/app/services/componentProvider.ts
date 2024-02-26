@@ -21,11 +21,15 @@ export class ComponentProvider {
       switch (type) {
         case 'database':
           if(!event){
-            return new Database(width, height, left, top);                              //creating component from backend
+            return new Database(width, height, left, top);  
+                                        //creating component from backend
           }
           const database = new Database(width, height, undefined, undefined, event); 
+          // provide null check for canvas data, component provider ideally should be injected instead of being created everywhere
           database.tableDefinitions = this.canvasData['tableDefinitions'];
-          database.tableNames = this.canvasData['tableNames']   //creating component on frontend
+          database.tableNames = this.canvasData['tableNames'] 
+          
+          return database  //creating component on frontend
         case 'function':
           if(!event){
             return new Func(width, height, left, top);

@@ -370,7 +370,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const width = img.clientWidth;
     const height = img.clientHeight;
  
-    const newImage = createFabricObject(componentType, width, height, undefined, undefined, e);
+    const newImage = createFabricObject(componentType, width, height, undefined, undefined, e, undefined);
  
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
@@ -479,7 +479,7 @@ if (canvasContainer) {
  
   }
  
-  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent, canvasData: any): fabric.Group{
+  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent, canvasData?: any): fabric.Group{
     console.log("calling factory");
  
     const componentProvider = new ComponentProvider();
@@ -567,7 +567,6 @@ if (canvasContainer) {
             let lft=i['left'];
             
             let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp, undefined, i);
-            // configureObject(newImage, i);
             newImage.setCoords();
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
@@ -708,27 +707,7 @@ createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
  
  
 
-// function configureObject(newImage: fabric.Group, i: any) {
-//   switch (i['type']) {
-//     case 'database':
-//       // set the custom parameters
-      
 
-       
-//     case 'function':
- 
-//     case 'restInterface':
-    
-//     case 'queue':
 
-//     case 'customGroup':
 
-//     case 'input':
-     
-//     default:
-//       throw new Error('Invalid component type.');
-//   }
-// }
-
-}
  
