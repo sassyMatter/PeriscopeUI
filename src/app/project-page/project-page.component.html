@@ -1,33 +1,45 @@
 <div class="form_div" *ngFor="let item of projectdata">
     <form [formGroup]="projectform" (ngSubmit)="f.form.valid &&updateproject()"  #f="ngForm" >
- 
-        <label>Name</label>
-        <input type="text" name="text" id="text"  required #text="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}" [readOnly]="true">
+        <div class="input">
+          <input class="input-projectfield" type="text" id="projectname" name="projectName" required   #projectName="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}" [readOnly]="true">
+          <label class="input-projectlabel">Projectname</label>
+        </div>
+         
 
         <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="item.projectName==null&& f.submitted"
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="item.projectName ==null && f.submitted"
           >
-          Project name is required!
+
+          Projectname is required!
         </div>
-  
-        <label>Memory</label>
-        <input type="text" name="memory" id="memory" required #memory="ngModel" placeholder="Enter the memory" [(ngModel)]="configurationdata.memory"
-         [ngModelOptions]="{standalone: true}">
-  
+          
+        <div class="input">
+          <input class="input-field" id="memory" type="text" name="memory" required #memory="ngModel"  [(ngModel)]="configurationdata.memory"
+           [ngModelOptions]="{standalone: true}">
+          <label class="input-label">Memory</label>
+          
+    
+        </div>
         <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="configurationdata.memory==null && f.submitted"
-          >
-  
-          Memory is required!
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="configurationdata.memory==null && f.submitted"
+        >
+
+         Please the required memory
         </div>
-     
-        <label>CPU</label>
-        <input type="text" name="cpu" id="cpus" required #cpus="ngModel" placeholder="Enter the number of cpus" [(ngModel)]="configurationdata.cpus" [ngModelOptions]="{standalone: true}">
+  
         
+      
+        <div class="input">
+          <input class="input-field" id="cpus" type="number"[min]="0" name="cpu" id="cpus" required #cpus="ngModel" [(ngModel)]="configurationdata.cpus" [ngModelOptions]="{standalone: true}">
+          <label class="input-label">CPU</label>
+         
+          
+        </div>
+       
         <div
             class="alert alert-danger"
             role="alert"
@@ -36,24 +48,26 @@
   
           Number of cpus are required!
         </div>
-
-
-        <label>Storage</label>
-        <input type="text" name="Storage" id="storage" required  #Storage="ngModel" placeholder="Enter the storage" [(ngModel)]="configurationdata.storage" [ngModelOptions]="{standalone: true}">
-    
+        <div class="input">
+          
+          <input class="input-field" id="storage" type="text" name="Storage" id="storage" required  #Storage="ngModel" [(ngModel)]="configurationdata.storage" [ngModelOptions]="{standalone: true}">
+          <label class="input-label">Storage</label>
+        </div>
+        
+        
         <div
         class="alert alert-danger"
         role="alert"
         *ngIf="configurationdata.storage==null && f.submitted"
         >
 
-        Storage is required!
+        Number of storage are required!
         </div>
         
         
-        <button mat-button type="submit" class="btns black" (click)="closeform()">Update</button>
-        <button mat-button type="button" class="btns close"  (click)="opencanvas()">Open</button>
-        <button mat-button type="button" class="btns black"   (click)="deleteproject()">Delete</button>
+        <button mat-button [disabled]="issaving" type="submit" class="btns black"  (click)="closeform()">Update</button>
+        <button mat-button [disabled]="issaving" type="button" class="btns close"  (click)="opencanvas()">Open</button>
+        <button mat-button [disabled]="issaving" type="button" class="btns black"  (click)="deleteproject()">Delete</button>
     </form>
 </div>
     

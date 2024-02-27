@@ -106,8 +106,10 @@ export class Func extends Item {
     } : {
       width: width,
       height: height,
-      left: left,
-      top: top,
+      left: left as number +30,
+      top: top as number + 30,
+      // left:left,
+      // top:top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',

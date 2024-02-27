@@ -52,8 +52,10 @@ export class Input extends Item {
       this.imageOptions = {
         width: width,
         height: height,
-        left: left,
-        top: top,
+        left: left as number +25,
+        top: top as number +25,
+        // left:left,
+        // top:top,
         centeredScaling: true,
         originX: 'center',
         originY: 'center',

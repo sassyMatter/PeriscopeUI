@@ -33,6 +33,7 @@ export class ProjectPageComponent implements OnInit {
   @Input() projectdata?:Project[];
   
   @Input () configurationdata= new Configurations;
+  issaving:boolean=false;
   
 
   showNav: boolean = true;
@@ -44,13 +45,10 @@ export class ProjectPageComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     console.log("logged In :: " , this.isLoggedIn);
-   
     //  this.project.projectName=this.projectdata[0].projectName;
     for(let item of this.projectdata as Project[]){
         this.projects=item;
     }
-    console.log(this.projects);
-   console.log(this.projects?.configurations);
    this.configurationsdata=new Configurations;
    this.configurationsdata=this.projects?.configurations;
 
@@ -60,14 +58,8 @@ export class ProjectPageComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_USER');
       this.username = user.username;
-    }
-    // this.project.projectName=this.projectdata.projectName;
-    // this.project.configurations=this.projectdata.configurations;
-   
-    // this.getAllProject();
-   
-    
-    
+    }   
+      
   }
   ngOnChanges(){
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -78,10 +70,12 @@ export class ProjectPageComponent implements OnInit {
 
   
   projectform=this.builder.group({
-   
+    
   })
+
   
   closeform(){
+  
     console.log(this.projectdata);
     // this.router.navigate(['/projects']).then(() => {
     //   window.location.reload();
@@ -105,6 +99,7 @@ export class ProjectPageComponent implements OnInit {
  
   
   updateproject(){
+    
   console.log( this.projectservice.getcurrentproject());
     // console.log(this.projectdata);
    
@@ -115,10 +110,15 @@ export class ProjectPageComponent implements OnInit {
     for(let item of this.projectdata as Project[]){
       this.project=item as Project;
     }
-   
+    
     if(this.project.projectName!=null && this.configurations.cpus!=null&&this.configurations.memory!=null&&this.configurations.storage!=null)
     {
-      this.projectservice.updateproject(this.project).subscribe();
+      this.issaving=true;
+      console.log(this.project);
+      console.log(this.configurations);
+      this.projectservice.updateproject(this.project).toPromise().then(()=>{
+        this.issaving=false;
+      });
     }
 
     
@@ -128,12 +128,14 @@ export class ProjectPageComponent implements OnInit {
     this.router.navigate(['/home']);
   }
    deleteproject(){
-
+      this.issaving=true;
       this.check=true;
       this.projectservice.deleteprojects(this.projects).toPromise().then(()=>{
+        
         this.router.navigate(['/projects']).then(() => {
           window.location.reload();
           });
+          this.issaving=false;
       });
       
       

@@ -1,8 +1,17 @@
 <app-navbar></app-navbar>
+<!-- <div  class="dialog" *ngIf="projects.length==0">
+  <div class="message">No project to show</div>
+  <ul><button mat-button class="dialog-button" (click)="gotocreateprojectpage()">Create a project</button></ul>
+</div> -->
 <div class="sidebar">
+  
   <div class="side_navbar" *ngIf="side_Navbar && projects.length!=0" >
     <div *ngFor="let item of projects">
-      <ul><button (click)="openproject(item)">{{item.projectName}}</button></ul>
+      <ul
+      [class.selected]="item.projectName === selectedProjectname"
+      (click)="selectProject(item.projectName)"><button (click)="openproject(item)"
+       
+        >{{item.projectName}}</button></ul>
     </div> 
   </div>
 </div>

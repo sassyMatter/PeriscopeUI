@@ -49,7 +49,7 @@ export class Topic extends Item {
     this.imageOptions = event ? {
       width: width + 14,
       height: height + 14,
-      left: event.offsetX - 25,
+      left: event.offsetX -25,
       top: event.offsetY - 25,
       centeredScaling: true,
       originX: 'center',
@@ -57,8 +57,10 @@ export class Topic extends Item {
     } : {
       width: width,
       height: height,
-      left: left,
-      top: top,
+      left: left as number+30,
+      top: top as number+25,
+      // left:left,
+      // top:top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',

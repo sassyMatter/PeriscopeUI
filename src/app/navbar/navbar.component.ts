@@ -15,14 +15,20 @@ export class NavbarComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
+  isproject:boolean=true;
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private projectservice:ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     // console.log("logged In :: " , this.isLoggedIn);
-
+    if(this.projectservice.currentproject.projectName!=null){
+      this.isproject=false;
+    }
+    else{
+      this.isproject=true;
+    }
+    console.log(this.isproject);
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;

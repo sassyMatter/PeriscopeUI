@@ -1,21 +1,27 @@
 <div class="container">
   <app-navbar class="app_nav"></app-navbar>
   <div class="form_div">
-    <form [formGroup]="projectform" (ngSubmit)="f.form.valid && saveproject()"  #f="ngForm">
-
-        <label>Name</label>
-        <input type="text" name="text" id="text"  required #text="ngModel" [(ngModel)]="project.projectName" placeholder="Enter the project name" [ngModelOptions]="{standalone: true}">
+    <form  class="card-form" [formGroup]="projectform" (ngSubmit)="f.form.valid && saveproject()"  #f="ngForm">
+        <div class="input">
+          <input class="input-field" id="projectname" type="text" name="text"   #projectName="ngModel" value="Project" [(ngModel)]="project.projectName"  [ngModelOptions]="{standalone: true}" required/>
+          <label class="input-label">Project Name</label>
+          
+        </div>
+      
         <div
             class="alert alert-danger"
             role="alert"
             *ngIf="project.projectName==null&& f.submitted"
           >
   
-          Project name is required!
+          Please fill project name!
         </div>
-  
-        <label>Memory</label>
-        <input type="text" name="memory" id="memory" required #memory="ngModel" placeholder="Enter the memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}">
+        <div class="input">
+          <input class="input-field" id="memory" type="text" name="memory"  required #memory="ngModel" value="Memory" [(ngModel)]="configurations.memory" [ngModelOptions]="{standalone: true}" required>
+          <label class="input-label">Memory</label>
+          
+        </div>
+       
   
         <div
             class="alert alert-danger"
@@ -25,9 +31,12 @@
   
           Memory is required!
         </div>
-     
-        <label>CPU</label>
-        <input type="text" name="cpu" id="cpus" required #cpus="ngModel" placeholder="Enter the number of cpus" [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}">
+        <div class="input">
+          <input class="input-field" id="cpus" type="number" min="0" name="cpu" #cpus="ngModel"  [(ngModel)]="configurations.cpus" [ngModelOptions]="{standalone: true}" required>
+          <label class="input-label" >CPU</label>
+         
+        
+        </div>
         
         <div
             class="alert alert-danger"
@@ -35,13 +44,16 @@
             *ngIf="configurations.cpus==null && f.submitted"
           >
   
-          Number of cpus are required!
+          Please fill required number of cpu!
         </div>
 
-
-        <label>Storage</label>
-        <input type="text" name="Storage" id="storage" required  #Storage="ngModel" placeholder="Enter the storage" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}">
+        <div class="input">
+          <input class="input-field" id="storage" type="text" name="Storage" #Storage="ngModel" [(ngModel)]="configurations.storage" [ngModelOptions]="{standalone: true}" required>
+          <label class="input-label">Storage</label>
+         
     
+        </div>
+        
         <div
         class="alert alert-danger"
         role="alert"
@@ -52,7 +64,7 @@
         </div>
 
         
-        <button mat-button type="submit" class="black">Save</button>
+        <button mat-button type="submit" [disabled]="issaving" class="black">Save</button>
       
        
     </form>
