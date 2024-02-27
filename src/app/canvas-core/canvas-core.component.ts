@@ -9,9 +9,9 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
-import { Database } from '../models/components/database';
 
 
+import { Observable } from 'rxjs';
  
  
  
@@ -25,7 +25,7 @@ export class CanvasCoreComponent implements OnInit {
  
   public response = 'Could not connect to server!!';
  
-  canvas : fabric.Canvas | null = null;
+  canvas :fabric.Canvas | null = null;
  
   isDialogOpen = false;
   targetObjectForDialog : any;
@@ -47,7 +47,8 @@ export class CanvasCoreComponent implements OnInit {
     private componentFactory : ComponentProvider,
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
-    private projectservice:ProjectService
+    private projectservice:ProjectService,
+    // private componentProcider:ComponentProvider
    ){
  
     this.canvas = new fabric.Canvas('canvas', { renderOnAddRemove: false });
@@ -55,12 +56,15 @@ export class CanvasCoreComponent implements OnInit {
  
  
   ngOnInit(): void {
+
     this.showServerData();
 
-   
-      console.log("running simulation");
+    setTimeout(() => {
       this.runSimulation();
-    
+    },  0);
+      // console.log("running simulation");
+      // this.runSimulation();
+  
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
    
@@ -93,7 +97,7 @@ const canvas = new fabric.Canvas(canvasElement, {
 this.canvas = canvas;
 this.createGridLines(canvas, canvasWidth, canvasHeight);
  
- 
+
  
 // Set the viewport transform to allow scrolling
 canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
@@ -235,7 +239,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
       evented: false,
     });
     canvas.add(line);
- 
+  
     // Attach an event listener to the `mouse:move` event on the canvas
     canvas.on('mouse:move', (event: fabric.IEvent) => {
       const pointer = canvas.getPointer(event.e);
@@ -292,6 +296,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
                 isConnected = true;
                 const line = this.createConnectLine(target, obj, isShiftKeyPressed);
                 canvas.add(line);
+                console.log(canvas.add(line));
                 canvas.renderAll();
  
           }
@@ -485,6 +490,7 @@ if (canvasContainer) {
     const componentProvider = new ComponentProvider();
     componentProvider.canvasData = canvasData;
     
+    
     if(event){
       return componentProvider.createComponent(componentType, width, height, undefined, undefined, event);
     }
@@ -555,35 +561,57 @@ if (canvasContainer) {
     }
     return value;
   }
- 
+
  
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
         console.log("data is coming");
         let hashMap = new Map<string, fabric.Group>();
-        let hashMap2=new Map<fabric.Group,number>();
-          for(let i of canvasData['objects']) {
-            let tp=i['top'];
-            let lft=i['left'];
-            
-            let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp, undefined, i);
+        let hashMap2=new Map<string,number>();
+        // let hashMap3=new Map<fabric.Group,fabric.Group>();
+          for(let canvas of canvasData['objects']) {
+            let tp=canvas['top'];
+            let lft=canvas['left'];
+            let height=canvas['height'];
+            let width=canvas['width'];
+            console.log("top left width height" , tp,lft,width,height);
+            let newImage: fabric.Group = this.createFabricObject(canvas['type'],width, height, lft, tp, undefined, canvas);
             newImage.setCoords();
-            this.canvas?.add(newImage);
-            hashMap.set(i['id'],newImage);
+            newImage.height=height;
+            newImage.width=width;
+            newImage.top=tp;
+            newImage.left=lft;
+            console.log("newimage ",newImage);
+            setTimeout(() => {
+              this.canvas?.add(newImage);
+            },  0);
+            // this.canvas?.renderAll();
+           
+            hashMap.set(canvas['id'],newImage );
           }
+          
           for(let i of canvasData['objects']) {
+            let src = hashMap.get(i['id']) as fabric.Group;
+            console.log("i" ,i);
+            console.log("connections of i,",i['connections']);
+          
             for(let j of i['connections']){
-              let src = hashMap.get(i['id']);
-              let dest = hashMap.get(j['id']);
-              if (src && dest) {
+              
+              let dest = hashMap.get(j['id']) as fabric.Group;
+              let unique1=i['id']+j['id'];
+              let unique2=j['id']+i['id'];
+              //lines connection dekhna hoga duplication ho rha
+              if (src  && dest &&(!hashMap2.get(unique1))&&!hashMap2.get(unique2)) {
                 const newLine = this.createConnectLine(src, dest, true);
-                this.canvas?.add(newLine);
+                this.canvas?.add(newLine);  
+                hashMap2.set(unique1,1);
+                hashMap2.set(unique2,1);
               }
             }
           }
-          this.canvas?.renderAll();
- 
+          // this.canvas?.renderAll();
+          
       }
       
 
@@ -670,7 +698,7 @@ if (canvasContainer) {
     });
   }
  
-createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
+   createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
    console.log("Create line called for ", obj1, obj2);
     const centerPointSource = obj1.getCenterPoint();
     const centerPointTarget = obj2.getCenterPoint();
