@@ -26,6 +26,17 @@ export class Topic extends Item {
 
   // custom properties
   topic: string;
+  // "customTypes": null,
+  parameters!: Map<string, string>;
+  returnType!: string;
+  functionBody: string;
+  functionName: string;
+ 
+  deserializationClass: string;
+  functionType: string;
+  // "tableNames": null,
+  tableDefinitions: string[];
+  tableNames:string[];
 
 
   override formFields: Field[] = [
@@ -86,6 +97,17 @@ export class Topic extends Item {
 
       // initializing custom topics
       this.topic = '';
+      this.tableDefinitions=[];
+      this.tableNames=[];
+      this.parameters = new Map<string, string>();
+      this.returnType = '';
+      this.functionBody = '';
+      this.functionName = '';
+      this.topic = '';
+      this.deserializationClass = '';
+      this.functionType = '';
+
+
 
 
   }

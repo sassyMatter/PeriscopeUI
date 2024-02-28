@@ -10,8 +10,8 @@ export class Input extends Item {
   imageOptions!: fabric.IImageOptions;
   objects?: fabric.Object[];
 
-  customTypes?: Map<string, string>;
-
+  customTypes: Map<string, string>;
+ 
   override formFields: Field[] = [
     {
       "name" : "inputSource",
@@ -61,7 +61,7 @@ export class Input extends Item {
         originY: 'center',
       }
     }
-
+    
     fabric.Image.fromURL(this.imgUrl, (img) => {
 
       // setting image options
@@ -77,12 +77,13 @@ export class Input extends Item {
         // Render the custom group
         // this.canvas?.renderAll();
       });
-
+       // initialzing custom properties
       this.customTypes = new Map<string, string>();
 
 
 
   }
+  
 
 
   override loadDataToFormFields(): void {
@@ -90,6 +91,7 @@ export class Input extends Item {
     for (const field of this.formFields) {
       switch (field.name) {
         case "customTypes":
+          console.log(this.customTypes);
           field.value = this.customTypes;
           break;
 
@@ -103,7 +105,7 @@ export class Input extends Item {
     for (const field of this.formFields) {
       switch (field.name) {
         case "customTypes":
-          this.customTypes = new Map<string, string>(field.value);
+          this.customTypes = new Map<string, string>(Object.entries(field.value));
           // adding type reference to global scope
           for (const item of this.customTypes.keys()) {
              this.references.add(item);

@@ -566,7 +566,8 @@ if (canvasContainer) {
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
-        console.log("data is coming");
+        // let canvasData = JSON.parse(canvasDataJson, this.reviver);
+        console.log("data is coming ", canvasData);
         let hashMap = new Map<string, fabric.Group>();
         let hashMap2=new Map<string,number>();
         // let hashMap3=new Map<fabric.Group,fabric.Group>();
@@ -575,14 +576,14 @@ if (canvasContainer) {
             let lft=canvas['left'];
             let height=canvas['height'];
             let width=canvas['width'];
-            console.log("top left width height" , tp,lft,width,height);
+            // console.log("top left width height" , tp,lft,width,height);
             let newImage: fabric.Group = this.createFabricObject(canvas['type'],width, height, lft, tp, undefined, canvas);
             newImage.setCoords();
             newImage.height=height;
             newImage.width=width;
             newImage.top=tp;
             newImage.left=lft;
-            console.log("newimage ",newImage);
+            // console.log("newimage ",newImage);
             setTimeout(() => {
               this.canvas?.add(newImage);
             },  0);
@@ -593,8 +594,8 @@ if (canvasContainer) {
           
           for(let i of canvasData['objects']) {
             let src = hashMap.get(i['id']) as fabric.Group;
-            console.log("i" ,i);
-            console.log("connections of i,",i['connections']);
+            // console.log("i" ,i);
+            // console.log("connections of i,",i['connections']);
           
             for(let j of i['connections']){
               

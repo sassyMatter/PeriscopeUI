@@ -15,7 +15,29 @@ export class ComponentProvider {
 
   public canvasData: any;
 
-    
+  getmap(obj:any){
+    const mymap=new Map<string, string>();
+    for (const [key, value] of Object.entries(obj)) {
+      console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+      if(`Value: ${value}` .includes(','))
+      {
+        console.log(`Key: ${key}, Value: ${value}`);
+        let values=(`Value: ${value}`.split(','));
+        console.log("values ");
+        console.log(values)
+        let keytype=(values[0].split(' '))[1];
+        let valu=(values[1]);
+        mymap.set(keytype,valu); }
+        else
+        mymap.set(`Key: ${key}`, `Value: ${value}`);
+     
+    }
+    return mymap;
+  }
 
     createComponent(type: string, width: number, height : number, left?: number, top?: number, event?: DragEvent): Item {
       switch (type) {
@@ -27,11 +49,12 @@ export class ComponentProvider {
             if(this.canvasData!=null){
               database.tableDefinitions = this.canvasData['tableDefinitions'];
               database.tableNames = this.canvasData['tableNames'] 
-              database.loadDataToFormFields();}
-              
-              return database;  
-             
+              database.loadDataToFormFields();
             }
+              
+            return database;  
+             
+          }
           const database = new Database(width, height, undefined, undefined, event); 
         
         
@@ -42,13 +65,14 @@ export class ComponentProvider {
             const func= new Func(width, height, left, top);
             
             if(this.canvasData!=null){
-              func.parameters=this.canvasData['parameters'];
+              func.parameters=this.getmap(this.canvasData['parameters']);
               func.returnType=this.canvasData['returnType'];
               func.functionBody=this.canvasData['functionBody'];
               func.functionName=this.canvasData['functionName'];
               func.topic=this.canvasData['topic'];
               func.deserializationClass=this.canvasData['deserializationClass'];
               func.functionType=this.canvasData['functionType'];
+              
               func.loadDataToFormFields();
             }
             return func;
@@ -61,8 +85,8 @@ export class ComponentProvider {
             
             if(this.canvasData!=null){
               restinterface.url=this.canvasData['url'];
-              restinterface.headers=this.canvasData['headers'];
-              restinterface.requestBody=this.canvasData['requestBody'];
+              restinterface.headers=this.getmap(this.canvasData['headers']);
+              restinterface.requestBody=this.getmap(this.canvasData['requestBody']);
               restinterface.requestUrl=this.canvasData['requestUrl'];
               restinterface.apiType=this.canvasData['apiType'];
               restinterface.httpMethod=this.canvasData['httpMethod'];
@@ -79,7 +103,7 @@ export class ComponentProvider {
          
             if(this.canvasData!=null){
               
-              queue['topic']=this.canvasData['topic'];
+              queue.topic=this.canvasData['topic'];
               queue.loadDataToFormFields();
             }
             return queue;
@@ -100,10 +124,15 @@ export class ComponentProvider {
             const input= new Input(width, height, left, top);
        
             if(this.canvasData!=null){
-              input['customTypes']=this.canvasData['customTypes'];
+              // input['customTypes']=this.canvasData['customTypes'];
+              //input meh krna hai
+
+              input.customTypes=this.getmap(this.canvasData['customTypes']);
+              console.log("input function printing ",input['customTypes']);
               input.loadDataToFormFields();
-              return input;
+              
             }
+            return input;
           }
           return new Input(width, height, undefined, undefined, event);
         default:

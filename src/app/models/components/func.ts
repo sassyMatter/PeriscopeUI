@@ -144,7 +144,7 @@ export class Func extends Item {
 
 
   }
-
+  
   override loadDataToFormFields(): void {
     for (const field of this.formFields) {
       switch (field.name) {
@@ -158,7 +158,8 @@ export class Func extends Item {
           field.value = this.functionBody;
           break;
         case "parameters":
-          field.value = this.parameters;
+     //     field.value = this.getmap(this.parameters);
+          field.value=this.parameters;
           break;
         case "returnType":
           field.value = this.returnType;
