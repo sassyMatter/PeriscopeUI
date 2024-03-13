@@ -7,6 +7,7 @@ import { Project } from './project';
 import { ProjectService } from '../project.service';
 import { Configurations } from './configurations';
 import { CanvasCoreComponent } from '../canvas-core/canvas-core.component';
+import { RunningConfigurations } from './RunningConfigurations';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { CanvasCoreComponent } from '../canvas-core/canvas-core.component';
 })
 export class ProjectPageComponent implements OnInit {
   configurations : Configurations =new Configurations;
-  project: Project= new Project(this.configurations);
+  runningconfigurations:RunningConfigurations=new RunningConfigurations;;
+  project: Project= new Project(this.configurations,this.runningconfigurations);
   private roles: string[] = [];
   isDropDownOpened: boolean = false;
   isLoggedIn = false;

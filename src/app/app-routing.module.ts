@@ -10,6 +10,7 @@ import { GetAllProjectsComponent } from './get-all-projects/get-all-projects.com
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { RunningpageComponent } from './runningpage/runningpage.component';
 const routes: Routes = [
   // {path: '', redirectTo: 'hello-world'},
   {path: 'home', component : HomeComponent , canActivate : [AuthGuard]},
@@ -20,7 +21,9 @@ const routes: Routes = [
   {path: 'projects', component: GetAllProjectsComponent,canActivate:[AuthGuard]},
   {path: 'project', component: ProjectPageComponent,canActivate:[AuthGuard]},
   { path: 'createProject', component: CreateProjectComponent, canActivate : [AuthGuard]},
-  {path : 'newproject',component:NewProjectComponent,canActivate : [AuthGuard]}
+  {path : 'newproject',component:NewProjectComponent,canActivate : [AuthGuard]},
+  {path:'runningprojects',component:RunningpageComponent,canActivate:[AuthGuard]}
+  
 ];
 
 @NgModule({

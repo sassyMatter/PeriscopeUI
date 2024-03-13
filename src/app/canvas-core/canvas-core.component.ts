@@ -29,6 +29,8 @@ export class CanvasCoreComponent implements OnInit {
  
   isDialogOpen = false;
   targetObjectForDialog : any;
+  disablebuildbutton:boolean=false;
+  buttonsdiabled:boolean=true;
 
   
   
@@ -60,6 +62,7 @@ export class CanvasCoreComponent implements OnInit {
     this.showServerData();
 
     setTimeout(() => {
+      
       this.runSimulation();
     },  0);
       // console.log("running simulation");
@@ -194,6 +197,10 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
   });
  
 });
+canvas.on('mousedown',(options)=>{
+  
+  console.log("object selected");
+})
  
  
  
@@ -507,7 +514,48 @@ if (canvasContainer) {
     //   this.response = data.response;
     // });
   }
- 
+  buildCanvasData():void{
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.disablebuildbutton=true;
+      this.projectservice.buildcanvasdata().toPromise().then(
+        response => {
+          console.log(response);
+          console.log("response coming");
+       
+        console.log(this.disablebuildbutton);
+        // setTimeout(()=>{
+        //   // this.disablebuildbutton=false;
+        // },1000)
+        this.disablebuildbutton=false;
+       }
+      ).catch(
+       error => {
+          console.error('Error occurred:', error);
+       }
+      );
+    }
+  
+          // this.disablebuildbutton=false;
+  }
+  runCanvasData(){
+    
+    this.projectservice.runproject().toPromise().then(
+      response => {
+        console.log(response);
+        console.log("response coming");
+       
+        this.projectservice.updateproject(this.projectservice.currentproject).toPromise();
+      // setTimeout(()=>{
+      //   // this.disablebuildbutton=false;
+      // },1000)
+      
+     }
+    ).catch(
+     error => {
+        console.error('Error occurred:', error);
+     }
+    );
+  }
   sendCanvasDataToBackend(): void {
  
     var objects =  this.canvas?.getObjects();
@@ -544,6 +592,10 @@ if (canvasContainer) {
   // these methods are used to add support for native Map object including deeply nested values
   replacer(key: any, value: any) {
     if(value instanceof Map) {
+      
+      console.log("value from replacer's map");
+      console.log(typeof value);
+      
       return {
         dataType: 'Map',
         value: Array.from(value.entries()), // or with spread: value: [...value]
@@ -564,6 +616,10 @@ if (canvasContainer) {
 
  
   runSimulation(){
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.buttonsdiabled=false;
+    }
+   
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
         // let canvasData = JSON.parse(canvasDataJson, this.reviver);

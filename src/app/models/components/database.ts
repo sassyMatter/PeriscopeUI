@@ -48,21 +48,27 @@ export class Database extends Item {
         left: event.offsetX-25,
         top: event.offsetY-25,
         centeredScaling: true,
-        originX: 'center',
-        originY: 'center',
+        // originX: 'center',
+      // originY: 'center',
+        originX: 'left',
+        originY: 'top',
+       
       }
     }
     else{
       this.imageOptions = {
         width: width,
         height: height,
-        left: left as number +25 ,
-        top: top as number +27 ,
+        left:left as number +25 ,
+        top: top as number +32 ,
         // left:left,
         // top:top,
         centeredScaling: true,
+        // originX: 'center',
+        // originY: 'center',
         originX: 'center',
         originY: 'center',
+       
       }
     }
 

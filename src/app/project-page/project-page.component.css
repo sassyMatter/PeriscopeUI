@@ -55,11 +55,39 @@
     padding-bottom: 4.5em;
     width: 200%;
     max-width: 425px;
+    position: relative;
   }
   .card-form {
     padding: 2rem 1rem 0;
   }
-
+  .status-circle {
+    top:30px;
+    right:40px;
+    width: 22px; 
+    height: 22px; 
+    position: absolute;
+    border-radius: 50%; /* Makes the div a circle */
+    
+    background-color: red;
+    cursor: pointer;
+}
+.status-circle:hover{
+  background-color: skyblue;
+}
+  .runbutton{
+    /* positio; */
+    position: absolute;
+    top: 10px; 
+    right: 30px; 
+    background-color: red;
+    cursor: pointer;
+  }
+  .runbutton:hover{
+    background-color: skyblue;
+  }
+  .projectrunning{
+    background-color: green;
+  }
   input {
     appearance: none;
     border-radius: 0;

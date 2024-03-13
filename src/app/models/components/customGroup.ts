@@ -21,8 +21,10 @@ export class CustomGroup extends Item {
         left: event.offsetX-25,
         top: event.offsetY-25,
         centeredScaling: true,
-        originX: 'center',
-        originY: 'center',
+        originX: 'left',
+        originY: 'top',
+       // originX: 'center',
+      // originY: 'center',
       }
     }
     else{

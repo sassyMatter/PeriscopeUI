@@ -1,0 +1,35 @@
+<!-- <div >
+    <app-navbar ></app-navbar>
+    <div class="container">
+        <div class="center" *ngFor="let project runningprojects" (click)="selectproject(project)">
+            <ul><button>{{project.projectName}}</button></ul>
+        </div>
+        <div class="project-runningconfig" *ngIf="selectedproject">
+
+                <label for="">{{selectedproject.running}}</label>
+    
+            
+        </div>
+    </div>
+    
+    
+
+</div> -->
+<div>
+    <app-navbar>
+
+    </app-navbar>
+    <div class="container">
+        <div class="project-list-container">
+            <div *ngFor="let project of runningprojects" >
+                <!-- <i class="fas fa-chevron-down dropdown-icon"></i> -->
+              <div (click)="toggleProjectDetails(project)" class="project-item" [class.selected]="selectedProject === project">{{ project.projectName }} </div>
+             
+              <div *ngIf="selectedProject === project" class="project-details"   >
+                 <p>Status: <span class="status">{{ project.running }}</span></p>
+                 <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
+              </div>
+            </div>
+           </div>
+    </div>
+</div>

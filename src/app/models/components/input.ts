@@ -105,7 +105,7 @@ export class Input extends Item {
     for (const field of this.formFields) {
       switch (field.name) {
         case "customTypes":
-          this.customTypes = new Map<string, string>(Object.entries(field.value));
+          this.customTypes = new Map<string, string>(field.value);
           // adding type reference to global scope
           for (const item of this.customTypes.keys()) {
              this.references.add(item);

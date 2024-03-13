@@ -44,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { NoProjectDialogComponent } from './no-project-dialog/no-project-dialog.component';
+import { RunningpageComponent } from './runningpage/runningpage.component';
 
 
 
@@ -64,7 +65,8 @@ import { NoProjectDialogComponent } from './no-project-dialog/no-project-dialog.
     NavbarComponent,
     ProjectPageComponent,
     NewProjectComponent,
-    NoProjectDialogComponent
+    NoProjectDialogComponent,
+    RunningpageComponent
   ],
   imports: [
     BrowserModule,
