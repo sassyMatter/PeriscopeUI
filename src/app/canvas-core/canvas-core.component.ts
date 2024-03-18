@@ -9,8 +9,8 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
-
-
+ 
+ 
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
  
@@ -30,12 +30,11 @@ export class CanvasCoreComponent implements OnInit {
  
   isDialogOpen = false;
   targetObjectForDialog : any;
-    disablebuildbutton:boolean=false;
+  disablebuildbutton:boolean=false;
   buttonsdiabled:boolean=true;
  
-
-
-  database?:Database;
+ 
+ 
   
   
   openDialog() {
@@ -64,9 +63,9 @@ export class CanvasCoreComponent implements OnInit {
  
  
   ngOnInit(): void {
-
+ 
     this.showServerData();
-
+ 
     setTimeout(() => {
       
       this.runSimulation();
@@ -106,7 +105,7 @@ const canvas = new fabric.Canvas(canvasElement, {
 this.canvas = canvas;
 this.createGridLines(canvas, canvasWidth, canvasHeight);
  
-
+ 
  
 // Set the viewport transform to allow scrolling
 canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
@@ -505,10 +504,10 @@ if (canvasContainer) {
     
     
     if(event){
-      return componentProvider.createComponent(componentType, width, height, undefined, undefined, undefined, undefined ,event);
+      return componentProvider.createComponent(componentType, width, height, undefined, undefined, event);
     }
     console.log("component Type: ", componentType);
-    return componentProvider.createComponent(componentType, width, height, left, top, tableDefinitions, tableNames);
+    return componentProvider.createComponent(componentType, width, height, left, top);
   }
  
   
@@ -628,7 +627,7 @@ if (canvasContainer) {
     }
     return value;
   }
-
+ 
  
   runSimulation(){
     if(this.projectservice.currentproject.canvasData!=null){
@@ -665,7 +664,6 @@ if (canvasContainer) {
             hashMap.set(canvas['id'],newImage );
           }
           
-          
           for(let i of canvasData['objects']) {
             let src = hashMap.get(i['id']) as fabric.Group;
             // console.log("i" ,i);
@@ -679,7 +677,9 @@ if (canvasContainer) {
               //lines connection dekhna hoga duplication ho rha
               if (src  && dest &&(!hashMap2.get(unique1))&&!hashMap2.get(unique2)) {
                 const newLine = this.createConnectLine(src, dest, true);
-                this.canvas?.add(newLine);
+                this.canvas?.add(newLine);  
+                hashMap2.set(unique1,1);
+                hashMap2.set(unique2,1);
               }
             }
           }
@@ -687,8 +687,8 @@ if (canvasContainer) {
           
       }
       
-
-
+ 
+ 
       // this.helloworldService.getCanvasData().pipe(
       //   tap((response: any) => {
       //     // Handle the response from the backend
@@ -808,8 +808,8 @@ if (canvasContainer) {
  
  
  
-
-
-
-
+ 
+ 
+ 
+ 
  
