@@ -199,9 +199,7 @@ button:active {
 opacity: 0.4;
 }
 
-#canvas-container.over {
-border: 5px dashed cyan;
-} @media screen and (min-height:700px) and (max-height:850px) {
+@media screen and (min-height:700px) and (max-height:850px) {
   .flex-container {
       display: flex;
     height:600px;

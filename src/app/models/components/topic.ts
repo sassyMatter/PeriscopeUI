@@ -70,7 +70,7 @@ export class Topic extends Item {
       // setting image options
         img.set(this.imageOptions);
 
-        console.log("image is : " , img);
+        // console.log("image is : " , img);
         // Add the image to the custom group
         this.addWithUpdate(img);
         img.setCoords();

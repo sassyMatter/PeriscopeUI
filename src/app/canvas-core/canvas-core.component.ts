@@ -9,6 +9,7 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
+import { Database } from '../models/components/database';
 
  
  
@@ -27,7 +28,8 @@ export class CanvasCoreComponent implements OnInit {
  
   isDialogOpen = false;
   targetObjectForDialog : any;
-
+  
+  database?:Database;
   
   
   openDialog() {
@@ -45,6 +47,7 @@ export class CanvasCoreComponent implements OnInit {
     private componentFactory : ComponentProvider,
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
+
     private projectservice:ProjectService
    ){
  
@@ -368,7 +371,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const width = img.clientWidth;
     const height = img.clientHeight;
  
-    const newImage = createFabricObject(componentType, width, height, undefined, undefined, e);
+    const newImage = createFabricObject(componentType, width, height, undefined, undefined, undefined, undefined, e);
  
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
@@ -477,15 +480,15 @@ if (canvasContainer) {
  
   }
  
-  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent): fabric.Group{
+  createFabricObject(componentType : string, width:number, height: number, tableNames?: string , tableDefinitions ?: string,left?: number, top?: number, event?: DragEvent): fabric.Group{
     console.log("calling factory");
  
     const componentProvider = new ComponentProvider();
     if(event){
-      return componentProvider.createComponent(componentType, width, height, undefined, undefined, event);
+      return componentProvider.createComponent(componentType, width, height, undefined, undefined, undefined, undefined ,event);
     }
     console.log("component Type: ", componentType);
-    return componentProvider.createComponent(componentType, width, height, left, top);
+    return componentProvider.createComponent(componentType, width, height, left, top, tableDefinitions, tableNames);
   }
  
  
@@ -554,18 +557,19 @@ if (canvasContainer) {
  
   runSimulation(){
       let canvasData = this.projectservice.currentproject.canvasData;
-      this.canvas?.clear();
+      console.log(canvasData);
       if(canvasData != null){
         console.log("data coming");
         let hashMap = new Map<string, fabric.Group>();
           for(let i of canvasData['objects']) {
             let tp=i['top'];
             let lft=i['left'];
-            let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+            let newImage = this.createFabricObject(i['type'], i['width'], i['height'], i['tableDefinitions'], i['tableNames'],lft, tp);
             newImage.setCoords();
             this.canvas?.add(newImage);
             hashMap.set(i['id'],newImage);
           }
+          
           for(let i of canvasData['objects']) {
             for(let j of i['connections']){
               let src = hashMap.get(i['id']);
@@ -579,43 +583,12 @@ if (canvasContainer) {
           this.canvas?.renderAll();
  
       }
-      
-
-
-      // this.helloworldService.getCanvasData().pipe(
-      //   tap((response: any) => {
-      //     // Handle the response from the backend
-      //     let components = response[0]['objects'];
-      //     let hashMap = new Map<string, fabric.Group>();
-      //     for(let i of components) {
-      //       let tp=i['top'];
-      //       let lft=i['left'];
-      //       let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
-      //       newImage.setCoords();
-      //       this.canvas?.add(newImage);
-      //       hashMap.set(i['id'],newImage);
-      //     }
-      //     for(let i of components) {
-      //       for(let j of i['connections']){
-      //         let src = hashMap.get(i['id']);
-      //         let dest = hashMap.get(j['id']);
-      //         if (src && dest) {
-      //           const newLine = this.createConnectLine(src, dest, true);
-      //           this.canvas?.add(newLine);
-      //         }
-      //       }
-      //     }
-      //     this.canvas?.setZoom(1);
-      //     this.canvas?.renderAll();
- 
-      //   }),
-      //   catchError((error) => {
-      //     // Handle any errors that occur during the request
-      //     console.error('Error occurred during get request', error);
-      //     return of(null); // Returning a non-error observable to prevent unhandled error
-      //   })
-      // ).subscribe();
   }
+
+  // loadData(componentType : string){
+  //   if(componentType == 'database'){
+  //   }
+  // }
  
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
     // Grid options
@@ -665,7 +638,7 @@ if (canvasContainer) {
   }
  
 createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
-   console.log("Create line called for ", obj1, obj2);
+  //  console.log("Create line called for ", obj1, obj2);
     const centerPointSource = obj1.getCenterPoint();
     const centerPointTarget = obj2.getCenterPoint();
  

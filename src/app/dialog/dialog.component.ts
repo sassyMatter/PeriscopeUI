@@ -32,7 +32,7 @@ export class DialogComponent implements OnInit {
   openDialog() {
     console.log("Open Dialog called:: we can populate the values here");
     this.isOpen = true;
-
+    
   
   }
 

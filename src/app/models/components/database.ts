@@ -11,19 +11,13 @@ export class Database extends Item {
       "name" : "tableNames",
       "fieldlabel": "Table Names(comma separated)",
       "type" : formFieldType.SHORT_STRING,
-      "value": "Persons",
+      "value": "",
     },
     {
       "name" : "tableDefinitions",
       "fieldlabel": "Editor",
       "type" : formFieldType.CODE_EDITOR,
-      "value": `CREATE TABLE Persons (
-        PersonID int,
-        LastName varchar(255),
-        FirstName varchar(255),
-        Address varchar(255),
-        City varchar(255)
-    );`
+      "value": ``,
     }
   ];
 
@@ -36,7 +30,7 @@ export class Database extends Item {
   tableNames!: string[];
   tableDefinitions!: string[];
 
-  constructor(width: number, height : number, left?: number, top?: number, event?: DragEvent) {
+  constructor(width: number, height : number, tableName?: string, tableDefintion?: string, left?: number, top?: number, event?: DragEvent) {
     super();
     this.connections = [];
     this.imgUrl = "assets/databaseResized.png";
@@ -62,6 +56,11 @@ export class Database extends Item {
         originX: 'center',
         originY: 'center',
       }
+      this.tableDefinitions=[];
+      this.tableNames=[];
+      this.tableNames?.push(tableName as string);
+      this.tableDefinitions?.push(tableDefintion as string);
+
     }
 
 
@@ -70,7 +69,7 @@ export class Database extends Item {
       // setting image options
       img.set(this.imageOptions);
 
-      console.log("image is : " , img);
+      // console.log("image is : " , img);
       // Add the image to the custom group
       this.addWithUpdate(img);
       img.setCoords();
@@ -80,9 +79,6 @@ export class Database extends Item {
       // Render the custom group
       // this.canvas?.renderAll();
     });
-
-    this.tableDefinitions = [];
-    this.tableNames = [];
   }
   override unloadDataFromFormFields(): void {
     console.log("loading data from to formFields for ", this.type);
@@ -99,6 +95,10 @@ export class Database extends Item {
         // Add cases for any other form fields you have in the class
       }
     }
+  }
+
+  setAttributes(){
+
   }
 
   override loadDataToFormFields(): void {
