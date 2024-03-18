@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component,  OnInit } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 import { CanvasService} from "../services/canvas-service";
@@ -12,6 +12,7 @@ import { ProjectService } from '../project.service';
 
 
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
  
  
  
@@ -31,6 +32,8 @@ export class CanvasCoreComponent implements OnInit {
   targetObjectForDialog : any;
   disablebuildbutton:boolean=false;
   buttonsdiabled:boolean=true;
+ 
+
 
   
   
@@ -50,6 +53,8 @@ export class CanvasCoreComponent implements OnInit {
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
     private projectservice:ProjectService,
+    private router:Router,
+    private cdr:ChangeDetectorRef
     // private componentProcider:ComponentProvider
    ){
  
@@ -557,9 +562,9 @@ if (canvasContainer) {
     );
   }
   sendCanvasDataToBackend(): void {
- 
+    
     var objects =  this.canvas?.getObjects();
- 
+    if(objects!=null){
     console.log("objects:: " , objects);
     const serializedCanvas = this.canvas?.toJSON(["id"]);
     console.log("serializedCanvas ::", serializedCanvas);
@@ -571,21 +576,30 @@ if (canvasContainer) {
       const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
       console.log("filteredCanvasData :: ", filteredCanvasData);
       const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
- 
+      if(filteredCanvasData.objects.length!=0){
+        console.log("serialized Data :: " , serializedData);
+        this.helloworldService.sendCanvasData(serializedData).pipe(
+          tap((response: any) => {
+            // Handle the response from the backend
+            console.log('Post request successful', response);
+         
+              window.location.reload();
+          }),
+          catchError((error) => {
+            // Handle any errors that occur during the request
+            console.error('Error occurred during post request', error);
+            return of(null); // Returning a non-error observable to prevent unhandled error
+          })
+        ).subscribe(
+         
+        );
+      }
       // const serializedData = JSON.stringify(serializedCanvas);
-      console.log("serialized Data :: " , serializedData);
-      this.helloworldService.sendCanvasData(serializedData).pipe(
-        tap((response: any) => {
-          // Handle the response from the backend
-          console.log('Post request successful', response);
-        }),
-        catchError((error) => {
-          // Handle any errors that occur during the request
-          console.error('Error occurred during post request', error);
-          return of(null); // Returning a non-error observable to prevent unhandled error
-        })
-      ).subscribe();
-    }
+     
+    }}
+   
+    // this.cdr.detectChanges();
+    
   }
  
  
@@ -630,6 +644,8 @@ if (canvasContainer) {
           for(let canvas of canvasData['objects']) {
             let tp=canvas['top'];
             let lft=canvas['left'];
+            // let tp=canvas['top']-25;
+            // let lft=canvas['left']-25;
             let height=canvas['height'];
             let width=canvas['width'];
             // console.log("top left width height" , tp,lft,width,height);

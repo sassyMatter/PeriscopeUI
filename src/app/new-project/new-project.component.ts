@@ -90,43 +90,17 @@ export class NewProjectComponent implements OnInit {
     if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
       this.issaving=true;
-      this.runningconfigurations.url="https://google.co.in/";
-      this.runningconfigurations.isrunning=false;
-      this.project.runningconfigurations=this.runningconfigurations;
-      // this.projectservice.saveprojects(this.project).subscribe();
-      console.log(this.project.runningconfigurations);
-      console.log(this.project);
-      console.log(this.configurations);
-      console.log(this.runningconfigurations);
-        // this.projectservice.saveprojects(this.project).toPromise().then((
-        //   response=>{
-        //     console.log(response);
-        //       this.router.navigate(['/projects']).then(() => {
-        //       // window.location.reload();
-              
-        //       });
-        //       this.issaving=false;
-        //   }
-        // )
-        // )
         this.projectservice.saveprojects(this.project).subscribe(
           {
-           
             next:data=>{
               console.log(data);
-                     this.router.navigate(['/projects']).then(() => {
-                        window.location.reload();
-                  
-                  });
-                  this.issaving=false;
-                  
+              this.issaving=false;    
             },
             error:err=>{
               console.log(err);
             }
           }
         );
-     
     }
     
     

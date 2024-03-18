@@ -20,16 +20,22 @@
 
     </app-navbar>
     <div class="container">
+        
         <div class="project-list-container">
-            <div *ngFor="let project of runningprojects" >
+            <div  *ngFor="let project of runningprojects"   >
                 <!-- <i class="fas fa-chevron-down dropdown-icon"></i> -->
               <div (click)="toggleProjectDetails(project)" class="project-item" [class.selected]="selectedProject === project">{{ project.projectName }} </div>
              
               <div *ngIf="selectedProject === project" class="project-details"   >
                  <p>Status: <span class="status">{{ project.running }}</span></p>
-                 <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
+                 <a href="{{ project.url }}" target="_blank" class="project-link">{{ project.url }}</a>
               </div>
             </div>
-           </div>
+            <div class="noproject" *ngIf="runningprojects.length==0">
+                <div>All projects current running status is false</div>
+            </div>
+        </div>
+        
+
     </div>
 </div>
