@@ -101,13 +101,17 @@ export class Func extends Item {
       left: event.offsetX - 25,
       top: event.offsetY - 25,
       centeredScaling: true,
-      originX: 'center',
-      originY: 'center',
+      // originX: 'center',
+      // originY: 'center',
+      originX: 'left',
+      originY: 'top',
     } : {
       width: width,
       height: height,
-      left: left,
-      top: top,
+      left: left as number +30,
+      top: top as number + 30,
+      // left:left,
+      // top:top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',
@@ -142,7 +146,7 @@ export class Func extends Item {
 
 
   }
-
+  
   override loadDataToFormFields(): void {
     for (const field of this.formFields) {
       switch (field.name) {
@@ -156,7 +160,8 @@ export class Func extends Item {
           field.value = this.functionBody;
           break;
         case "parameters":
-          field.value = this.parameters;
+     //     field.value = this.getmap(this.parameters);
+          field.value=this.parameters;
           break;
         case "returnType":
           field.value = this.returnType;

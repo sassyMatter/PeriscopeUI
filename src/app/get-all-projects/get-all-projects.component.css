@@ -20,29 +20,67 @@
     outline: none;
     box-shadow: 0 9px #999;
   }
+  .selected button{
+    background-color:#555;
+    transition: 0.3s all;
+    cursor: pointer;
+    color:white;
+  }
 
   .side_navbar button:hover {
     cursor: pointer;
     transform: scale(0.98); 
-    background-color: #555 !important;
-    color: white !important;
+   
   }
   
-  .side_navbar button:active, .side_navbar button:focus, .side_navbar button:visited{
+  /* .side_navbar button:active, .side_navbar button:focus, .side_navbar button:visited{
     background-color: #555 !important;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
     color: white !important;
     transition: 0.2s all;
-  }
+  } */
+  .dialog{
+ 
+   width:400px;
+   height:150px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: lightgrey;
+   gap:10px;
+   /* display: inline-flex;
+    position: absolute;
+    top:  18%;
+    left:  40%;
+    transform: translate(-15%, -40%); */
+   margin: 22rem auto;
 
+   
+    /* j */
+  }
+  .dialog-button{
+    position: relative;
+    background-color:#1E90FF;
+    color:white; 
+    /* display: block; */
+    /* margin: 0 10px; */
+  }
+  .message{
+   color:black;
+   margin-top: 10px;
+   margin-left: 30px;
+   
+   /* display: inline-block; */
+   font-size: 1.2em;
+  }
   div.configForm {
     display: inline-flex;
     position: absolute;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10vw;
-    margin-top: 25vh;
+    top:  50%;
+    left:  45%;
+    transform: translate(-50%, -45%);
   }
   
   @media screen and (max-width: 700px) {

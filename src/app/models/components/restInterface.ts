@@ -108,19 +108,24 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
       left: event.offsetX-25,
       top: event.offsetY-25,
       centeredScaling: true,
-      originX: 'center',
-      originY: 'center',
+      // originX: 'center',
+      // originY: 'center',
+      originX: 'left',
+        originY: 'top',
     }
   }
   else{
     this.imageOptions = {
       width: width,
       height: height,
-      left: left,
-      top: top,
+      left: left as number +25,
+      top: top as number +25,
+    //  left:left,
+    //     top:top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',
+      
     }
   }
 
@@ -155,19 +160,29 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
 
 
   }
+  
+
 
   override loadDataToFormFields(): void {
     console.log("loading data from to formFields for ", this.type);
+    
     for (const field of this.formFields) {
       switch (field.name) {
         case "url":
           field.value = this.url;
           break;
         case "headers":
-          field.value = this.headers;
+        
+          // field.value =this.getmap(this.headers);
+         console.log(this.headers);
+         
+          field.value=this.headers;
+      
           break;
         case "requestBody":
-          field.value = this.requestBody;
+          
+          // field.value =this.getmap(this.requestBody);
+          field.value=this.requestBody;
           break;
         case "requestUrl":
           field.value = this.requestUrl;

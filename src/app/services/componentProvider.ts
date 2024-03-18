@@ -13,36 +13,245 @@ import { Input } from "../models/components/input";
 )
 export class ComponentProvider {
 
+  public canvasData: any;
+
+  getmap(obj:any){
+    const mymap=new Map<string, string>();
+    for (const [key, value] of Object.entries(obj)) {
+      // console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+      if(`Value: ${value}` .includes(':'))
+      {
+        let values=(`Value: ${value}`);
+        let keyvalues=(values.substring(7));
+        let parts = keyvalues.split(",");
+        for (let i = 0; i < parts.length; i += 2) {
+          mymap.set(parts[i], parts[i + 1]);
+        }
+      }
+       
+     
+    }
+    return mymap;
+  }
+  //to parse json types of custom components
+  convertcustomtypes(obj:any){
+    
+    const mymap=new Map<string, string>();
+    
+
+    for (const [key, value] of Object.entries(obj)) {
+      // console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+
+      if(`Value: ${value}` .includes(','))
+      {
+       const input=(`Value: ${value}`);
+       const parts = input.substring(7);
+     
+       let key = '',values = '',bool = 0;
+
+
+        for (let i = 0; i < parts.length; i++) {
+            
+            if(parts[i]==' '&&i>0&&parts[i-1]==',')
+              continue;
+            if(parts[i]==','&&i>0&&parts[i-1]=='}')
+            { 
+                console.log("yes");
+                continue;
+            }
+            if (parts[i] === '}') {
+              values += parts[i];
+              mymap.set(key, values);
+              key = '';
+              values = '';
+              bool = 0;
+              while(i+1<parts.length&&parts[i+1]!=',')
+                i++;
+              i++;
+
+            } 
+            else if(parts[i]==','&&parts[i+1]=='{'){
+              bool=1;
+            }
+            else if (bool) {
+              values += parts[i];
+            }
+            else {
+              key += parts[i];
+            }
+          }
+        }
+    }
+    return mymap;
+  }
+
+  public canvasData: any;
+
+  getmap(obj:any){
+    const mymap=new Map<string, string>();
+    for (const [key, value] of Object.entries(obj)) {
+      // console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+      if(`Value: ${value}` .includes(':'))
+      {
+        let values=(`Value: ${value}`);
+        let keyvalues=(values.substring(7));
+        let parts = keyvalues.split(",");
+        for (let i = 0; i < parts.length; i += 2) {
+          mymap.set(parts[i], parts[i + 1]);
+        }
+      }
+       
+     
+    }
+    return mymap;
+  }
+  //to parse json types of custom components
+  convertcustomtypes(obj:any){
+    
+    const mymap=new Map<string, string>();
+    
+
+    for (const [key, value] of Object.entries(obj)) {
+      // console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+
+      if(`Value: ${value}` .includes(','))
+      {
+       const input=(`Value: ${value}`);
+       const parts = input.substring(7);
+     
+       let key = '',values = '',bool = 0;
+
+
+        for (let i = 0; i < parts.length; i++) {
+            
+            if(parts[i]==' '&&i>0&&parts[i-1]==',')
+              continue;
+            if(parts[i]==','&&i>0&&parts[i-1]=='}')
+            { 
+                console.log("yes");
+                continue;
+            }
+            if (parts[i] === '}') {
+              values += parts[i];
+              mymap.set(key, values);
+              key = '';
+              values = '';
+              bool = 0;
+              while(i+1<parts.length&&parts[i+1]!=',')
+                i++;
+              i++;
+
+            } 
+            else if(parts[i]==','&&parts[i+1]=='{'){
+              bool=1;
+            }
+            else if (bool) {
+              values += parts[i];
+            }
+            else {
+              key += parts[i];
+            }
+          }
+        }
+    }
+    return mymap;
+  }
+
     createComponent(type: string, width: number, height : number, left?: number, top?: number, tableDefinitions ?: string, tableNames?: string , event?: DragEvent): Item {
       switch (type) {
         case 'database':
           if(!event){
-            return new Database(width, height, tableDefinitions, tableNames, left, top);                              //creating component from backend
+            const database = new Database(width, height, tableDefinitions, tableNames, left,top);
+            
+              // provide null check for canvas data, component provider ideally should be injected instead of being created everywhere
+            if(this.canvasData!=null){
+              database.tableDefinitions = this.canvasData['tableDefinitions'];
+              database.tableNames = this.canvasData['tableNames'] 
+              database.loadDataToFormFields();
+            }
+              
+            return database;  
+             
           }
-          return new Database(width, height, undefined, undefined, undefined, undefined, event);    //creating component on frontend
+          const database = new Database(width, height, undefined, undefined, undefined, undefined, event); 
+        
+        
+          
+          return database  //creating component on frontend
         case 'function':
           if(!event){
             return new Func(width, height, left, top);
           }
-          return new Func(width, height, undefined, undefined, undefined, undefined, event);
+          return new Func(width, height, undefined, undefined, event);
         case 'restInterface':
           if(!event){
-            return new RestInterface(width, height, tableDefinitions, tableNames, left, top);
+            const restinterface= new RestInterface(width, height, tableDefinitions, tableNames, left, top);
+            
+            if(this.canvasData!=null){
+              restinterface.url=this.canvasData['url'];
+              restinterface.headers=this.getmap(this.canvasData['headers']);
+              console.log(restinterface.headers);
+              restinterface.requestBody=this.getmap(this.canvasData['requestBody']);
+              restinterface.requestUrl=this.canvasData['requestUrl'];
+              restinterface.apiType=this.canvasData['apiType'];
+              restinterface.httpMethod=this.canvasData['httpMethod'];
+              restinterface.methodName=this.canvasData['methodName'];
+              restinterface.loadDataToFormFields();
+            }
+            return restinterface;
+            
           } 
           return new RestInterface(width, height, undefined, undefined, undefined, undefined, event);
         case 'queue':
           if(!event){
-            return new Topic(width, height, tableDefinitions, tableNames, left, top);
+            const queue= new Topic(width, height, tableDefinitions, tableNames, left, top);
+         
+            if(this.canvasData!=null){
+              
+              queue.topic=this.canvasData['topic'];
+              queue.loadDataToFormFields();
+            }
+            return queue;
           }
           return new Topic(width, height, undefined, undefined, undefined, undefined, event);
         case 'customGroup':
           if(!event){
-            return new CustomGroup(width, height, tableDefinitions, tableNames, left, top);
+            const customgroup= new CustomGroup(width, height, tableDefinitions, tableNames, left, top);
+            
+            if(this.canvasData!=null){
+              customgroup.loadDataToFormFields();
+            }
+            return customgroup;
           }
           return new CustomGroup(width, height, undefined, undefined, undefined, undefined, event);
         case 'input':
           if(!event){
-            return new Input(width, height, tableDefinitions, tableNames, left, top);
+            const input= new Input(width, height, tableDefinitions, tableNames, left, top);
+            if(this.canvasData!=null){
+              // input['customTypes']=this.canvasData['customTypes'];
+              //input meh krna hai
+              // console.log(this.canvasData['customTypes']);
+              input.customTypes=this.convertcustomtypes(this.canvasData['customTypes']);
+              // console.log("input function printing ",input['customTypes']);
+              input.loadDataToFormFields();
+            }
+            return input;
           }
           return new Input(width, height, undefined, undefined, undefined, undefined, event);
         default:

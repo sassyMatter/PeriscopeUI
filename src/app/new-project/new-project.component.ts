@@ -7,6 +7,7 @@ import { Configurations } from '../project-page/configurations';
 import { Project } from '../project-page/project';
 import { Router } from '@angular/router';
 import { ProjectService } from '../project.service';
+import { RunningConfigurations } from '../project-page/RunningConfigurations';
 
 @Component({
   selector: 'app-new-project',
@@ -15,7 +16,8 @@ import { ProjectService } from '../project.service';
 })
 export class NewProjectComponent implements OnInit {
   configurations : Configurations=new Configurations;
-  project: Project =new Project(this.configurations);
+  runningconfigurations:RunningConfigurations=new RunningConfigurations;
+  project: Project =new Project(this.configurations,this.runningconfigurations);
   
   private roles: string[] = [];
   isDropDownOpened: boolean = false;
@@ -26,6 +28,7 @@ export class NewProjectComponent implements OnInit {
   showNav: boolean = true;
   projects?: Project[]  ;
   
+  issaving:boolean=false;
   
   constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private builder:FormBuilder,private router:Router,private projectservice:ProjectService) { }
 
@@ -73,21 +76,31 @@ export class NewProjectComponent implements OnInit {
     this.isDropDownOpened = false;
   }
   // 
+  isValidInput(projectName :string) {
+    const regex = /^[a-zA-Z0-9]+$/; // Matches only alphanumeric characters
+    return regex.test(projectName);
+  }
+  
   
  
  
   saveproject(){
- 
+    
     
     if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
-      // this.projectservice.saveprojects(this.project).subscribe();
-        this.projectservice.saveprojects(this.project).toPromise().then(()=>{
-          this.router.navigate(['/projects']).then(() => {
-          window.location.reload();
-          });
-        })
-     
+      this.issaving=true;
+        this.projectservice.saveprojects(this.project).subscribe(
+          {
+            next:data=>{
+              console.log(data);
+              this.issaving=false;    
+            },
+            error:err=>{
+              console.log(err);
+            }
+          }
+        );
     }
     
     

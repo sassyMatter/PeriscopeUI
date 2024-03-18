@@ -6,8 +6,10 @@
     <a href="#" class="navbar-brand">Periscope</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Home</a>
+        <a *ngIf="!isproject" class="nav-link" ng routerLink="/home">Home</a>
         <a routerLink="/projects" class="nav-link" >Projects</a>
+        <a routerLink="/runningprojects" class="nav-link" >Status</a>
+      
       
       </li>
     </ul>

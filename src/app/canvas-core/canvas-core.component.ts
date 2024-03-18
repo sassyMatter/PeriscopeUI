@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component,  OnInit } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 import { CanvasService} from "../services/canvas-service";
@@ -9,8 +9,10 @@ import { catchError, of, tap } from 'rxjs';
 import { ConnectionManager } from '../services/connnectionManager';
 import { Item } from '../models/components/component';
 import { ProjectService } from '../project.service';
-import { Database } from '../models/components/database';
 
+
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
  
  
  
@@ -24,11 +26,15 @@ export class CanvasCoreComponent implements OnInit {
  
   public response = 'Could not connect to server!!';
  
-  canvas : fabric.Canvas | null = null;
+  canvas :fabric.Canvas | null = null;
  
   isDialogOpen = false;
   targetObjectForDialog : any;
-  
+    disablebuildbutton:boolean=false;
+  buttonsdiabled:boolean=true;
+ 
+
+
   database?:Database;
   
   
@@ -47,8 +53,10 @@ export class CanvasCoreComponent implements OnInit {
     private componentFactory : ComponentProvider,
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
-
-    private projectservice:ProjectService
+    private projectservice:ProjectService,
+    private router:Router,
+    private cdr:ChangeDetectorRef
+    // private componentProcider:ComponentProvider
    ){
  
     this.canvas = new fabric.Canvas('canvas', { renderOnAddRemove: false });
@@ -56,12 +64,16 @@ export class CanvasCoreComponent implements OnInit {
  
  
   ngOnInit(): void {
+
     this.showServerData();
 
-   
-      console.log("running simulation");
+    setTimeout(() => {
+      
       this.runSimulation();
-    
+    },  0);
+      // console.log("running simulation");
+      // this.runSimulation();
+  
     let createFabricObject = this.createFabricObject;
     let componentFactory = this.componentFactory;
    
@@ -94,7 +106,7 @@ const canvas = new fabric.Canvas(canvasElement, {
 this.canvas = canvas;
 this.createGridLines(canvas, canvasWidth, canvasHeight);
  
- 
+
  
 // Set the viewport transform to allow scrolling
 canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
@@ -191,6 +203,10 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
   });
  
 });
+canvas.on('mousedown',(options)=>{
+  
+  console.log("object selected");
+})
  
  
  
@@ -236,7 +252,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
       evented: false,
     });
     canvas.add(line);
- 
+  
     // Attach an event listener to the `mouse:move` event on the canvas
     canvas.on('mouse:move', (event: fabric.IEvent) => {
       const pointer = canvas.getPointer(event.e);
@@ -293,6 +309,7 @@ canvas.on('mouse:down', (event: fabric.IEvent) => {
                 isConnected = true;
                 const line = this.createConnectLine(target, obj, isShiftKeyPressed);
                 canvas.add(line);
+                console.log(canvas.add(line));
                 canvas.renderAll();
  
           }
@@ -371,7 +388,7 @@ function handleDrop(this: HTMLElement, e: DragEvent): boolean {
     const width = img.clientWidth;
     const height = img.clientHeight;
  
-    const newImage = createFabricObject(componentType, width, height, undefined, undefined, undefined, undefined, e);
+    const newImage = createFabricObject(componentType, width, height, undefined, undefined, e, undefined);
  
     console.log("adding image to canvas " , img);
     console.log(canvas.getObjects());
@@ -480,10 +497,13 @@ if (canvasContainer) {
  
   }
  
-  createFabricObject(componentType : string, width:number, height: number, tableNames?: string , tableDefinitions ?: string,left?: number, top?: number, event?: DragEvent): fabric.Group{
+  createFabricObject(componentType : string, width:number, height: number, left?: number, top?: number, event?: DragEvent, canvasData?: any): fabric.Group{
     console.log("calling factory");
  
     const componentProvider = new ComponentProvider();
+    componentProvider.canvasData = canvasData;
+    
+    
     if(event){
       return componentProvider.createComponent(componentType, width, height, undefined, undefined, undefined, undefined ,event);
     }
@@ -491,6 +511,7 @@ if (canvasContainer) {
     return componentProvider.createComponent(componentType, width, height, left, top, tableDefinitions, tableNames);
   }
  
+  
  
   showServerData(){
     // this.helloworldService.getServerResponse()
@@ -499,11 +520,52 @@ if (canvasContainer) {
     //   this.response = data.response;
     // });
   }
- 
+  buildCanvasData():void{
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.disablebuildbutton=true;
+      this.projectservice.buildcanvasdata().toPromise().then(
+        response => {
+          console.log(response);
+          console.log("response coming");
+       
+        console.log(this.disablebuildbutton);
+        // setTimeout(()=>{
+        //   // this.disablebuildbutton=false;
+        // },1000)
+        this.disablebuildbutton=false;
+       }
+      ).catch(
+       error => {
+          console.error('Error occurred:', error);
+       }
+      );
+    }
+  
+          // this.disablebuildbutton=false;
+  }
+  runCanvasData(){
+    
+    this.projectservice.runproject().toPromise().then(
+      response => {
+        console.log(response);
+        console.log("response coming");
+       
+        this.projectservice.updateproject(this.projectservice.currentproject).toPromise();
+      // setTimeout(()=>{
+      //   // this.disablebuildbutton=false;
+      // },1000)
+      
+     }
+    ).catch(
+     error => {
+        console.error('Error occurred:', error);
+     }
+    );
+  }
   sendCanvasDataToBackend(): void {
- 
+    
     var objects =  this.canvas?.getObjects();
- 
+    if(objects!=null){
     console.log("objects:: " , objects);
     const serializedCanvas = this.canvas?.toJSON(["id"]);
     console.log("serializedCanvas ::", serializedCanvas);
@@ -515,27 +577,40 @@ if (canvasContainer) {
       const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
       console.log("filteredCanvasData :: ", filteredCanvasData);
       const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
- 
+      if(filteredCanvasData.objects.length!=0){
+        console.log("serialized Data :: " , serializedData);
+        this.helloworldService.sendCanvasData(serializedData).pipe(
+          tap((response: any) => {
+            // Handle the response from the backend
+            console.log('Post request successful', response);
+         
+              window.location.reload();
+          }),
+          catchError((error) => {
+            // Handle any errors that occur during the request
+            console.error('Error occurred during post request', error);
+            return of(null); // Returning a non-error observable to prevent unhandled error
+          })
+        ).subscribe(
+         
+        );
+      }
       // const serializedData = JSON.stringify(serializedCanvas);
-      console.log("serialized Data :: " , serializedData);
-      this.helloworldService.sendCanvasData(serializedData).pipe(
-        tap((response: any) => {
-          // Handle the response from the backend
-          console.log('Post request successful', response);
-        }),
-        catchError((error) => {
-          // Handle any errors that occur during the request
-          console.error('Error occurred during post request', error);
-          return of(null); // Returning a non-error observable to prevent unhandled error
-        })
-      ).subscribe();
-    }
+     
+    }}
+   
+    // this.cdr.detectChanges();
+    
   }
  
  
   // these methods are used to add support for native Map object including deeply nested values
   replacer(key: any, value: any) {
     if(value instanceof Map) {
+      
+      console.log("value from replacer's map");
+      console.log(typeof value);
+      
       return {
         dataType: 'Map',
         value: Array.from(value.entries()), // or with spread: value: [...value]
@@ -553,42 +628,101 @@ if (canvasContainer) {
     }
     return value;
   }
- 
+
  
   runSimulation(){
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.buttonsdiabled=false;
+    }
+   
       let canvasData = this.projectservice.currentproject.canvasData;
-      console.log(canvasData);
       if(canvasData != null){
-        console.log("data coming");
+        // let canvasData = JSON.parse(canvasDataJson, this.reviver);
+        console.log("data is coming ", canvasData);
         let hashMap = new Map<string, fabric.Group>();
-          for(let i of canvasData['objects']) {
-            let tp=i['top'];
-            let lft=i['left'];
-            let newImage = this.createFabricObject(i['type'], i['width'], i['height'], i['tableDefinitions'], i['tableNames'],lft, tp);
+        let hashMap2=new Map<string,number>();
+        // let hashMap3=new Map<fabric.Group,fabric.Group>();
+          for(let canvas of canvasData['objects']) {
+            let tp=canvas['top'];
+            let lft=canvas['left'];
+            // let tp=canvas['top']-25;
+            // let lft=canvas['left']-25;
+            let height=canvas['height'];
+            let width=canvas['width'];
+            // console.log("top left width height" , tp,lft,width,height);
+            let newImage: fabric.Group = this.createFabricObject(canvas['type'],width, height, lft, tp, undefined, canvas);
             newImage.setCoords();
-            this.canvas?.add(newImage);
-            hashMap.set(i['id'],newImage);
+            newImage.height=height;
+            newImage.width=width;
+            newImage.top=tp;
+            newImage.left=lft;
+            // console.log("newimage ",newImage);
+            setTimeout(() => {
+              this.canvas?.add(newImage);
+            },  0);
+            // this.canvas?.renderAll();
+           
+            hashMap.set(canvas['id'],newImage );
           }
           
+          
           for(let i of canvasData['objects']) {
+            let src = hashMap.get(i['id']) as fabric.Group;
+            // console.log("i" ,i);
+            // console.log("connections of i,",i['connections']);
+          
             for(let j of i['connections']){
-              let src = hashMap.get(i['id']);
-              let dest = hashMap.get(j['id']);
-              if (src && dest) {
+              
+              let dest = hashMap.get(j['id']) as fabric.Group;
+              let unique1=i['id']+j['id'];
+              let unique2=j['id']+i['id'];
+              //lines connection dekhna hoga duplication ho rha
+              if (src  && dest &&(!hashMap2.get(unique1))&&!hashMap2.get(unique2)) {
                 const newLine = this.createConnectLine(src, dest, true);
                 this.canvas?.add(newLine);
               }
             }
           }
-          this.canvas?.renderAll();
- 
+          // this.canvas?.renderAll();
+          
       }
-  }
+      
 
-  // loadData(componentType : string){
-  //   if(componentType == 'database'){
-  //   }
-  // }
+
+      // this.helloworldService.getCanvasData().pipe(
+      //   tap((response: any) => {
+      //     // Handle the response from the backend
+      //     let components = response[0]['objects'];
+      //     let hashMap = new Map<string, fabric.Group>();
+      //     for(let i of components) {
+      //       let tp=i['top'];
+      //       let lft=i['left'];
+      //       let newImage: fabric.Group = this.createFabricObject(i['type'], i['width'], i['height'], lft, tp);
+      //       newImage.setCoords();
+      //       this.canvas?.add(newImage);
+      //       hashMap.set(i['id'],newImage);
+      //     }
+      //     for(let i of components) {
+      //       for(let j of i['connections']){
+      //         let src = hashMap.get(i['id']);
+      //         let dest = hashMap.get(j['id']);
+      //         if (src && dest) {
+      //           const newLine = this.createConnectLine(src, dest, true);
+      //           this.canvas?.add(newLine);
+      //         }
+      //       }
+      //     }
+      //     this.canvas?.setZoom(1);
+      //     this.canvas?.renderAll();
+ 
+      //   }),
+      //   catchError((error) => {
+      //     // Handle any errors that occur during the request
+      //     console.error('Error occurred during get request', error);
+      //     return of(null); // Returning a non-error observable to prevent unhandled error
+      //   })
+      // ).subscribe();
+  }
  
   createGridLines(canvas: fabric.Canvas, width: number, height: number) {
     // Grid options
@@ -637,8 +771,8 @@ if (canvasContainer) {
     });
   }
  
-createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
-  //  console.log("Create line called for ", obj1, obj2);
+   createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
+   console.log("Create line called for ", obj1, obj2);
     const centerPointSource = obj1.getCenterPoint();
     const centerPointTarget = obj2.getCenterPoint();
  
@@ -674,4 +808,8 @@ createConnectLine(obj1: fabric.Group, obj2: fabric.Group, directional:boolean) {
  
  
  
+
+
+
+
  

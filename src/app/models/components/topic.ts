@@ -26,6 +26,17 @@ export class Topic extends Item {
 
   // custom properties
   topic: string;
+  // "customTypes": null,
+  parameters!: Map<string, string>;
+  returnType!: string;
+  functionBody: string;
+  functionName: string;
+ 
+  deserializationClass: string;
+  functionType: string;
+  // "tableNames": null,
+  tableDefinitions: string[];
+  tableNames:string[];
 
 
   override formFields: Field[] = [
@@ -49,16 +60,19 @@ export class Topic extends Item {
     this.imageOptions = event ? {
       width: width + 14,
       height: height + 14,
-      left: event.offsetX - 25,
+      left: event.offsetX -25,
       top: event.offsetY - 25,
       centeredScaling: true,
-      originX: 'center',
-      originY: 'center',
+      // originX: 'center',
+      // originY: 'center',
+      originX: 'left',
+        originY: 'top',
     } : {
       width: width,
       height: height,
-      left: left,
-      top: top,
+      left: left as number+30,
+      top: top as number+25,
+      
       centeredScaling: true,
       originX: 'center',
       originY: 'center',
@@ -84,6 +98,17 @@ export class Topic extends Item {
 
       // initializing custom topics
       this.topic = '';
+      this.tableDefinitions=[];
+      this.tableNames=[];
+      this.parameters = new Map<string, string>();
+      this.returnType = '';
+      this.functionBody = '';
+      this.functionName = '';
+      this.topic = '';
+      this.deserializationClass = '';
+      this.functionType = '';
+
+
 
 
   }

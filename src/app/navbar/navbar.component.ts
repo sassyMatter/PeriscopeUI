@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,14 +15,20 @@ export class NavbarComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  isproject:boolean=true;
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService,private projectservice:ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     // console.log("logged In :: " , this.isLoggedIn);
-
+    if(this.projectservice.currentproject.projectName!=null){
+      this.isproject=false;
+    }
+    else{
+      this.isproject=true;
+    }
+    console.log(this.isproject);
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -36,6 +43,7 @@ export class NavbarComponent {
   }
 
   logout(): void {
+    this.projectservice.logout();
     this.authService.logout();
   }
 
@@ -46,6 +54,7 @@ export class NavbarComponent {
   clickedOutside(): void {
     this.isDropDownOpened = false;
   }
+  
   
 }
 
