@@ -166,7 +166,7 @@
   <div>
 
     <button type="button" (click)="sendCanvasDataToBackend()" >Save</button>
-    <button type="button " (click)="runCanvasData()" [disabled]="buttonsdiabled" [ngClass]="{'runcanvas':buttonsdiabled,'runcanvas1':!buttonsdiabled}">Run</button>
+    <button type="button " (click)="runCanvasData()" [disabled]="disablebuildbutton" [ngClass]="{'runcanvas':buttonsdiabled,'runcanvas1':!buttonsdiabled}">Run</button>
     <button type="button" (click)="buildCanvasData()"  [disabled]="buttonsdiabled" [ngClass]="{'runcanvas':buttonsdiabled,'runcanvas1':!buttonsdiabled}">Build</button>
      <!-- <button type="button" (click)="runSimulation()">Go Live</button> -->
   </div>

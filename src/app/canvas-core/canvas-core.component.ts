@@ -543,16 +543,18 @@ if (canvasContainer) {
           // this.disablebuildbutton=false;
   }
   runCanvasData(){
-    
+    this.disablebuildbutton=true;
     this.projectservice.runproject().toPromise().then(
       response => {
         console.log(response);
         console.log("response coming");
-       
-        this.projectservice.updateproject(this.projectservice.currentproject).toPromise();
+        
+        this.disablebuildbutton=false;
+        // 
       // setTimeout(()=>{
-      //   // this.disablebuildbutton=false;
-      // },1000)
+      //   this.disablebuildbutton=false;
+      //   // this.projectservice.updateproject(this.projectservice.currentproject).toPromise();
+      // },7000)
       
      }
     ).catch(
@@ -666,9 +668,7 @@ if (canvasContainer) {
           
           for(let i of canvasData['objects']) {
             let src = hashMap.get(i['id']) as fabric.Group;
-            // console.log("i" ,i);
-            // console.log("connections of i,",i['connections']);
-          
+           
             for(let j of i['connections']){
               
               let dest = hashMap.get(j['id']) as fabric.Group;

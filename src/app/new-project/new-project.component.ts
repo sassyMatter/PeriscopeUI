@@ -16,9 +16,15 @@ import { RunningConfigurations } from '../project-page/RunningConfigurations';
 })
 export class NewProjectComponent implements OnInit {
   configurations : Configurations=new Configurations;
-  runningconfigurations:RunningConfigurations=new RunningConfigurations;
+  url:string="";
+  isrunning:boolean=true;
+  runningconfigurations:RunningConfigurations=new RunningConfigurations(this.url,this.isrunning);
+  runconfigurations:RunningConfigurations={
+    url:"linkk will be here",
+    isrunning:true
+  };
   project: Project =new Project(this.configurations,this.runningconfigurations);
-  
+
   private roles: string[] = [];
   isDropDownOpened: boolean = false;
   isLoggedIn = false;
@@ -89,12 +95,22 @@ export class NewProjectComponent implements OnInit {
     
     if(this.project.projectName!=null && this.configurations.cpus!=null && this.configurations.memory!=null && this.configurations.storage!=null)
     {
+      // this.runningconfigurations.isrunning=false;
+      // this.runningconfigurations.url="https://www.google.co.in/";
+      this.project.runningconfigurations=this.runconfigurations;
+      console.log(this.project);
+      console.log(this.runconfigurations);
       this.issaving=true;
         this.projectservice.saveprojects(this.project).subscribe(
           {
+            
             next:data=>{
+              console.log(this.project);
               console.log(data);
               this.issaving=false;    
+              this.router.navigate(['/projects']).then(() => {
+                window.location.reload();
+              });
             },
             error:err=>{
               console.log(err);

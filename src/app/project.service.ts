@@ -11,7 +11,9 @@ import { RunningConfigurations } from './project-page/RunningConfigurations';
 })
 export class ProjectService {
   configurations : Configurations =new Configurations;
-  runningconfigurations:RunningConfigurations=new RunningConfigurations;
+  url:string="";
+  isrunning:boolean=true;
+  runningconfigurations:RunningConfigurations=new RunningConfigurations(this.url,this.isrunning);
   currentproject: Project =new Project(this.configurations,this.runningconfigurations);
   ishome:boolean=false;
   public runningproject: Project[] =[];
@@ -103,7 +105,7 @@ export class ProjectService {
     }
     runproject(){
       
-      return this.httpclient.post<string>(`${this.baseURLrunproject}`,this.currentproject.projectName).pipe();
+      return this.httpclient.post<String>(`${this.baseURLrunproject}`,this.currentproject.projectName).pipe();
     }
     runningprojects(){
      
@@ -126,11 +128,6 @@ export class ProjectService {
        
         
     }
-
-
-    
-    
-   
 
 }
 

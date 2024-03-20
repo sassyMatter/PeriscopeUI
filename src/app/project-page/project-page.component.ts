@@ -17,7 +17,9 @@ import { RunningConfigurations } from './RunningConfigurations';
 })
 export class ProjectPageComponent implements OnInit {
   configurations : Configurations =new Configurations;
-  runningconfigurations:RunningConfigurations=new RunningConfigurations;;
+  url:string="";
+  isrunning:boolean=true;
+  runningconfigurations:RunningConfigurations=new RunningConfigurations(this.url,this.isrunning);
   project: Project= new Project(this.configurations,this.runningconfigurations);
   private roles: string[] = [];
   isDropDownOpened: boolean = false;
