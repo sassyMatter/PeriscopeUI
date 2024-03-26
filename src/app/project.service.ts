@@ -116,8 +116,7 @@ export class ProjectService {
            for(let i of response.data){
             this.runningproject.push(i as Project);
            }
-          //  console.log(this.runningproject);
-      
+        
           }),
           catchError((error) => {
             // Handle any errors that occur during the request
