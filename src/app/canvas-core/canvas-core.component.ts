@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component,  OnInit } from '@angular/core';
 import { Message } from '../models/message';
 import { HelloWorldService } from '../services/hello-world.service';
 import { CanvasService} from "../services/canvas-service";
@@ -12,6 +12,7 @@ import { ProjectService } from '../project.service';
 
 
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
  
  
  
@@ -29,6 +30,10 @@ export class CanvasCoreComponent implements OnInit {
  
   isDialogOpen = false;
   targetObjectForDialog : any;
+  disablebuildbutton:boolean=false;
+  buttonsdiabled:boolean=true;
+ 
+
 
   
   
@@ -48,6 +53,8 @@ export class CanvasCoreComponent implements OnInit {
     private connectionManager: ConnectionManager,
     private canvasService : CanvasService,
     private projectservice:ProjectService,
+    private router:Router,
+    private cdr:ChangeDetectorRef
     // private componentProcider:ComponentProvider
    ){
  
@@ -60,6 +67,7 @@ export class CanvasCoreComponent implements OnInit {
     this.showServerData();
 
     setTimeout(() => {
+      
       this.runSimulation();
     },  0);
       // console.log("running simulation");
@@ -194,6 +202,10 @@ canvas.on('object:selected', (event : fabric.IEvent) =>{
   });
  
 });
+canvas.on('mousedown',(options)=>{
+  
+  console.log("object selected");
+})
  
  
  
@@ -507,11 +519,54 @@ if (canvasContainer) {
     //   this.response = data.response;
     // });
   }
- 
+  buildCanvasData():void{
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.disablebuildbutton=true;
+      this.projectservice.buildcanvasdata().toPromise().then(
+        response => {
+          console.log(response);
+          console.log("response coming");
+       
+        console.log(this.disablebuildbutton);
+        // setTimeout(()=>{
+        //   // this.disablebuildbutton=false;
+        // },1000)
+        this.disablebuildbutton=false;
+       }
+      ).catch(
+       error => {
+          console.error('Error occurred:', error);
+       }
+      );
+    }
+  
+          // this.disablebuildbutton=false;
+  }
+  runCanvasData(){
+    this.disablebuildbutton=true;
+    this.projectservice.runproject().toPromise().then(
+      response => {
+        console.log(response);
+        console.log("response coming");
+        
+        this.disablebuildbutton=false;
+        // 
+      // setTimeout(()=>{
+      //   this.disablebuildbutton=false;
+      //   // this.projectservice.updateproject(this.projectservice.currentproject).toPromise();
+      // },7000)
+      
+     }
+    ).catch(
+     error => {
+        console.error('Error occurred:', error);
+     }
+    );
+  }
   sendCanvasDataToBackend(): void {
- 
+    
     var objects =  this.canvas?.getObjects();
- 
+    if(objects!=null){
     console.log("objects:: " , objects);
     const serializedCanvas = this.canvas?.toJSON(["id"]);
     console.log("serializedCanvas ::", serializedCanvas);
@@ -523,27 +578,40 @@ if (canvasContainer) {
       const filteredCanvasData = { ...serializedCanvas, objects: filteredCanvasObjects };
       console.log("filteredCanvasData :: ", filteredCanvasData);
       const serializedData = JSON.stringify(filteredCanvasData, this.replacer);
- 
+      if(filteredCanvasData.objects.length!=0){
+        console.log("serialized Data :: " , serializedData);
+        this.helloworldService.sendCanvasData(serializedData).pipe(
+          tap((response: any) => {
+            // Handle the response from the backend
+            console.log('Post request successful', response);
+         
+              window.location.reload();
+          }),
+          catchError((error) => {
+            // Handle any errors that occur during the request
+            console.error('Error occurred during post request', error);
+            return of(null); // Returning a non-error observable to prevent unhandled error
+          })
+        ).subscribe(
+         
+        );
+      }
       // const serializedData = JSON.stringify(serializedCanvas);
-      console.log("serialized Data :: " , serializedData);
-      this.helloworldService.sendCanvasData(serializedData).pipe(
-        tap((response: any) => {
-          // Handle the response from the backend
-          console.log('Post request successful', response);
-        }),
-        catchError((error) => {
-          // Handle any errors that occur during the request
-          console.error('Error occurred during post request', error);
-          return of(null); // Returning a non-error observable to prevent unhandled error
-        })
-      ).subscribe();
-    }
+     
+    }}
+   
+    // this.cdr.detectChanges();
+    
   }
  
  
   // these methods are used to add support for native Map object including deeply nested values
   replacer(key: any, value: any) {
     if(value instanceof Map) {
+      
+      console.log("value from replacer's map");
+      console.log(typeof value);
+      
       return {
         dataType: 'Map',
         value: Array.from(value.entries()), // or with spread: value: [...value]
@@ -564,6 +632,10 @@ if (canvasContainer) {
 
  
   runSimulation(){
+    if(this.projectservice.currentproject.canvasData!=null){
+      this.buttonsdiabled=false;
+    }
+   
       let canvasData = this.projectservice.currentproject.canvasData;
       if(canvasData != null){
         // let canvasData = JSON.parse(canvasDataJson, this.reviver);
@@ -574,6 +646,8 @@ if (canvasContainer) {
           for(let canvas of canvasData['objects']) {
             let tp=canvas['top'];
             let lft=canvas['left'];
+            // let tp=canvas['top']-25;
+            // let lft=canvas['left']-25;
             let height=canvas['height'];
             let width=canvas['width'];
             // console.log("top left width height" , tp,lft,width,height);
@@ -594,9 +668,7 @@ if (canvasContainer) {
           
           for(let i of canvasData['objects']) {
             let src = hashMap.get(i['id']) as fabric.Group;
-            // console.log("i" ,i);
-            // console.log("connections of i,",i['connections']);
-          
+           
             for(let j of i['connections']){
               
               let dest = hashMap.get(j['id']) as fabric.Group;

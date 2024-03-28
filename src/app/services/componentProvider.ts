@@ -18,23 +18,77 @@ export class ComponentProvider {
   getmap(obj:any){
     const mymap=new Map<string, string>();
     for (const [key, value] of Object.entries(obj)) {
-      console.log(`Key: ${key}, Value: ${value}`);
+      // console.log(`Key: ${key}, Value: ${value}`);
       let dataType=key;
       if(dataType=="dataType"){
           continue;
       }
+      if(`Value: ${value}` .includes(':'))
+      {
+        let values=(`Value: ${value}`);
+        let keyvalues=(values.substring(7));
+        let parts = keyvalues.split(",");
+        for (let i = 0; i < parts.length; i += 2) {
+          mymap.set(parts[i], parts[i + 1]);
+        }
+      }
+       
+     
+    }
+    return mymap;
+  }
+  //to parse json types of custom components
+  convertcustomtypes(obj:any){
+    
+    const mymap=new Map<string, string>();
+    
+
+    for (const [key, value] of Object.entries(obj)) {
+      // console.log(`Key: ${key}, Value: ${value}`);
+      let dataType=key;
+      if(dataType=="dataType"){
+          continue;
+      }
+
       if(`Value: ${value}` .includes(','))
       {
-        console.log(`Key: ${key}, Value: ${value}`);
-        let values=(`Value: ${value}`.split(','));
-        console.log("values ");
-        console.log(values)
-        let keytype=(values[0].split(' '))[1];
-        let valu=(values[1]);
-        mymap.set(keytype,valu); }
-        else
-        mymap.set(`Key: ${key}`, `Value: ${value}`);
+       const input=(`Value: ${value}`);
+       const parts = input.substring(7);
      
+       let key = '',values = '',bool = 0;
+
+
+        for (let i = 0; i < parts.length; i++) {
+            
+            if(parts[i]==' '&&i>0&&parts[i-1]==',')
+              continue;
+            if(parts[i]==','&&i>0&&parts[i-1]=='}')
+            { 
+                console.log("yes");
+                continue;
+            }
+            if (parts[i] === '}') {
+              values += parts[i];
+              mymap.set(key, values);
+              key = '';
+              values = '';
+              bool = 0;
+              while(i+1<parts.length&&parts[i+1]!=',')
+                i++;
+              i++;
+
+            } 
+            else if(parts[i]==','&&parts[i+1]=='{'){
+              bool=1;
+            }
+            else if (bool) {
+              values += parts[i];
+            }
+            else {
+              key += parts[i];
+            }
+          }
+        }
     }
     return mymap;
   }
@@ -86,6 +140,7 @@ export class ComponentProvider {
             if(this.canvasData!=null){
               restinterface.url=this.canvasData['url'];
               restinterface.headers=this.getmap(this.canvasData['headers']);
+              console.log(restinterface.headers);
               restinterface.requestBody=this.getmap(this.canvasData['requestBody']);
               restinterface.requestUrl=this.canvasData['requestUrl'];
               restinterface.apiType=this.canvasData['apiType'];
@@ -122,15 +177,13 @@ export class ComponentProvider {
         case 'input':
           if(!event){
             const input= new Input(width, height, left, top);
-       
             if(this.canvasData!=null){
               // input['customTypes']=this.canvasData['customTypes'];
               //input meh krna hai
-
-              input.customTypes=this.getmap(this.canvasData['customTypes']);
-              console.log("input function printing ",input['customTypes']);
+              // console.log(this.canvasData['customTypes']);
+              input.customTypes=this.convertcustomtypes(this.canvasData['customTypes']);
+              // console.log("input function printing ",input['customTypes']);
               input.loadDataToFormFields();
-              
             }
             return input;
           }

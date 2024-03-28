@@ -1,5 +1,10 @@
 <div class="form_div" *ngFor="let item of projectdata">
     <form [formGroup]="projectform" (ngSubmit)="f.form.valid &&updateproject()"  #f="ngForm" >
+       
+          <!-- <button mat-button class="runbutton" [ngClass]="{'projectrunning': item.running}">Run</button> -->
+          <div class="running">Running:</div>
+          <div class="status-circle" [ngClass]="{'projectrunning': item.running}">
+          </div>
         <div class="input">
           <input class="input-projectfield" type="text" id="projectname" name="projectName" required   #projectName="ngModel" [(ngModel)]="item.projectName"  [ngModelOptions]="{standalone: true}" [readOnly]="true">
           <label class="input-projectlabel">Projectname</label>

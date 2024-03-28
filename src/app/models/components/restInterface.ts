@@ -108,8 +108,10 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
       left: event.offsetX-25,
       top: event.offsetY-25,
       centeredScaling: true,
-      originX: 'center',
-      originY: 'center',
+      // originX: 'center',
+      // originY: 'center',
+      originX: 'left',
+        originY: 'top',
     }
   }
   else{
@@ -118,7 +120,8 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
       height: height,
       left: left as number +25,
       top: top as number +25,
-   
+    //  left:left,
+    //     top:top,
       centeredScaling: true,
       originX: 'center',
       originY: 'center',
@@ -157,14 +160,7 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
 
 
   }
-  reviver(key: any, value:any) {
-    if(typeof value === 'object' && value !== null) {
-      if (value.dataType === 'Map') {
-        return new Map(value.value);
-      }
-    }
-    return value;
-  }
+  
 
 
   override loadDataToFormFields(): void {
@@ -178,7 +174,7 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
         case "headers":
         
           // field.value =this.getmap(this.headers);
-         
+         console.log(this.headers);
          
           field.value=this.headers;
       
@@ -215,10 +211,10 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
           this.references.add(this.url);
           break;
         case "headers":
-          this.headers = this.headers;
+          this.headers = new Map<string, string>(field.value);
           break;
         case "requestBody":
-          this.requestBody =this.requestBody;
+          this.requestBody = new Map<string, string>(field.value);
           break;
         case "requestUrl":
           this.requestUrl = field.value;

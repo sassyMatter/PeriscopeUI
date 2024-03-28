@@ -38,6 +38,7 @@ export class GetAllProjectsComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     console.log("logged In :: " , this.isLoggedIn);
+    this.projects=[];
     this.getAllProject();
 
     if (this.isLoggedIn) {

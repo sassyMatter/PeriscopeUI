@@ -1,3 +1,4 @@
+import { RunningConfigurations } from "./RunningConfigurations";
 import { Configurations } from "./configurations";
 
 export class Project{
@@ -9,10 +10,16 @@ export class Project{
     sourceDir ?: string;
     sourceDirName ?:string;
     canvasData ?: any;
+    runningconfigurations?:RunningConfigurations;
+    url?:string;
     
-    
-    constructor(configurations:Configurations){
+    constructor(configurations:Configurations,runningconfigurations:RunningConfigurations){
         this.configurations=configurations;
+        this.runningconfigurations=runningconfigurations;
     }
+    
+    // constructor(runningconfiguratiosn:RunningConfigurations){
+    //     this.runningconfigurations=runningconfiguratiosn;
+    // }
 
 }

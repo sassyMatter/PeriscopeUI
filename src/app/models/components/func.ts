@@ -101,8 +101,10 @@ export class Func extends Item {
       left: event.offsetX - 25,
       top: event.offsetY - 25,
       centeredScaling: true,
-      originX: 'center',
-      originY: 'center',
+      // originX: 'center',
+      // originY: 'center',
+      originX: 'left',
+      originY: 'top',
     } : {
       width: width,
       height: height,

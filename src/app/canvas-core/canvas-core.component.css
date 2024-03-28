@@ -103,14 +103,20 @@ button {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+/* button:hover {
   background-color: #0056b3;
-}
+} */
 
 button:active {
   transform: scale(0.95);
 }
 
+.runcanvas{
+  background-color: red;
+}
+.runcanvas1{
+  background-color: green;
+}
 /* Add media queries for responsiveness */
 @media only screen and (min-width:  900px) and (max-width: 1400px) and (update:fast){
   .grid-container {
