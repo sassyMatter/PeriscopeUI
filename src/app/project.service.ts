@@ -101,11 +101,11 @@ export class ProjectService {
     }
     buildcanvasdata(){
       
-      return this.httpclient.post<Project>(`${this.baseURLbuildProject}`,this.currentproject.projectName).pipe();
+      return this.httpclient.post<Project>(`${this.baseURLbuildProject}`,this.currentproject).pipe();
     }
     runproject(){
       
-      return this.httpclient.post<String>(`${this.baseURLrunproject}`,this.currentproject.projectName).pipe();
+      return this.httpclient.post<Project>(`${this.baseURLrunproject}`,this.currentproject).pipe();
     }
     runningprojects(){
      
