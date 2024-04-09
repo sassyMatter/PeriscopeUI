@@ -228,7 +228,7 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
           this.headers = new Map<string, string>(field.value);
           break;
         case "requestBody":
-          this.requestBody = new Map<string, string>();
+          this.requestBody = new Map<string, string>(field.value);
           break;
         case "requestUrl":
           this.requestUrl = field.value;
