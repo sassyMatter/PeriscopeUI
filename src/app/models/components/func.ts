@@ -28,6 +28,7 @@ export class Func extends Item {
   topic: string;
   deserializationClass: string;
   functionType: string;
+  params?:Map<string, object> ;
 
 
   override formFields: Field[] = [
@@ -143,6 +144,7 @@ export class Func extends Item {
       this.topic = '';
       this.deserializationClass = '';
       this.functionType = '';
+      this.params=new Map<string,object>();
 
 
   }
@@ -190,7 +192,10 @@ export class Func extends Item {
             this.references.add(this.functionName);
           break;
         case "functionBody":
+          
+          
           this.functionBody = field.value;
+
           break;
         case "parameters":
           this.parameters = new Map<string, string>(field.value);

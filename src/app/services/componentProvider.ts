@@ -146,6 +146,7 @@ export class ComponentProvider {
               restinterface.apiType=this.canvasData['apiType'];
               restinterface.httpMethod=this.canvasData['httpMethod'];
               restinterface.methodName=this.canvasData['methodName'];
+              restinterface.returnType=this.canvasData['returnType'];
               restinterface.loadDataToFormFields();
             }
             return restinterface;
