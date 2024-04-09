@@ -28,6 +28,7 @@ requestUrl: string;
 apiType: string;
 httpMethod: string;
 methodName: string;
+returnType: string;
 
 
 override formFields: Field[] = [
@@ -88,7 +89,14 @@ override formFields: Field[] = [
     "fieldlabel" : "Method Name",
     "type" : formFieldType.SHORT_STRING,
     "value" : ""
+  },
+  {
+    "name" : "returnType",
+    "fieldlabel" : "Return type",
+    "type" : formFieldType.SHORT_STRING,
+    "value" : ""
   }
+
 
 ];
 
@@ -157,6 +165,7 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
       this.apiType= '',
       this.httpMethod = '',
       this.methodName = ''
+      this.returnType='';
 
 
   }
@@ -196,6 +205,11 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
         case "methodName":
           field.value = this.methodName;
           break;
+        case "returnType":
+          console.log("2");
+          console.log(this.returnType);
+          field.value=this.returnType;
+          break;
         // Add cases for any other form fields you have in the class
       }
     }
@@ -230,12 +244,17 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
         case "methodName":
           this.methodName = field.value;
           break;
+        case "returnType":
+          // field.value=this.returnType;
+          this.returnType=field.value;
+          break;
         // Add cases for any other form fields you have in the class
       }
     }
     console.log("url ", this.url);
     console.log("headers" , this.headers);
     console.log("requestBody", this.requestBody);
+    // console.log("requesturl",this.returntypefield);
   }
 
   override toObject(propertiesToInclude?: string[] | undefined) {
@@ -250,7 +269,8 @@ constructor(width: number, height: number, left?: number, top?: number, event?: 
      requestUrl: this.requestUrl,
      apiType: this.apiType,
      httpMethod: this.httpMethod,
-     methodName: this.methodName
+     methodName: this.methodName,
+     returnType: this.returnType
    });
 
  }
